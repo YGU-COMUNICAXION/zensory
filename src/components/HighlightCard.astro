@@ -1,0 +1,60 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text }: Props = Astro.props;
+---
+
+<div class="highlight-card px-4 py-8 md:px-6 md:py-8">
+  <p class="highlight-card__text text-sm md:text-base lg:text-lg">
+    {text}
+  </p>
+</div>
+
+<style>
+  @reference "../styles/global.css";
+
+  .highlight-card {
+    position: relative;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 2rem;
+    background-color: var(--color-primary);
+    color: var(--color-accent);
+    box-shadow: 0 18px 35px rgba(26, 15, 27, 0.25);
+  }
+
+  .highlight-card::before,
+  .highlight-card::after {
+    content: "";
+    position: absolute;
+    inset: 0.5rem;
+    border-radius: 1.75rem;
+    pointer-events: none;
+  }
+
+  .highlight-card::before {
+    border: 1px solid rgba(223, 213, 200, 0.85);
+  }
+
+  .highlight-card::after {
+    inset: .5rem;
+    border-radius: 2.75rem;
+    border: 1px solid rgba(223, 213, 200, 0.5);
+  }
+
+  .highlight-card__text {
+    line-height: 1.7;
+    font-weight: 400;
+  }
+
+  @media (min-width: 768px) {
+    .highlight-card {
+      padding: 3rem 2.5rem;
+    }
+  }
+</style>

@@ -1,4 +1,6 @@
 ---
+import HighlightCard from './HighlightCard.astro';
+
 interface Props {
   id?: string;
 }
@@ -18,53 +20,14 @@ const HIGHLIGHTS = [
 <section id={id} class="bg-white py-16 lg:py-24">
   <div class="container mx-auto px-4 lg:px-0">
     <h2
-      class="font-heading text-center text-3xl font-bold
-    text-primary lg:text-4xl"
+      class="font-heading text-center text-3xl lg:text-5xl font-bold
+    text-primary italic"
     >
       ¿Qué aprenderás?
     </h2>
 
-    <div class="mt-6 grid gap-4 grid-cols-3 lg:grid-cols-6">
-      {
-        HIGHLIGHTS.map((item, index) => (
-          <div
-            class="flex h-full flex-col justify-center relative
-          rounded-3xl border border-accent bg-primary
-          px-2 py-6 text-center text-accent shadow-lg"
-          >
-            <svg
-              class="absolute h-full w-full inset-0
-              bg-amber-900 "
-              viewBox="0 0 103 131"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                x="0.25"
-                y="0.25"
-                width="102.5"
-                height="130.5"
-                rx="11.75"
-                stroke="#DFD5C8"
-                stroke-width="0.5"
-              />
-              <rect
-                x="0.25"
-                y="0.25"
-                width="102.5"
-                height="130.5"
-                rx="21.75"
-                stroke="#DFD5C8"
-                stroke-width="0.5"
-              />
-            </svg>
-
-            <p class="text-sm font-medium leading-relaxed md:text-base">
-              {item}
-            </p>
-          </div>
-        ))
-      }
+    <div class="mt-6 lg:mt-16 grid gap-4 grid-cols-3 lg:grid-cols-6">
+      {HIGHLIGHTS.map((item) => <HighlightCard text={item} />)}
     </div>
   </div>
 </section>
