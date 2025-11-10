@@ -1,0 +1,43 @@
+---
+import Header from "./Header.astro";
+import "../styles/global.css";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Zensory | Manifiesta tu sueño con la magia del sound healing</title>
+    <meta
+      name="description"
+      content="Sumérgete en la experiencia Zensory para conectar con la magia del sound healing y transformar tu bienestar."
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+  </head>
+  <body class="flex min-h-screen flex-col bg-white font-sans text-neutral-900">
+    <Header />
+    <main class="flex-1 pt-24 lg:pt-28">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
