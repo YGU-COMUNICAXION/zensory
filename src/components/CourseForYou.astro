@@ -1,0 +1,36 @@
+---
+import { Image } from "astro:assets";
+import eyeIcon from "@assets/svg/ojo.svg";
+
+const HIGHLIGHTS = [
+  "Quieres transformar tu vida para atraer lo que mereces.",
+  "Buscas una conexión más profunda con el universo y tu propósito de vida.",
+  "Deseas manifestar desde la claridad y la confianza en ti y el universo.",
+  "Estás en un momento de búsqueda espiritual y crecimiento personal.",
+  "Quieres aprender a usar el sound healing y los cuencos tibetanos como apoyo en tu proceso de manifestación.",
+  "Deseas identificar y liberar creencias limitantes que frenan tus sueños.",
+];
+---
+
+<section id="curso" class="border border-primary text-primary">
+  <div class="container mx-auto max-w-5xl px-6 py-14">
+    <h2 class="font-heading text-center text-3xl font-semibold italic tracking-wide md:text-4xl">
+      Este curso es para ti
+    </h2>
+
+    <ul class="mt-10 space-y-4 text-left">
+      {HIGHLIGHTS.map((item) => (
+        <li class="flex items-start gap-3 text-base leading-relaxed md:text-lg">
+          <span class="mt-1 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center">
+            <Image src={eyeIcon} alt="Ojo" class="h-6 w-6" />
+          </span>
+          <p class="flex-1">{item}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  @reference "../styles/global.css";
+</style>
