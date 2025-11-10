@@ -9,10 +9,10 @@ interface Props {
 const { id = "curso" }: Props = Astro.props;
 ---
 
-<section id={id} class="bg-accent/30 py-16 lg:py-24">
-  <div class="container mx-auto max-w-6xl px-6">
-    <div class="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
-      <div class="order-2 flex-1 lg:order-1">
+<section id={id} class="bg-accent py-16 lg:py-24">
+  <div class="container mx-auto px-6">
+    <div class="grid gap-10 lg:grid-cols-2 lg:items-stretch lg:gap-16">
+      <div class="order-2 flex flex-col justify-center lg:order-1">
         <h2 class="font-heading text-2xl font-semibold uppercase tracking-[0.08em] text-primary lg:text-4xl">
           UN VIAJE DE CONEXIÓN PROFUNDA CONTIGO
         </h2>
@@ -22,14 +22,14 @@ const { id = "curso" }: Props = Astro.props;
             recibir las bendiciones que el universo tiene listas para ti.
           </p>
           <p>
-            A través de la magia de los cuencos tibetanos, el sound healing y la ley de atracción, aprenderás a
-            manifestar lo que tu corazón y alma anhelan. Así como amor, salud, abundancia y todo lo que deseas vivir.
+            A través de la magia de los cuencos tibetanos, el sound healing y la ley de atracción, aprenderás a manifestar
+            lo que tú deseas hoy: ya sea amor, salud, abundancia o lo que tu corazón y alma anhelan.
           </p>
         </div>
       </div>
 
-      <div class="order-1 flex-1 lg:order-2">
-        <div class="relative mx-auto max-w-md overflow-hidden rounded-3xl shadow-xl lg:max-w-none">
+      <div class="order-1 overflow-hidden lg:order-2">
+        <div class="relative h-72 w-full overflow-hidden lg:h-full lg:min-h-[420px]">
           <Image
             src={mentorImage}
             alt="Fotografía de la mentora del curso"
