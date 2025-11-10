@@ -20,7 +20,7 @@ const NAVIGATION = [
   class="fixed inset-x-0 top-0 z-50 bg-primary/95 text-accent shadow-lg backdrop-blur-sm"
   data-menu-open="false"
 >
-  <div class="container flex items-center justify-between gap-6 px-4 py-4 lg:px-6 lg:py-5">
+  <div class="container mx-auto flex items-center justify-between gap-6 px-4 py-4 lg:px-6 lg:py-5">
     <a href="/" class="flex items-center gap-3">
       <Image src={logo} alt="Zensory" class="h-8 w-auto md:h-9" />
     </a>
@@ -48,14 +48,16 @@ const NAVIGATION = [
 
     <nav
       id="primary-navigation"
-      class="absolute left-0 right-0 top-full hidden flex-col items-center gap-6 bg-primary px-6 pb-8 pt-8 text-center text-xl font-light lg:static lg:flex lg:flex-row lg:items-center lg:gap-10 lg:bg-transparent lg:px-0 lg:py-0 lg:text-xl"
+      class="absolute left-0 right-0 top-full hidden flex-col items-center gap-6 bg-primary px-6 pb-6 pt-6 text-center text-xl font-light lg:static lg:flex lg:flex-row lg:items-center lg:gap-10 lg:bg-transparent lg:px-0 lg:py-0 lg:text-xl"
     >
-      <ul class="flex w-full flex-col items-center gap-6 lg:w-auto lg:flex-row lg:gap-8">
+      <ul class="flex w-full flex-col items-center gap-0 lg:w-auto lg:flex-row lg:gap-8">
         {NAVIGATION.map((item) => (
-          <li>
+          <li
+            class="flex w-full items-center justify-center border-b border-accent/60 last:border-b-0 lg:w-auto lg:border-none"
+          >
             <a
               href={item.href}
-              class="relative block w-full border-b border-accent pb-3 text-center font-heading text-xl font-light leading-none text-white transition-colors duration-200 hover:text-white/80 lg:border-none lg:pb-0 lg:text-accent"
+              class="block w-full py-3 text-center font-heading text-xl font-light leading-none text-white transition-colors duration-200 hover:text-white/80 lg:py-0 lg:text-accent"
               data-nav-link
             >
               {item.label}

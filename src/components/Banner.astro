@@ -9,7 +9,7 @@ interface Props {
 const { id = "inicio" }: Props = Astro.props;
 ---
 
-<section id={id} class="relative isolate overflow-hidden bg-neutral-900 text-white">
+<section id={id} class="relative isolate overflow-hidden text-white">
   <div class="absolute inset-0">
     <Image
       src={heroImage}
@@ -20,21 +20,19 @@ const { id = "inicio" }: Props = Astro.props;
       loading="eager"
       decoding="async"
     />
-    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-[#3a233b]/80 to-[#3a233b]/90"></div>
   </div>
 
   <div
-    class="relative mx-auto flex min-h-[75vh] w-full max-w-4xl flex-col items-center justify-center gap-6 px-6 py-28 text-center"
+    class="relative container mx-auto flex min-h-[75vh] w-full flex-col items-center justify-center gap-6 px-6 py-28 text-center"
   >
-    <p class="font-sans text-xs uppercase tracking-[0.55em] text-accent">
-      manifiesta tu sueño con
-    </p>
-    <h1 class="font-heading text-3xl font-semibold uppercase leading-snug tracking-[0.2em] text-accent md:text-5xl md:leading-tight">
-      la magia del <span class="text-white">sound healing</span>
+    <h1
+      class="font-heading text-4xl font-medium italic leading-none tracking-[0.02em] text-white md:text-5xl"
+    >
+      MANIFIESTA TU SUEÑO CON LA MAGIA DEL SOUND HEALING
     </h1>
-    <p class="max-w-2xl text-base text-accent/80 md:text-lg">
+    <p class="max-w-3xl font-sans text-2xl font-normal leading-none text-white">
       Si este curso llegó a ti, no es casualidad. No hay coincidencias, solamente
-      <span class="font-semibold italic text-accent"> diosidencias.</span>
+      diosidencias.
     </p>
   </div>
 </section>
