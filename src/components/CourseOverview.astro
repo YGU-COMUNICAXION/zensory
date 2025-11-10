@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import bowlsImage from "@assets/who.jpg";
+import mentorImage from "@assets/me.jpg";
 
 interface Props {
   id?: string;
@@ -10,34 +10,36 @@ const { id = "curso" }: Props = Astro.props;
 ---
 
 <section id={id} class="bg-accent/30 py-16 lg:py-24">
-  <div class="container mx-auto flex flex-col gap-10 px-6 lg:flex-row lg:items-center lg:gap-16">
-    <div class="order-2 flex-1 lg:order-1">
-      <h2 class="font-heading text-2xl font-semibold uppercase tracking-[0.08em] text-primary lg:text-4xl">
-        UN VIAJE DE CONEXIÓN PROFUNDA CONTIGO
-      </h2>
-      <div class="mt-6 space-y-4 text-base leading-relaxed text-primary lg:text-lg">
-        <p>
-          Este curso es un viaje de conexión profunda contigo. En él descubrirás cómo elevar tu vibración y abrirte a
-          recibir las bendiciones que el universo tiene listas para ti.
-        </p>
-        <p>
-          A través de la magia de los cuencos tibetanos, el sound healing y la ley de atracción, aprenderás a manifestar
-          lo que tu corazón y alma anhelan. Así como amor, salud, abundancia y todo lo que deseas vivir.
-        </p>
+  <div class="container mx-auto max-w-6xl px-6">
+    <div class="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
+      <div class="order-2 flex-1 lg:order-1">
+        <h2 class="font-heading text-2xl font-semibold uppercase tracking-[0.08em] text-primary lg:text-4xl">
+          UN VIAJE DE CONEXIÓN PROFUNDA CONTIGO
+        </h2>
+        <div class="mt-6 space-y-4 text-base leading-relaxed text-primary lg:text-lg">
+          <p>
+            Este curso es un viaje de conexión profunda contigo. En él descubrirás cómo elevar tu vibración y abrirte a
+            recibir las bendiciones que el universo tiene listas para ti.
+          </p>
+          <p>
+            A través de la magia de los cuencos tibetanos, el sound healing y la ley de atracción, aprenderás a
+            manifestar lo que tu corazón y alma anhelan. Así como amor, salud, abundancia y todo lo que deseas vivir.
+          </p>
+        </div>
       </div>
-    </div>
 
-    <div class="order-1 flex-1 lg:order-2">
-      <div class="relative mx-auto max-w-md overflow-hidden rounded-3xl shadow-xl lg:max-w-none">
-        <Image
-          src={bowlsImage}
-          alt="Facilitadora realizando una sesión con cuencos tibetanos"
-          class="h-full w-full object-cover"
-          widths={[320, 480, 640, 960]}
-          sizes="(max-width: 1024px) 90vw, 45vw"
-          loading="lazy"
-          decoding="async"
-        />
+      <div class="order-1 flex-1 lg:order-2">
+        <div class="relative mx-auto max-w-md overflow-hidden rounded-3xl shadow-xl lg:max-w-none">
+          <Image
+            src={mentorImage}
+            alt="Fotografía de la mentora del curso"
+            class="h-full w-full object-cover"
+            widths={[320, 480, 640, 960]}
+            sizes="(max-width: 1024px) 90vw, 45vw"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
       </div>
     </div>
   </div>
