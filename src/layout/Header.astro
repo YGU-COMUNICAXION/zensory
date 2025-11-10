@@ -1,0 +1,144 @@
+---
+import { Image } from "astro:assets";
+import logo from "@assets/svg/logo.svg";
+import menuIcon from "@assets/svg/menu.svg";
+import closeIcon from "@assets/svg/close.svg";
+
+const NAVIGATION = [
+  { label: "inicio", href: "/#inicio" },
+  { label: "Curso", href: "/#curso" },
+  { label: "Inversión", href: "/#inversion" },
+  { label: "Gali Marli", href: "/#gali-marli" },
+  { label: "Testimonios", href: "/#testimonios" },
+  { label: "FAQs", href: "/#faqs" },
+  { label: "Contacto", href: "/#contacto" },
+];
+---
+
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-50 bg-primary/95 text-accent shadow-lg backdrop-blur-sm"
+  data-menu-open="false"
+>
+  <div class="container mx-auto flex items-center justify-between gap-6 px-4 py-4 lg:px-6 lg:py-6">
+    <a href="/" class="flex items-center gap-3">
+      <Image src={logo} alt="Zensory" class="h-7 w-auto md:h-8" />
+    </a>
+
+    <button
+      type="button"
+      class="lg:hidden"
+      aria-controls="primary-navigation"
+      aria-expanded="false"
+      data-menu-toggle
+    >
+      <Image
+        src={menuIcon}
+        alt="Abrir menú"
+        class="h-6 w-6"
+        data-menu-icon="open"
+      />
+      <Image
+        src={closeIcon}
+        alt="Cerrar menú"
+        class="hidden h-6 w-6"
+        data-menu-icon="close"
+      />
+    </button>
+
+    <nav
+      id="primary-navigation"
+      class="absolute left-0 right-0 top-full hidden flex-col items-center gap-6 bg-primary  pt-4 pb-2 text-center text-xl font-light
+      lg:static lg:flex lg:flex-row lg:items-center lg:gap-10 lg:bg-transparent lg:px-0 lg:py-0 lg:text-xl"
+    >
+      <ul class="flex w-full flex-col items-center gap-0 lg:w-auto lg:flex-row lg:gap-8">
+        {NAVIGATION.map((item) => (
+          <li
+            class="flex w-full items-center justify-center border-b border-accent/60 last:border-b-0 lg:w-auto lg:border-none"
+          >
+            <a
+              href={item.href}
+              class="block w-full py-3 text-center font-heading text-xl font-light leading-none text-white transition-colors duration-200 hover:text-white/80 lg:py-0 lg:text-accent"
+              data-nav-link
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  @reference "../styles/global.css";
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const header = document.querySelector<HTMLElement>("#site-header");
+    const menu = document.querySelector<HTMLElement>("#primary-navigation");
+    const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+    const openIcon = toggle?.querySelector<HTMLImageElement>("[data-menu-icon=\"open\"]");
+    const closeIcon = toggle?.querySelector<HTMLImageElement>("[data-menu-icon=\"close\"]");
+    const navLinks = document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]");
+
+    if (!header || !menu || !toggle || !openIcon || !closeIcon) {
+      return;
+    }
+
+    const isDesktop = () => window.matchMedia("(min-width: 1024px)").matches;
+
+    const setMenuState = (open: boolean) => {
+      header.dataset.menuOpen = open ? "true" : "false";
+      menu.classList.toggle("hidden", !open && !isDesktop());
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      document.body.classList.toggle("overflow-hidden", open && !isDesktop());
+      openIcon.classList.toggle("hidden", open);
+      closeIcon.classList.toggle("hidden", !open);
+    };
+
+    const closeMenu = () => setMenuState(false);
+
+    toggle.addEventListener("click", () => {
+      const open = header.dataset.menuOpen === "true";
+      setMenuState(!open);
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (!isDesktop()) {
+          closeMenu();
+        }
+      });
+    });
+
+    window.addEventListener(
+      "resize",
+      () => {
+        if (isDesktop()) {
+          menu.classList.remove("hidden");
+          document.body.classList.remove("overflow-hidden");
+          setMenuState(false);
+        } else if (header.dataset.menuOpen !== "true") {
+          menu.classList.add("hidden");
+          openIcon.classList.remove("hidden");
+          closeIcon.classList.add("hidden");
+        }
+      },
+      { passive: true }
+    );
+
+    const updateActiveLink = () => {
+      const currentHash = window.location.hash || "#inicio";
+      navLinks.forEach((link) => {
+        const isActive = link.getAttribute("href")?.endsWith(currentHash) ?? false;
+        link.dataset.active = isActive ? "true" : "false";
+      });
+    };
+
+    updateActiveLink();
+
+    window.addEventListener("hashchange", updateActiveLink, { passive: true });
+  });
+</script>

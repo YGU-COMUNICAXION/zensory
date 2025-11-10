@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import heroImage from "@assets/banner.jpg";
+
+interface Props {
+  id?: string;
+}
+
+const { id = "inicio" }: Props = Astro.props;
+---
+
+<section id={id} class="relative isolate overflow-hidden text-white">
+  <div class="absolute inset-0">
+    <Image
+      src={heroImage}
+      alt="Cuenco tibetano sobre un tapete"
+      class="h-full w-full object-cover"
+      widths={[640, 960, 1280, 1600]}
+      sizes="100vw"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+
+  <div
+    class="relative container mx-auto flex flex-col items-center justify-center gap-6 px-6 py-20 lg:py-40 xl:py-56 text-center"
+  >
+    <h1
+      class="font-heading max-w-5xl text-2xl md:text-3xl lg:text-4xl xl:text-5xl
+      font-medium italic leading-normal tracking-[0.02em] text-white"
+    >
+      MANIFIESTA TU SUEÑO CON LA MAGIA DEL SOUND HEALING
+    </h1>
+    <p
+      class="max-w-2xl font-sans text-base md:text-xl font-normal text-white
+      leading-normal"
+    >
+      Si este curso llegó a ti, no es casualidad. No hay coincidencias,
+      solamente <b class="font-semibold italic">diosidencias.</b>
+    </p>
+  </div>
+</section>
+
+<style>
+  @reference "../styles/global.css";
+</style>
