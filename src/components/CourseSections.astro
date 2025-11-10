@@ -1,0 +1,427 @@
+---
+import { Image } from "astro:assets";
+import eyeIcon from "@assets/svg/ojo.svg";
+import closeIcon from "@assets/svg/close.svg";
+
+const HIGHLIGHTS = [
+  "Quieres transformar tu vida para atraer lo que mereces.",
+  "Buscas una conexión más profunda con el universo y tu propósito de vida.",
+  "Deseas manifestar desde la claridad y la confianza en ti y el universo.",
+  "Estás en un momento de búsqueda espiritual y crecimiento personal.",
+  "Quieres aprender a usar el sound healing y los cuencos tibetanos como apoyo en tu proceso de manifestación.",
+  "Deseas identificar y liberar creencias limitantes que frenan tus sueños.",
+];
+
+const MODULES = [
+  {
+    number: 1,
+    title: "Sintonización energética",
+    subtitle: "Introducción y apertura del círculo",
+    learnings: [
+      "Nos presentamos y abrimos el círculo de manifestación.",
+      "Realizamos ejercicios de respiración consciente para preparar cuerpo y mente.",
+      "Cerramos con una intención compartida y agradecimiento.",
+    ],
+    materials: ["Cuaderno de manifestación", "Pluma", "Cuenco tibetano (opcional)"],
+  },
+  {
+    number: 2,
+    title: "Alineación y vibración consciente",
+    subtitle: "Reconectar con el propósito",
+    learnings: [
+      "Exploramos nuestra intención principal de manifestación.",
+      "Practicamos visualizaciones activas para elevar la vibración.",
+      "Integramos afirmaciones para sostener la energía.",
+    ],
+    materials: ["Cuaderno de manifestación", "Velas o inciensos (opcional)"],
+  },
+  {
+    number: 3,
+    title: "Manifestación y vibración del aquí y ahora",
+    subtitle: "Habitar el presente",
+    learnings: [
+      "Identificamos pensamientos y emociones que sostienen el deseo.",
+      "Utilizamos el sonido como ancla al presente.",
+      "Creamos un ritual personal de manifestación diaria.",
+    ],
+    materials: ["Cuaderno de manifestación"],
+  },
+  {
+    number: 4,
+    title: "Transformación consciente de creencias",
+    subtitle: "Reescritura de patrones",
+    learnings: [
+      "Reconocemos creencias limitantes que frenan el proceso.",
+      "Aplicamos técnicas de liberación con sonido y respiración.",
+      "Diseñamos nuevas declaraciones que expanden nuestra realidad.",
+    ],
+    materials: ["Cuaderno de manifestación", "Tarjetas o post-its"],
+  },
+  {
+    number: 5,
+    title: "Visualización sensorial del sueño",
+    subtitle: "Expansión imaginativa",
+    learnings: [
+      "Integramos los sentidos en la visualización consciente.",
+      "Exploramos el viaje sonoro como portal creativo.",
+      "Creamos un mapa sensorial de manifestación.",
+    ],
+    materials: ["Cuaderno de manifestación", "Elementos sensoriales (opcional)"],
+  },
+  {
+    number: 6,
+    title: "Soltar y confiar en el proceso",
+    subtitle: "Entrega amorosa",
+    learnings: [
+      "Identificamos apegos que dificultan la manifestación.",
+      "Practicamos meditaciones para soltar con amor.",
+      "Anclamos una nueva relación con la confianza.",
+    ],
+    materials: ["Cuaderno de manifestación"],
+  },
+  {
+    number: 7,
+    title: "Vibrar en gratitud consciente",
+    subtitle: "Celebrar el camino",
+    learnings: [
+      "Profundizamos en la gratitud como estado vibracional.",
+      "Creamos rituales de agradecimiento diario.",
+      "Compartimos testimonios y descubrimientos.",
+    ],
+    materials: ["Cuaderno de manifestación", "Pluma"],
+  },
+  {
+    number: 8,
+    title: "Integración y manifestación celebrada",
+    subtitle: "Cierre del proceso",
+    learnings: [
+      "Integramos aprendizajes y resonancias de cada módulo.",
+      "Diseñamos un plan de acción alineado con el sueño.",
+      "Celebramos la manifestación con un viaje sonoro final.",
+    ],
+    materials: ["Cuaderno de manifestación", "Elemento simbólico personal"],
+  },
+];
+---
+
+<section id="curso" class="bg-[#f8f5f1] py-20 text-primary">
+  <div class="container mx-auto flex max-w-6xl flex-col gap-20 px-6">
+    <div class="flex flex-col gap-10">
+      <div class="flex flex-col items-center text-center">
+        <p class="font-heading text-lg italic text-primary/70">Descubre si resuena contigo</p>
+        <h2 class="font-heading text-3xl font-semibold italic tracking-wide text-primary md:text-4xl">
+          Este curso es para ti si
+        </h2>
+      </div>
+      <ul class="grid gap-5 text-left text-primary">
+        {HIGHLIGHTS.map((item) => (
+          <li class="flex items-start gap-4 rounded-2xl bg-white/80 p-4 shadow-sm">
+            <span class="mt-1 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center">
+              <Image src={eyeIcon} alt="Ojo" class="h-6 w-6" />
+            </span>
+            <p class="text-base leading-relaxed md:text-lg">{item}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="flex flex-col gap-10">
+      <header class="flex flex-col gap-4 text-center">
+        <h2 class="font-heading text-3xl font-semibold italic text-primary md:text-4xl">Módulos</h2>
+        <p class="text-sm font-medium uppercase tracking-[0.35em] text-primary/60 md:text-base">
+          8 módulos de 45 minutos
+        </p>
+        <p class="mx-auto max-w-3xl text-base leading-relaxed text-primary/80 md:text-lg">
+          El curso Manifiesta tu sueño está diseñado con ocho módulos que te guían paso a paso por un proceso de manifestación.
+          Cada módulo se adapta al formato del dispositivo para que explores su contenido de forma intuitiva.
+        </p>
+      </header>
+
+      <div class="lg:hidden">
+        <ul class="flex flex-col gap-4" data-module-list>
+          {MODULES.map((module, index) => (
+            <li>
+              <button
+                type="button"
+                class="flex w-full items-center justify-between gap-4 rounded-3xl bg-primary/95 px-5 py-4 text-left text-accent shadow-lg transition-transform duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:scale-[0.99]"
+                data-module-trigger
+                data-module-index={index}
+              >
+                <div class="flex items-center gap-4">
+                  <span class="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20 text-xl font-semibold text-accent">
+                    {module.number}
+                  </span>
+                  <div class="flex flex-col">
+                    <span class="font-heading text-lg font-semibold italic text-accent">Módulo {module.number}</span>
+                    <span class="text-sm text-accent/80">{module.title}</span>
+                  </div>
+                </div>
+                <span class="text-2xl text-accent/60">+</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="hidden lg:flex lg:flex-col lg:gap-4" data-module-accordion-group>
+        {MODULES.map((module) => (
+          <details
+            class="overflow-hidden rounded-3xl border border-primary/10 bg-white/70 text-left shadow-sm transition-shadow duration-200 open:shadow-md"
+            data-module-accordion
+          >
+            <summary class="flex cursor-pointer items-center justify-between gap-6 px-6 py-5 text-primary">
+              <div class="flex items-center gap-6">
+                <span class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/95 text-2xl font-semibold text-accent">
+                  {module.number}
+                </span>
+                <div class="flex flex-col gap-1">
+                  <span class="font-heading text-2xl font-semibold italic">Módulo {module.number}</span>
+                  <span class="text-base font-medium text-primary/70">{module.title}</span>
+                </div>
+              </div>
+              <span class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/5 text-primary transition-transform duration-200" data-accordion-icon>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  class="h-5 w-5"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M6 9l6 6 6-6"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+            </summary>
+            <div class="space-y-6 px-6 pb-8 pt-2 text-primary/80">
+              <div class="grid gap-4 md:grid-cols-3 md:gap-6">
+                {module.learnings.map((item, idx) => (
+                  <div class="flex items-start gap-4 rounded-2xl bg-primary/5 p-5">
+                    <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-primary/95 text-lg font-semibold text-accent">
+                      {idx + 1}
+                    </span>
+                    <p class="text-base leading-relaxed">{item}</p>
+                  </div>
+                ))}
+              </div>
+              {module.materials?.length ? (
+                <div class="space-y-2">
+                  <h4 class="font-heading text-lg font-semibold text-primary">Material sugerido</h4>
+                  <ul class="list-disc space-y-1 pl-5 text-base">
+                    {module.materials.map((material) => (
+                      <li>{material}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 px-4 py-10"
+    role="dialog"
+    aria-modal="true"
+    data-module-modal
+  >
+    <div class="relative flex w-full max-w-lg flex-col overflow-hidden rounded-3xl bg-primary text-accent shadow-2xl">
+      <button
+        type="button"
+        class="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent/10 text-accent transition-colors duration-200 hover:bg-accent/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        aria-label="Cerrar módulo"
+        data-module-close
+      >
+        <Image src={closeIcon} alt="Cerrar" class="h-5 w-5" />
+      </button>
+      <div class="flex-1 overflow-y-auto px-6 pb-8 pt-10">
+        <header class="flex items-center gap-4">
+          <span class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent/10 text-lg font-semibold text-accent" data-modal-number></span>
+          <div class="flex flex-col">
+            <span class="font-heading text-xl font-semibold italic" data-modal-title></span>
+            <span class="text-sm uppercase tracking-[0.3em] text-accent/60" data-modal-subtitle></span>
+          </div>
+        </header>
+        <div class="mt-6 space-y-4" data-modal-learnings></div>
+        <div class="mt-6 space-y-2" data-modal-materials-wrapper hidden>
+          <h4 class="font-heading text-lg font-semibold">Material sugerido</h4>
+          <ul class="list-disc space-y-1 pl-5 text-base" data-modal-materials></ul>
+        </div>
+      </div>
+      <div class="flex flex-col gap-3 border-t border-accent/20 bg-primary/80 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+        <button
+          type="button"
+          class="flex-1 rounded-full bg-accent/10 px-5 py-3 text-sm font-semibold uppercase tracking-wide text-accent transition-colors duration-200 hover:bg-accent/20 disabled:cursor-not-allowed disabled:opacity-40 sm:flex-none"
+          data-module-prev
+        >
+          Módulo anterior
+        </button>
+        <button
+          type="button"
+          class="flex-1 rounded-full bg-accent px-5 py-3 text-sm font-semibold uppercase tracking-wide text-primary transition-colors duration-200 hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60 sm:flex-none"
+          data-module-next
+        >
+          Siguiente módulo
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script type="application/json" data-modules-json>{JSON.stringify(MODULES)}</script>
+</section>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const dataElement = document.querySelector("[data-modules-json]");
+    const modules = dataElement ? JSON.parse(dataElement.textContent ?? "[]") : [];
+
+    const modal = document.querySelector<HTMLElement>("[data-module-modal]");
+    const triggers = document.querySelectorAll("[data-module-trigger]");
+    const closeButton = modal?.querySelector("[data-module-close]");
+    const prevButton = modal?.querySelector("[data-module-prev]");
+    const nextButton = modal?.querySelector("[data-module-next]");
+    const numberEl = modal?.querySelector<HTMLElement>("[data-modal-number]");
+    const titleEl = modal?.querySelector<HTMLElement>("[data-modal-title]");
+    const subtitleEl = modal?.querySelector<HTMLElement>("[data-modal-subtitle]");
+    const learningsContainer = modal?.querySelector<HTMLElement>("[data-modal-learnings]");
+    const materialsWrapper = modal?.querySelector<HTMLElement>("[data-modal-materials-wrapper]");
+    const materialsList = modal?.querySelector<HTMLElement>("[data-modal-materials]");
+    const overlay = modal;
+
+    let activeIndex = 0;
+
+    const updateNavigationState = () => {
+      if (!prevButton || !nextButton) return;
+      prevButton.toggleAttribute("disabled", activeIndex === 0);
+      nextButton.toggleAttribute("disabled", activeIndex === modules.length - 1);
+    };
+
+    const updateModalContent = (index: number) => {
+      if (!modal || !numberEl || !titleEl || !subtitleEl || !learningsContainer || !materialsWrapper || !materialsList) {
+        return;
+      }
+
+      const module = modules[index];
+      if (!module) {
+        return;
+      }
+
+      activeIndex = index;
+
+      numberEl.textContent = String(module.number ?? "");
+      titleEl.textContent = `Módulo ${module.number}: ${module.title}`;
+      subtitleEl.textContent = module.subtitle ?? "";
+      subtitleEl.classList.toggle("hidden", !module.subtitle);
+
+      learningsContainer.innerHTML = "";
+      if (Array.isArray(module.learnings)) {
+        module.learnings.forEach((learning: string, idx: number) => {
+          const item = document.createElement("div");
+          item.className = "flex items-start gap-4 rounded-2xl bg-accent/10 p-4";
+
+          const badge = document.createElement("span");
+          badge.className = "flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-accent/20 text-base font-semibold text-accent";
+          badge.textContent = String(idx + 1);
+
+          const text = document.createElement("p");
+          text.className = "text-base leading-relaxed";
+          text.textContent = learning;
+
+          item.appendChild(badge);
+          item.appendChild(text);
+          learningsContainer.appendChild(item);
+        });
+      }
+
+      materialsList.innerHTML = "";
+      const hasMaterials = Array.isArray(module.materials) && module.materials.length > 0;
+      materialsWrapper.toggleAttribute("hidden", !hasMaterials);
+      if (hasMaterials) {
+        (module.materials as string[]).forEach((material) => {
+          const li = document.createElement("li");
+          li.textContent = material;
+          materialsList.appendChild(li);
+        });
+      }
+
+      updateNavigationState();
+    };
+
+    const openModal = (index: number) => {
+      if (!overlay) return;
+      updateModalContent(index);
+      overlay.classList.remove("hidden");
+      document.body.classList.add("overflow-hidden");
+    };
+
+    const closeModal = () => {
+      if (!overlay) return;
+      overlay.classList.add("hidden");
+      document.body.classList.remove("overflow-hidden");
+    };
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", (event) => {
+        const target = event.currentTarget as HTMLElement;
+        const index = Number(target.dataset.moduleIndex ?? 0);
+        openModal(index);
+      });
+    });
+
+    closeButton?.addEventListener("click", () => closeModal());
+
+    overlay?.addEventListener("click", (event) => {
+      if (event.target === overlay) {
+        closeModal();
+      }
+    });
+
+    prevButton?.addEventListener("click", () => {
+      if (activeIndex > 0) {
+        updateModalContent(activeIndex - 1);
+      }
+    });
+
+    nextButton?.addEventListener("click", () => {
+      if (activeIndex < modules.length - 1) {
+        updateModalContent(activeIndex + 1);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && overlay && !overlay.classList.contains("hidden")) {
+        closeModal();
+      }
+    });
+
+    const accordions = Array.from(document.querySelectorAll<HTMLDetailsElement>("[data-module-accordion]"));
+    accordions.forEach((details) => {
+      details.addEventListener("toggle", () => {
+        const icon = details.querySelector<HTMLElement>("[data-accordion-icon]");
+        icon?.classList.toggle("rotate-180", details.open);
+
+        if (details.open) {
+          accordions.forEach((other) => {
+            if (other !== details) {
+              other.open = false;
+            }
+          });
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  @reference "../styles/global.css";
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+</style>
