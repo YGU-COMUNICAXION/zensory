@@ -34,28 +34,30 @@ const NAVIGATION = [
       aria-expanded="false"
       data-menu-toggle
     >
-      <Image src={menuIcon} alt="Abrir menú" class="h-6 w-6" />
+      <Image
+        src={menuIcon}
+        alt="Abrir menú"
+        class="h-6 w-6"
+        data-menu-icon="open"
+      />
+      <Image
+        src={closeIcon}
+        alt="Cerrar menú"
+        class="hidden h-6 w-6"
+        data-menu-icon="close"
+      />
     </button>
 
     <nav
       id="primary-navigation"
-      class="absolute left-0 right-0 top-full hidden min-h-[calc(100vh-64px)] flex-col items-center gap-10 bg-primary px-6 pb-16 pt-20 text-center text-base font-medium tracking-[0.35em] lg:static lg:min-h-0 lg:flex lg:flex-row lg:items-center lg:gap-10 lg:bg-transparent lg:px-0 lg:py-0 lg:text-[0.72rem] lg:tracking-[0.4em]"
+      class="absolute left-0 right-0 top-full hidden flex-col items-center gap-6 bg-primary px-6 pb-10 pt-10 text-center text-base font-medium tracking-[0.35em] lg:static lg:flex lg:flex-row lg:items-center lg:gap-10 lg:bg-transparent lg:px-0 lg:py-0 lg:text-[0.72rem] lg:tracking-[0.4em]"
     >
-      <button
-        type="button"
-        class="ml-auto -mt-6 mb-10 lg:hidden"
-        aria-controls="primary-navigation"
-        aria-expanded="true"
-        data-menu-close
-      >
-        <Image src={closeIcon} alt="Cerrar menú" class="h-6 w-6" />
-      </button>
       <ul class="flex w-full flex-col items-center gap-6 lg:w-auto lg:flex-row lg:gap-8">
         {NAVIGATION.map((item) => (
           <li>
             <a
               href={item.href}
-              class="relative text-accent transition-colors duration-200 hover:text-white/80 data-[active=true]:font-semibold"
+              class="relative font-heading text-accent transition-colors duration-200 hover:text-white/80 data-[active=true]:font-semibold"
               data-nav-link
             >
               {item.label}
@@ -76,10 +78,11 @@ const NAVIGATION = [
     const header = document.querySelector<HTMLElement>("#site-header");
     const menu = document.querySelector<HTMLElement>("#primary-navigation");
     const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
-    const closeBtn = document.querySelector<HTMLButtonElement>("[data-menu-close]");
+    const openIcon = toggle?.querySelector<HTMLImageElement>("[data-menu-icon=\"open\"]");
+    const closeIcon = toggle?.querySelector<HTMLImageElement>("[data-menu-icon=\"close\"]");
     const navLinks = document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]");
 
-    if (!header || !menu || !toggle || !closeBtn) {
+    if (!header || !menu || !toggle || !openIcon || !closeIcon) {
       return;
     }
 
@@ -89,8 +92,9 @@ const NAVIGATION = [
       header.dataset.menuOpen = open ? "true" : "false";
       menu.classList.toggle("hidden", !open && !isDesktop());
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      closeBtn.setAttribute("aria-expanded", open ? "true" : "false");
       document.body.classList.toggle("overflow-hidden", open && !isDesktop());
+      openIcon.classList.toggle("hidden", open);
+      closeIcon.classList.toggle("hidden", !open);
     };
 
     const closeMenu = () => setMenuState(false);
@@ -99,8 +103,6 @@ const NAVIGATION = [
       const open = header.dataset.menuOpen === "true";
       setMenuState(!open);
     });
-
-    closeBtn.addEventListener("click", closeMenu);
 
     navLinks.forEach((link) => {
       link.addEventListener("click", () => {
@@ -116,11 +118,11 @@ const NAVIGATION = [
         if (isDesktop()) {
           menu.classList.remove("hidden");
           document.body.classList.remove("overflow-hidden");
-          header.dataset.menuOpen = "false";
-          toggle.setAttribute("aria-expanded", "false");
-          closeBtn.setAttribute("aria-expanded", "false");
+          setMenuState(false);
         } else if (header.dataset.menuOpen !== "true") {
           menu.classList.add("hidden");
+          openIcon.classList.remove("hidden");
+          closeIcon.classList.add("hidden");
         }
       },
       { passive: true }
