@@ -1,22 +1,42 @@
 ---
 import type { ImageMetadata } from "astro";
 
+type DescriptionItem = string | { text: string; icon?: ImageMetadata };
+
 interface Props {
   title: string;
   subtitle?: string;
-  description: string[];
+  description: DescriptionItem[];
   icon: ImageMetadata;
   subtitleIcon?: ImageMetadata;
+  titleClass?: string;
+  containerClass?: string;
 }
 
-const { title, subtitle, description, icon, subtitleIcon } = Astro.props;
+const {
+  title,
+  subtitle,
+  description,
+  icon,
+  subtitleIcon,
+  titleClass = "",
+  containerClass = "rounded-3xl",
+} = Astro.props;
+
+const normalizedDescription = description.map((item) =>
+  typeof item === "string" ? { text: item } : item
+);
 ---
-<article class="flex h-full flex-col rounded-3xl bg-accent px-8 py-10 text-primary shadow-[0_10px_40px_-20px_rgba(58,35,59,0.55)]">
+<article
+  class={`flex h-full flex-col ${containerClass} bg-accent px-8 py-10 text-primary shadow-[0_10px_40px_-20px_rgba(58,35,59,0.55)]`}
+>
   <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary">
     <img src={icon.src} alt={`Ícono de ${title}`} class="h-9 w-9" loading="lazy" />
   </div>
 
-  <h3 class="mt-6 text-center font-heading text-2xl font-semibold text-primary md:text-3xl">
+  <h3
+    class={`mt-6 text-center font-heading text-2xl font-semibold text-primary md:text-3xl ${titleClass}`.trim()}
+  >
     {title}
   </h3>
 
@@ -41,8 +61,19 @@ const { title, subtitle, description, icon, subtitleIcon } = Astro.props;
       )}
 
       <div class="mt-5 flex flex-col gap-4 text-base leading-relaxed md:text-lg">
-        {description.map((item) => (
-          <p>{item}</p>
+        {normalizedDescription.map((item) => (
+          <div class={item.icon ? "flex items-start gap-3" : ""}>
+            {item.icon && (
+              <img
+                src={item.icon.src}
+                alt=""
+                role="presentation"
+                class="mt-1 h-4 w-4 flex-shrink-0"
+                loading="lazy"
+              />
+            )}
+            <p class={item.icon ? "flex-1" : ""}>{item.text}</p>
+          </div>
         ))}
       </div>
     </div>

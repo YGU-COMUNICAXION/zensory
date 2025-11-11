@@ -4,6 +4,7 @@ import cardIcon from "@assets/svg/card.svg";
 import arrowsIcon from "@assets/svg/arrows.svg";
 import moneysIcon from "@assets/svg/moneys.svg";
 import alertIcon from "@assets/svg/alert.svg";
+import checkIcon from "@assets/svg/tick-circle.svg";
 
 interface Props {
   id?: string;
@@ -52,29 +53,35 @@ const paymentMethods = [
     icon: cardIcon,
     title: "Tarjeta de crédito o débito",
     description: [
-      "Pago único o en parcialidades.",
-      "Si el pago se hace a meses pueden aplicarse comisión o intereses.",
+      { text: "Pago único o en parcialidades.", icon: checkIcon },
+      {
+        text: "Si el pago se hace a meses, puede aplicarse comisión o intereses.",
+        icon: alertIcon,
+      },
     ],
   },
   {
     icon: arrowsIcon,
     title: "Transferencia",
     description: [
-      "Pago único o en parcialidades.",
-      "Opción directa y sin comisiones.",
+      { text: "Pago único o en parcialidades.", icon: checkIcon },
+      { text: "Opción directa y sin comisiones.", icon: checkIcon },
     ],
   },
   {
     icon: moneysIcon,
     title: "Efectivo",
     description: [
-      "Método de pago válido solo para la modalidad presencial en vivo.",
+      {
+        text: "Método de pago válido solo para la modalidad presencial en vivo.",
+        icon: alertIcon,
+      },
     ],
   },
 ];
 ---
 <section id={id}>
-  <div class="px-4 py-16 md:py-24">
+  <div class="px-4 pt-16 pb-10 md:pt-24 md:pb-14">
     <div class="container mx-auto bg-primary px-6 py-16 text-accent shadow-[0_25px_80px_-40px_rgba(34,9,34,0.55)] md:px-10 md:py-20">
       <div class="grid gap-12 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-16">
         <div class="flex flex-col items-center text-center">
@@ -120,53 +127,47 @@ const paymentMethods = [
     </div>
   </div>
 
-  <div class="bg-accent/10 text-primary">
-    <div class="container mx-auto px-4 py-16 md:py-24">
-      <p class="text-center font-heading text-xl font-semibold uppercase tracking-wide text-primary">
-        O elige entre una de las tres opciones de pago a plazos
-      </p>
+  <div class="container mx-auto px-4 pb-16 text-primary md:pb-24">
+    <p class="text-center font-heading text-2xl font-semibold italic tracking-tight text-primary md:text-3xl">
+      O elige entre una de las tres opciones de pago a plazos
+    </p>
 
-      <div class="mt-10 overflow-hidden rounded-3xl border border-primary/15 bg-white/60 shadow-[0_25px_80px_-60px_rgba(34,9,34,0.5)]">
-        <table class="w-full table-fixed text-left">
-          <thead>
-            <tr class="bg-primary text-accent">
-              {paymentPlans.map((plan) => (
-                <th class="px-6 py-5 text-center font-heading text-xl font-semibold uppercase tracking-wide">
+    <div class="mt-8 overflow-hidden">
+      <table class="w-full border border-primary/20 text-sm md:text-base">
+        <tbody>
+          <tr class="divide-x divide-primary/20">
+            {paymentPlans.map((plan) => (
+              <td class="px-6 py-8 text-center align-top md:px-10">
+                <p class="font-heading text-xl font-semibold text-primary md:text-2xl">
                   {plan.title}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="divide-x divide-primary/10 text-sm md:text-base">
-              {paymentPlans.map((plan) => (
-                <td class="px-6 py-6 align-top">
-                  <ul class="space-y-3 text-center">
-                    {plan.items.map((item) => (
-                      <li>{item}</li>
-                    ))}
-                  </ul>
-                </td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
-      </div>
+                </p>
+                <div class="mt-4 space-y-2">
+                  {plan.items.map((item) => (
+                    <p>{item}</p>
+                  ))}
+                </div>
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-      <div class="mt-20">
-        <h3 class="text-center font-heading text-4xl font-bold italic tracking-tight text-primary">
-          Formas de pago
-        </h3>
+    <div class="mt-16 md:mt-20">
+      <h3 class="text-center font-heading text-4xl font-bold italic uppercase tracking-tight text-primary md:text-5xl">
+        Formas de pago
+      </h3>
 
-        <div class="mt-12 grid gap-6 md:grid-cols-3">
-          {paymentMethods.map((method) => (
-            <CourseModalitiesCard
-              title={method.title}
-              description={method.description}
-              icon={method.icon}
-            />
-          ))}
-        </div>
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {paymentMethods.map((method) => (
+          <CourseModalitiesCard
+            title={method.title}
+            description={method.description}
+            icon={method.icon}
+            titleClass="uppercase"
+            containerClass="rounded-2xl"
+          />
+        ))}
       </div>
     </div>
   </div>
