@@ -245,14 +245,55 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
   },
   {
     number: 5,
-    title: "Visualización sensorial del sueño",
-    subtitle: "Expansión imaginativa",
+    title: "Visualización consciente y sensorial",
     highlights: [
-      "Integramos los sentidos en la visualización consciente.",
-      "Exploramos el viaje sonoro como portal creativo.",
-      "Creamos un mapa sensorial de manifestación.",
+      "Practicarás la visualización consciente y sensorial, integrando imágenes y emociones para conectar profundamente con tu sueño.",
+      "Realizarás una meditación guiada que te permitirá experimentar tu deseo como si ya fuera realidad, sintiendo cada emoción que genera.",
+      "Darás forma a tu visión de manera creativa, mapeando los detalles sensoriales de tu manifestación con un vision board personal.",
     ],
-    materials: ["Cuaderno de manifestación", "Elementos sensoriales (opcional)"],
+    location:
+      "Un espacio tranquilo en el que puedas meditar cómodamente, cerrar los ojos y dejar fluir tu imaginación y tus sensaciones.",
+    materials: [
+      "Un cuaderno de manifestación y pluma",
+      "Colores, plumones, revistas, impresiones o materiales para crear tu vision board",
+      "Un objeto significativo que simbolice tu sueño (imagen, fotografía o amuleto)",
+      "Cuenco tibetano o campana (opcional) para acompañar la meditación y elevar la vibración",
+    ],
+    materialsNote:
+      "*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.",
+    modalContent: `
+      <div class="space-y-6 text-base leading-relaxed text-accent/90">
+        <p>
+          Al visualizar y sentir eso que tu corazón desea, atraerás tu sueño de manera más clara y poderosa. La visualización no
+          solamente es imaginarlo, sino experimentarlo con tus sentidos, sentir cómo vibra tu cuerpo, mente y alma por medio de una
+          meditación guiada.
+        </p>
+        <section class="space-y-3">
+          <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
+          <ol class="space-y-2">
+            <li class="flex gap-2"><span class="font-semibold text-accent">1 -</span><span>Practicarás la visualización consciente y sensorial, integrando imágenes y emociones para conectar profundamente con tu sueño.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">2 -</span><span>Realizarás una meditación guiada que te permitirá experimentar tu deseo como si ya fuera realidad, sintiendo cada emoción que genera.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">3 -</span><span>Darás forma a tu visión de manera creativa, mapeando los detalles sensoriales de tu manifestación con un vision board personal.</span></li>
+          </ol>
+        </section>
+        <section class="space-y-2">
+          <h3 class="font-heading text-lg font-semibold text-accent">Lugar sugerido</h3>
+          <p>
+            Un espacio tranquilo en el que puedas meditar cómodamente, cerrar los ojos y dejar fluir tu imaginación y tus sensaciones.
+          </p>
+        </section>
+        <section class="space-y-2">
+          <h3 class="font-heading text-lg font-semibold text-accent">Material</h3>
+          <ul class="space-y-1 list-disc pl-5">
+            <li>Un cuaderno de manifestación y pluma</li>
+            <li>Colores, plumones, revistas, impresiones o materiales para crear tu vision board</li>
+            <li>Un objeto significativo que simbolice tu sueño (imagen, fotografía o amuleto)</li>
+            <li>Cuenco tibetano o campana (opcional) para acompañar la meditación y elevar la vibración</li>
+          </ul>
+          <p class="text-sm italic text-accent/70">*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.</p>
+        </section>
+      </div>
+    `.trim(),
   },
   {
     number: 6,
