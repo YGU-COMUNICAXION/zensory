@@ -108,12 +108,12 @@ const MODULES = [
     </header>
 
     <div class="lg:hidden">
-      <ul class="flex flex-col gap-4" data-module-list>
+      <ul class="flex flex-col gap-3" data-module-list>
         {MODULES.map((module, index) => (
           <li>
             <button
               type="button"
-              class="flex w-full items-center justify-between gap-4 rounded-3xl bg-primary/5 px-5 py-4 text-left text-accent transition-transform duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:scale-[0.99]"
+              class="flex w-full items-center gap-4 rounded-full border border-accent/25 bg-primary/10 px-5 py-4 text-left text-accent transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent hover:bg-primary/20 active:bg-primary/30"
               data-module-trigger
               data-module-index={index}
             >
@@ -126,7 +126,6 @@ const MODULES = [
                   <span class="text-sm text-accent/70">{module.title}</span>
                 </div>
               </div>
-              <span class="text-2xl text-accent/50">+</span>
             </button>
           </li>
         ))}
