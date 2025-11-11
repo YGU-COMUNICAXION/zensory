@@ -149,11 +149,46 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
     title: "Manifestación y vibración del aquí y ahora",
     subtitle: "Habitar el presente",
     highlights: [
-      "Identificamos pensamientos y emociones que sostienen el deseo.",
-      "Utilizamos el sonido como ancla al presente.",
-      "Creamos un ritual personal de manifestación diaria.",
+      "Redactarás una carta de manifestación en positivo, presente y como si ya lo tuvieras.",
+      "Practicarás la energía de la gratitud y comprenderás su importancia como puente para recibir más bendiciones.",
+      "Potenciarás tu carta con el sonido de los cuencos tibetanos para elevar tu vibración y materializar tus sueños.",
     ],
-    materials: ["Cuaderno de manifestación"],
+    location:
+      "Un espacio tranquilo donde puedas escribir con calma y conectar contigo. Puede ser tu rincón de meditación, tu habitación, tu altar o cualquier lugar donde sientas paz y presencia.",
+    materials: [
+      "Carta de manifestación y pluma",
+      "Hoja adicional o cuaderno personal para tus afirmaciones y ritual de gratitud diaria",
+      "Cuenco tibetano o campana (opcional)",
+    ],
+    materialsNote:
+      "*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para acompañar tu carta durante la práctica.",
+    modalContent: `
+      <div class="space-y-6 text-base leading-relaxed text-accent/90">
+        <section class="space-y-3">
+          <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
+          <ol class="space-y-2">
+            <li class="flex gap-2"><span class="font-semibold text-accent">1 -</span><span>Redactarás una carta de manifestación en positivo, presente y como si ya lo tuvieras.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">2 -</span><span>Practicarás la energía de la gratitud y comprenderás su importancia como puente para recibir más bendiciones.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">3 -</span><span>Potenciarás tu carta con el sonido de los cuencos tibetanos para elevar tu vibración y materializar tus sueños.</span></li>
+          </ol>
+        </section>
+        <section class="space-y-2">
+          <h3 class="font-heading text-lg font-semibold text-accent">Lugar sugerido</h3>
+          <p>
+            Un espacio tranquilo donde puedas escribir con calma y conectar contigo. Puede ser tu rincón de meditación, tu habitación, tu altar o cualquier lugar donde sientas paz y presencia.
+          </p>
+        </section>
+        <section class="space-y-2">
+          <h3 class="font-heading text-lg font-semibold text-accent">Material</h3>
+          <ul class="space-y-1 list-disc pl-5">
+            <li>Carta de manifestación y pluma</li>
+            <li>Hoja adicional o cuaderno personal para tus afirmaciones y ritual de gratitud diaria</li>
+            <li>Cuenco tibetano o campana (opcional)</li>
+          </ul>
+          <p class="text-sm italic text-accent/70">*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para acompañar tu carta durante la práctica.</p>
+        </section>
+      </div>
+    `.trim(),
   },
   {
     number: 4,
