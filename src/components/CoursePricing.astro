@@ -1,6 +1,5 @@
 ---
-import type { ImageMetadata } from "astro";
-import PricingInfoCard from "./PricingInfoCard.astro";
+import CourseModalitiesCard from "./CourseModalitiesCard.astro";
 import cardIcon from "@assets/svg/card.svg";
 import arrowsIcon from "@assets/svg/arrows.svg";
 import moneysIcon from "@assets/svg/moneys.svg";
@@ -8,14 +7,6 @@ import alertIcon from "@assets/svg/alert.svg";
 
 interface Props {
   id?: string;
-}
-
-interface InfoCard {
-  icon: ImageMetadata;
-  iconAlt: string;
-  title: string;
-  subtitle?: string;
-  items: string[];
 }
 
 const { id = "precios" }: Props = Astro.props;
@@ -36,83 +27,61 @@ const priceColumns = [
 const upfrontNote =
   "En una sola exhibición y para quien se inscriba máximo 15 días antes de iniciar el curso.";
 
-const paymentPlans: InfoCard[] = [
+const paymentPlans = [
   {
-    icon: cardIcon,
-    iconAlt: "Plan en dos pagos",
     title: "Dos pagos",
-    items: ["1er pago: $2,222", "2do pago: $2,222"],
+    items: ["1er semana: $4,444", "5ta semana: $4,444"],
   },
   {
-    icon: arrowsIcon,
-    iconAlt: "Plan en cuatro pagos",
     title: "Cuatro pagos",
     items: [
-      "Semana 1: $1,111",
-      "Semana 2: $1,111",
-      "Semana 3: $1,111",
-      "Semana 4: $1,111",
+      "1er semana: $2,222",
+      "2da semana: $2,222",
+      "3er semana: $2,222",
+      "4ta semana: $2,222",
     ],
   },
   {
-    icon: moneysIcon,
-    iconAlt: "Plan en ocho pagos",
-    title: "Ocho pagos",
-    items: [
-      "Semana 1: $555",
-      "Semana 2: $555",
-      "Semana 3: $555",
-      "Semana 4: $555",
-      "Semana 5: $555",
-      "Semana 6: $555",
-      "Semana 7: $555",
-      "Semana 8: $555",
-    ],
+    title: "8 pagos",
+    items: ["Pagos semanales de $1,111 durante 8 semanas."],
   },
 ];
 
-const paymentMethods: InfoCard[] = [
+const paymentMethods = [
   {
     icon: cardIcon,
-    iconAlt: "Pago con tarjeta",
     title: "Tarjeta de crédito o débito",
-    subtitle: "Pago único o en parcialidades",
-    items: [
-      "Confirma tu lugar al instante con pago seguro.",
-      "Puede aplicar comisión por diferir a meses según tu banco.",
+    description: [
+      "Pago único o en parcialidades.",
+      "Si el pago se hace a meses pueden aplicarse comisión o intereses.",
     ],
   },
   {
     icon: arrowsIcon,
-    iconAlt: "Pago por transferencia",
     title: "Transferencia",
-    subtitle: "Pago único o en parcialidades",
-    items: [
-      "Solicita los datos bancarios y registra tu comprobante.",
-      "Evita comisiones adicionales al realizarlo desde tu banca en línea.",
+    description: [
+      "Pago único o en parcialidades.",
+      "Opción directa y sin comisiones.",
     ],
   },
   {
     icon: moneysIcon,
-    iconAlt: "Pago en efectivo",
     title: "Efectivo",
-    subtitle: "Pago único o en parcialidades",
-    items: [
-      "Disponible para modalidad presencial o punto autorizado.",
-      "Agenda tu entrega con anticipación para asegurar tu lugar.",
+    description: [
+      "Método de pago válido solo para la modalidad presencial en vivo.",
     ],
   },
 ];
 ---
 <section id={id}>
-  <div class="bg-primary text-accent">
-    <div class="container mx-auto px-4 py-16 md:py-24">
-      <div class="grid gap-12 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:items-start md:gap-16">
-        <div class="flex flex-col items-center text-center md:items-start md:text-left">
+  <div class="px-4 py-16 md:py-24">
+    <div class="container mx-auto bg-primary px-6 py-16 text-accent shadow-[0_25px_80px_-40px_rgba(34,9,34,0.55)] md:px-10 md:py-20">
+      <div class="grid gap-12 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-16">
+        <div class="flex flex-col items-center text-center">
           <span class="text-sm font-semibold uppercase tracking-[0.2em] text-accent/80">
             {priceColumns[0].label}
           </span>
-          <span class="mt-4 font-heading text-5xl font-semibold md:text-6xl">
+          <span class="mt-5 font-heading text-5xl font-semibold md:text-6xl">
             {priceColumns[0].amount}
             <span class="ml-2 text-base font-sans font-medium uppercase tracking-[0.3em] text-accent/60">
               {priceColumns[0].currency}
@@ -120,19 +89,23 @@ const paymentMethods: InfoCard[] = [
           </span>
         </div>
 
-        <div class="mx-auto h-px w-16 bg-accent/30 md:h-full md:w-px"></div>
+        <div class="mx-auto hidden h-full w-px bg-accent/30 md:block"></div>
 
-        <div class="flex flex-col items-center text-center md:items-start md:text-left">
+        <div class="flex flex-col items-center text-center">
           <span class="text-sm font-semibold uppercase tracking-[0.2em] text-accent/80">
             {priceColumns[1].label}
           </span>
-          <span class="mt-4 font-heading text-5xl font-semibold md:text-6xl">
+          <span class="mt-5 font-heading text-5xl font-semibold md:text-6xl">
             {priceColumns[1].amount}
             <span class="ml-2 text-base font-sans font-medium uppercase tracking-[0.3em] text-accent/60">
               {priceColumns[1].currency}
             </span>
           </span>
         </div>
+      </div>
+
+      <div class="mt-10 md:hidden">
+        <div class="mx-auto h-px w-4/5 bg-accent/30"></div>
       </div>
 
       <div class="mt-12 flex items-start gap-3 text-left text-sm leading-relaxed text-accent/80 md:text-base">
@@ -149,24 +122,49 @@ const paymentMethods: InfoCard[] = [
 
   <div class="bg-accent/10 text-primary">
     <div class="container mx-auto px-4 py-16 md:py-24">
-      <p class="text-center text-sm uppercase tracking-[0.3em] text-primary/70">
+      <p class="text-center font-heading text-xl font-semibold uppercase tracking-wide text-primary">
         O elige entre una de las tres opciones de pago a plazos
       </p>
 
-      <div class="mt-10 grid gap-6 md:grid-cols-3">
-        {paymentPlans.map((plan) => (
-          <PricingInfoCard {...plan} />
-        ))}
+      <div class="mt-10 overflow-hidden rounded-3xl border border-primary/15 bg-white/60 shadow-[0_25px_80px_-60px_rgba(34,9,34,0.5)]">
+        <table class="w-full table-fixed text-left">
+          <thead>
+            <tr class="bg-primary text-accent">
+              {paymentPlans.map((plan) => (
+                <th class="px-6 py-5 text-center font-heading text-xl font-semibold uppercase tracking-wide">
+                  {plan.title}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="divide-x divide-primary/10 text-sm md:text-base">
+              {paymentPlans.map((plan) => (
+                <td class="px-6 py-6 align-top">
+                  <ul class="space-y-3 text-center">
+                    {plan.items.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="mt-16">
-        <h3 class="text-center font-heading text-3xl font-semibold uppercase tracking-tight text-primary">
+      <div class="mt-20">
+        <h3 class="text-center font-heading text-4xl font-bold italic tracking-tight text-primary">
           Formas de pago
         </h3>
 
-        <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
           {paymentMethods.map((method) => (
-            <PricingInfoCard {...method} />
+            <CourseModalitiesCard
+              title={method.title}
+              description={method.description}
+              icon={method.icon}
+            />
           ))}
         </div>
       </div>
