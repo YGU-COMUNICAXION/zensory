@@ -2,6 +2,7 @@ export type ModuleDefinition = {
   number: number;
   title: string;
   subtitle?: string;
+  description?: string;
   highlights: string[];
   location?: string;
   materials?: string[];
@@ -20,7 +21,9 @@ const createDefaultModalContent = (module: ModuleDefinition) => {
           ${module.highlights
             .map(
               (highlight, idx) =>
-                `<li class=\"flex gap-2\"><span class=\"font-semibold text-accent\">${idx + 1}.</span><span>${highlight}</span></li>`
+                `<li class=\"flex gap-2\"><span class=\"font-semibold text-accent\">${
+                  idx + 1
+                }.</span><span>${highlight}</span></li>`
             )
             .join("")}
         </ol>
@@ -44,7 +47,11 @@ const createDefaultModalContent = (module: ModuleDefinition) => {
         <ul class="space-y-1 list-disc pl-5 text-base leading-relaxed text-accent/80">
           ${module.materials.map((item) => `<li>${item}</li>`).join("")}
         </ul>
-        ${module.materialsNote ? `<p class=\"text-sm italic text-accent/70\">${module.materialsNote}</p>` : ""}
+        ${
+          module.materialsNote
+            ? `<p class=\"text-sm italic text-accent/70\">${module.materialsNote}</p>`
+            : ""
+        }
       </section>
     `);
   }
@@ -57,6 +64,7 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
     number: 1,
     title: "Sintonización energética",
     subtitle: "Introducción y apertura del círculo",
+    description: "En este modulo:",
     highlights: [
       "Nos presentaremos y abriremos el círculo de manifestación.",
       "Realizaremos una meditación de sintonización energética con respiración consciente y cuencos tibetanos para preparar nuestro cuerpo, mente y alma a la manifestación.",
@@ -99,6 +107,8 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
     number: 2,
     title: "Alineación y vibración consciente",
     subtitle: "Reconectar con el propósito",
+    description:
+      "Aprenderás a determinar lo que sí y lo que no quieres para manifestar tu sueño.  Manifestar no solo es pedir, es alinearte y vibrar conscientemente con tu propósito de  vida y con lo que anhela tu corazón y alma. En este módulo:",
     highlights: [
       "Realizarás un ejercicio escrito en una hoja con dos columnas: una para lo que no deseas atraer y otra para lo que sí.",
       "Llevarás a cabo un ritual de liberación con el sonido de los cuencos tibetanos y frases empoderadas para soltar lo que ya no funciona y reforzar lo que sí quieres atraer.",
@@ -146,6 +156,8 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
     number: 3,
     title: "Manifestación y vibración del aquí y ahora",
     subtitle: "Habitar el presente",
+    description:
+      "En este módulo aprenderás a manifestar tus sueños en positivo, en presente y como si  ya estuvieran en tu vida. Cuando te enfocas en el futuro, aparece la ansiedad y la  sensación de carencia. En cambio, al escribir como si ya lo tuvieras, te alineas con la  vibración del aquí y el ahora, donde todo se manifiesta.",
     highlights: [
       "Redactarás una carta de manifestación en positivo, presente y como si ya lo tuvieras.",
       "Practicarás la energía de la gratitud y aprenderás su importancia como puente para recibir más bendiciones.",
@@ -196,6 +208,8 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
     number: 4,
     title: "Transformación consciente de creencias",
     subtitle: "Reescritura de patrones",
+    description:
+      "Para que tu deseo se manifieste, es importante reconocer las creencias y pensamientos que te limitan, ya sea de forma consciente o inconsciente. En este módulo aprenderás a identificarlas y transformarlas a positivo, abriendo el camino a nuevas bendiciones.",
     highlights: [
       "Identificarás las creencias limitantes que bloquean tu energía y tu manifestación.",
       "Aprenderás a transformarlas en pensamientos y frases positivas para expandir tu energía.",
@@ -245,6 +259,8 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
   {
     number: 5,
     title: "Visualización consciente y sensorial",
+    description:
+      "Al visualizar y sentir eso que tu corazón desea, atraerás tu sueño de manera más clara y poderosa. La visualización no solamente es imaginarlo, sino experimentarlo con tus sentidos, sentir cómo vibra tu cuerpo, mente y alma por medio de una meditación guiada. En este módulo:",
     highlights: [
       "Practicarás la visualización consciente y sensorial, integrando imágenes y emociones para conectar profundamente con tu sueño.",
       "Realizarás una meditación guiada que te permitirá experimentar tu deseo como si ya fuera realidad, sintiendo cada emoción que eso genera.",
@@ -293,6 +309,8 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
     number: 6,
     title: "Soltar y confiar en la vibración divina",
     subtitle: "Entrega amorosa",
+    description:
+      "Cuando soltamos y confiamos, abrimos espacio para que la magia del universo actúe. La verdadera fe surge al rendirnos a la vibración divina del universo, confiando en que todo llega en su momento divino. En este módulo:",
     highlights: [
       "Reflexionarás sobre la importancia de soltar el control para permitir que tus sueños se manifiesten.",
       "Practicarás el arte de confiar y rendirte a la fe y voluntad divina.",
@@ -342,6 +360,8 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
     number: 7,
     title: "Vibrar en gratitud consciente",
     subtitle: "Celebrar el camino",
+    description:
+      "Cuando agradecemos, nos damos cuenta de todo lo que tenemos en nuestra vida. La gratitud nos conecta con el presente, abre nuestro corazón y nos eleva a una frecuencia más alta. La gratitud es una frecuencia divina que nos llena de amor y nos abre las puertas para recibir más bendiciones. En este módulo:",
     highlights: [
       "Reflexionarás sobre la importancia de agradecer y cómo esta práctica diaria eleva tu vibración y atrae abundancia.",
       "Escribirás en tu cuaderno de manifestación, agradeciendo por todo lo que tienes en tu vida aquí y ahora.",
@@ -392,6 +412,8 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
     number: 8,
     title: "Cierre mágico de manifestación con sonidos sagrados",
     subtitle: "Cierre del proceso",
+    description:
+      "Integraremos lo aprendido a través de una meditación sonora sagrada. Los cuencos tibetanos, el handpan, el jicuri drum, el arpa y otros instrumentos mágicos resonarán en tu alma para acompañarte a manifestar ese sueño de manera consciente y elevada. El sonido es oración, es frecuencia divina, es el lenguaje del alma. Con cada vibración, tu energía se alinea con el universo y tu manifestación se siembra en la realidad. En este módulo:",
     highlights: [
       "Integrarás todo lo trabajado en los módulos anteriores en una experiencia sonora única y transformadora.",
       "Vibrarás con la energía de los sonidos sagrados por medio de una meditación guiada mágica que armonizará tu cuerpo, mente y espíritu.",

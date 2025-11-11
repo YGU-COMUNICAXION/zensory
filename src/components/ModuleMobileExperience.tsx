@@ -70,7 +70,12 @@ const ModuleMobileExperience = ({ modules }: ModuleMobileExperienceProps) => {
         ))}
       </ul>
 
-      <Modal open={Boolean(activeModule)} onClose={closeModal} closeLabel="Cerrar módulo" className="lg:hidden">
+      <Modal
+        open={Boolean(activeModule)}
+        onClose={closeModal}
+        closeLabel="Cerrar módulo"
+        className="lg:hidden"
+      >
         {activeModule ? (
           <>
             <div className="flex-1 overflow-y-auto px-6 pb-8 pt-10">
@@ -91,8 +96,15 @@ const ModuleMobileExperience = ({ modules }: ModuleMobileExperienceProps) => {
               </header>
               <div
                 className="mt-6 space-y-6 text-base leading-relaxed text-accent/90"
-                dangerouslySetInnerHTML={{ __html: activeModule.modalContent ?? "" }}
+                dangerouslySetInnerHTML={{
+                  __html: activeModule.modalContent ?? "",
+                }}
               />
+
+              <p className="mt-2 text-sm italic text-accent/70">
+                * Material opcional. Lo puedes adquirir conmigo o, si ya tienes
+                uno, tenerlo a la mano para hacer diferentes prácticas.
+              </p>
             </div>
             <div className="flex flex-col gap-3 border-t border-accent/15 bg-primary/90 px-6 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4 shrink-0">
               <button
