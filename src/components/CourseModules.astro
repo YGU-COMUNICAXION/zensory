@@ -1,163 +1,6 @@
 ---
 import ModuleMobileExperience from "./ModuleMobileExperience";
-
-const createDefaultModalContent = (module: {
-  learnings?: string[];
-  materials?: string[];
-}) => {
-  const sections: string[] = [];
-
-  if (module.learnings?.length) {
-    sections.push(`
-      <section class="space-y-3">
-        <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
-        <ol class="space-y-2 text-base leading-relaxed text-accent/90">
-          ${module.learnings
-            .map(
-              (learning, idx) =>
-                `<li class="flex gap-2"><span class="font-semibold text-accent">${idx + 1}.</span><span>${learning}</span></li>`
-            )
-            .join("")}
-        </ol>
-      </section>
-    `);
-  }
-
-  if (module.materials?.length) {
-    sections.push(`
-      <section class="space-y-2">
-        <h3 class="font-heading text-lg font-semibold text-accent">Material sugerido</h3>
-        <ul class="space-y-1 list-disc pl-5 text-base leading-relaxed text-accent/80">
-          ${module.materials.map((item) => `<li>${item}</li>`).join("")}
-        </ul>
-      </section>
-    `);
-  }
-
-  return `<div class="space-y-6">${sections.join("")}</div>`;
-};
-
-const MODULE_DEFINITIONS = [
-  {
-    number: 1,
-    title: "Sintonización energética",
-    subtitle: "Introducción y apertura del círculo",
-    learnings: [
-      "Nos presentamos y abrimos el círculo de manifestación.",
-      "Realizamos ejercicios de respiración consciente para preparar cuerpo y mente.",
-      "Cerramos con una intención compartida y agradecimiento.",
-    ],
-    materials: ["Cuaderno de manifestación", "Pluma", "Cuenco tibetano (opcional)"],
-    modalContent: `
-      <div class="space-y-6 text-base leading-relaxed text-accent/90">
-        <section class="space-y-3">
-          <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
-          <ol class="space-y-2">
-            <li class="flex gap-2"><span class="font-semibold text-accent">1 -</span><span>Nos presentaremos y abriremos el círculo de manifestación.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">2 -</span><span>Realizaremos una meditación de sintonización energética con respiración consciente y cuencos tibetanos para preparar nuestro cuerpo, mente y alma a la manifestación.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">3 -</span><span>Cerraremos con una reflexión y agradecimiento.</span></li>
-          </ol>
-        </section>
-        <section class="space-y-2">
-          <h3 class="font-heading text-lg font-semibold text-accent">Lugar sugerido</h3>
-          <p>
-            Prepara un espacio cómodo y tranquilo. Puede ser un lugar donde te sientas en paz, ya sea sentado en una silla o un cojín,
-            o acostado sobre una colchoneta o cama. Lo importante es que tu cuerpo esté relajado y tu mente pueda enfocarse en la meditación.
-          </p>
-        </section>
-        <section class="space-y-2">
-          <h3 class="font-heading text-lg font-semibold text-accent">Material</h3>
-          <ul class="space-y-1 list-disc pl-5">
-            <li>Un cuaderno de manifestación y pluma.</li>
-            <li>Cuenco tibetano (opcional), o si ya tienes uno, te invitamos a tenerlo a la mano para practicar.</li>
-          </ul>
-        </section>
-      </div>
-    `.trim(),
-  },
-  {
-    number: 2,
-    title: "Alineación y vibración consciente",
-    subtitle: "Reconectar con el propósito",
-    learnings: [
-      "Exploramos nuestra intención principal de manifestación.",
-      "Practicamos visualizaciones activas para elevar la vibración.",
-      "Integramos afirmaciones para sostener la energía.",
-    ],
-    materials: ["Cuaderno de manifestación", "Velas o inciensos (opcional)"],
-  },
-  {
-    number: 3,
-    title: "Manifestación y vibración del aquí y ahora",
-    subtitle: "Habitar el presente",
-    learnings: [
-      "Identificamos pensamientos y emociones que sostienen el deseo.",
-      "Utilizamos el sonido como ancla al presente.",
-      "Creamos un ritual personal de manifestación diaria.",
-    ],
-    materials: ["Cuaderno de manifestación"],
-  },
-  {
-    number: 4,
-    title: "Transformación consciente de creencias",
-    subtitle: "Reescritura de patrones",
-    learnings: [
-      "Reconocemos creencias limitantes que frenan el proceso.",
-      "Aplicamos técnicas de liberación con sonido y respiración.",
-      "Diseñamos nuevas declaraciones que expanden nuestra realidad.",
-    ],
-    materials: ["Cuaderno de manifestación", "Tarjetas o post-its"],
-  },
-  {
-    number: 5,
-    title: "Visualización sensorial del sueño",
-    subtitle: "Expansión imaginativa",
-    learnings: [
-      "Integramos los sentidos en la visualización consciente.",
-      "Exploramos el viaje sonoro como portal creativo.",
-      "Creamos un mapa sensorial de manifestación.",
-    ],
-    materials: ["Cuaderno de manifestación", "Elementos sensoriales (opcional)"],
-  },
-  {
-    number: 6,
-    title: "Soltar y confiar en el proceso",
-    subtitle: "Entrega amorosa",
-    learnings: [
-      "Identificamos apegos que dificultan la manifestación.",
-      "Practicamos meditaciones para soltar con amor.",
-      "Anclamos una nueva relación con la confianza.",
-    ],
-    materials: ["Cuaderno de manifestación"],
-  },
-  {
-    number: 7,
-    title: "Vibrar en gratitud consciente",
-    subtitle: "Celebrar el camino",
-    learnings: [
-      "Profundizamos en la gratitud como estado vibracional.",
-      "Creamos rituales de agradecimiento diario.",
-      "Compartimos testimonios y descubrimientos.",
-    ],
-    materials: ["Cuaderno de manifestación", "Pluma"],
-  },
-  {
-    number: 8,
-    title: "Integración y manifestación celebrada",
-    subtitle: "Cierre del proceso",
-    learnings: [
-      "Integramos aprendizajes y resonancias de cada módulo.",
-      "Diseñamos un plan de acción alineado con el sueño.",
-      "Celebramos la manifestación con un viaje sonoro final.",
-    ],
-    materials: ["Cuaderno de manifestación", "Elemento simbólico personal"],
-  },
-];
-
-const MODULES = MODULE_DEFINITIONS.map((module) => ({
-  ...module,
-  modalContent: module.modalContent ?? createDefaultModalContent(module),
-}));
+import { MODULES } from "../data/modules";
 ---
 
 <section class="bg-primary text-accent">
@@ -185,18 +28,20 @@ const MODULES = MODULE_DEFINITIONS.map((module) => ({
       <ModuleMobileExperience client:load modules={MODULES} />
     </div>
 
-    <div class="hidden lg:flex lg:flex-col lg:gap-5" data-module-accordion-group>
+    <div class="hidden lg:flex lg:flex-col lg:gap-6" data-module-accordion-group>
       {MODULES.map((module) => (
         <details
-          class="overflow-hidden rounded-3xl text-left shadow-sm transition-shadow duration-200 open:shadow-lg"
+          class="group overflow-hidden rounded-3xl text-left shadow-sm transition-shadow duration-300"
           data-module-accordion
         >
-          <summary class="flex cursor-pointer items-center justify-between gap-6 rounded-full bg-[#2A1A2B] px-8 py-6 text-accent shadow-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+          <summary
+            class="flex cursor-pointer items-center justify-between gap-6 rounded-3xl bg-[#2A1A2B] px-8 py-6 text-accent transition-colors duration-200 group-open:rounded-b-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
             <div class="flex items-center gap-6">
               <span class="flex h-16 w-16 items-center justify-center rounded-full bg-accent font-heading text-2xl font-light text-primary">
                 {module.number}
               </span>
-              <div class="flex flex-col gap-1">
+              <div class="flex flex-col gap-1 text-left">
                 <span class="font-heading text-2xl font-semibold italic leading-tight">Módulo {module.number}</span>
                 <span class="text-lg font-medium text-accent/80">{module.title}</span>
               </div>
@@ -205,7 +50,7 @@ const MODULES = MODULE_DEFINITIONS.map((module) => ({
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="none"
-              class="h-8 w-8 text-accent transition-transform duration-200"
+              class="h-10 w-10 text-accent transition-transform duration-200 group-open:rotate-180"
               aria-hidden="true"
               data-accordion-icon
             >
@@ -218,33 +63,59 @@ const MODULES = MODULE_DEFINITIONS.map((module) => ({
               />
             </svg>
           </summary>
-          <div class="space-y-6 bg-primary/40 px-8 pb-10 pt-6 text-accent/90">
-            <div class="grid gap-4 md:grid-cols-3 md:gap-6">
-              {module.learnings.map((item, idx) => (
-                <div class="flex items-start gap-4 rounded-2xl bg-primary/60 p-5">
-                  <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-accent text-base font-heading font-light text-primary">
-                    {idx + 1}
-                  </span>
-                  <p class="text-base leading-relaxed text-accent/90">{item}</p>
-                </div>
-              ))}
+          <div class="bg-[#2A1A2B]">
+            <div class="space-y-8 border-t border-accent/10 px-8 pb-10 pt-8 text-accent/90">
+              <header class="flex flex-col gap-2 text-accent">
+                <span class="font-heading text-xl font-semibold italic text-accent">
+                  Módulo {module.number}: {module.title}
+                </span>
+                {module.subtitle ? (
+                  <span class="text-base text-accent/70">{module.subtitle}</span>
+                ) : null}
+              </header>
+
+              {module.highlights?.length ? (
+                <section class="space-y-4">
+                  <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
+                  <ol class="grid gap-5 md:grid-cols-3">
+                    {module.highlights.map((item, idx) => (
+                      <li class="flex items-start gap-4" key={`${module.number}-${idx}`}>
+                        <span class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent text-lg font-heading font-light text-primary">
+                          {idx + 1}
+                        </span>
+                        <p class="text-base leading-relaxed text-accent">{item}</p>
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+              ) : null}
+
+              {module.location ? (
+                <section class="space-y-3">
+                  <h3 class="font-heading text-lg font-semibold text-accent">Lugar sugerido</h3>
+                  <p class="text-base leading-relaxed text-accent">{module.location}</p>
+                </section>
+              ) : null}
+
+              {module.materials?.length ? (
+                <section class="space-y-3">
+                  <h3 class="font-heading text-lg font-semibold text-accent">Material sugerido</h3>
+                  <ul class="list-disc space-y-2 pl-6 text-base text-accent">
+                    {module.materials.map((material) => (
+                      <li key={material}>{material}</li>
+                    ))}
+                  </ul>
+                  {module.materialsNote ? (
+                    <p class="text-sm italic text-accent/70">{module.materialsNote}</p>
+                  ) : null}
+                </section>
+              ) : null}
             </div>
-            {module.materials?.length ? (
-              <div class="space-y-2">
-                <h4 class="font-heading text-lg font-semibold text-accent">Material sugerido</h4>
-                <ul class="list-disc space-y-1 pl-5 text-base text-accent/90">
-                  {module.materials.map((material) => (
-                    <li>{material}</li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
           </div>
         </details>
       ))}
     </div>
   </div>
-
 </section>
 
 <script>
@@ -252,9 +123,6 @@ const MODULES = MODULE_DEFINITIONS.map((module) => ({
     const accordions = Array.from(document.querySelectorAll<HTMLDetailsElement>("[data-module-accordion]"));
     accordions.forEach((details) => {
       details.addEventListener("toggle", () => {
-        const icon = details.querySelector<HTMLElement>("[data-accordion-icon]");
-        icon?.classList.toggle("rotate-180", details.open);
-
         if (details.open) {
           accordions.forEach((other) => {
             if (other !== details) {

@@ -1,15 +1,9 @@
 import { useMemo, useState } from "react";
+import type { Module } from "../data/modules";
 import Modal from "./Modal";
 
-type ModuleDefinition = {
-  number: number;
-  title: string;
-  subtitle?: string;
-  modalContent?: string;
-};
-
 type ModuleMobileExperienceProps = {
-  modules: ModuleDefinition[];
+  modules: Module[];
 };
 
 const triggerBaseClasses =
