@@ -64,17 +64,17 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
     ],
     location:
       "Prepara un espacio cómodo y tranquilo. Puede ser un lugar donde te sientas en paz, ya sea sentado en una silla o un cojín, o acostado sobre una colchoneta o cama. Lo importante es que tu cuerpo esté relajado y tu mente pueda enfocarse en la meditación.",
-    materials: ["Un cuaderno de manifestación y pluma.", "Cuenco tibetano*"],
+    materials: ["Un cuaderno de manifestación y pluma", "Cuenco tibetano"],
     materialsNote:
-      "*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para hacer prácticas adicionales.",
+      "* Material opcional. Lo puedes adquirir conmigo o, si ya tienes uno, tenerlo a la mano para hacer diferentes prácticas.",
     modalContent: `
       <div class="space-y-6 text-base leading-relaxed text-accent/90">
         <section class="space-y-3">
           <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
           <ol class="space-y-2">
-            <li class="flex gap-2"><span class="font-semibold text-accent">1 -</span><span>Nos presentaremos y abriremos el círculo de manifestación.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">2 -</span><span>Realizaremos una meditación de sintonización energética con respiración consciente y cuencos tibetanos para preparar nuestro cuerpo, mente y alma a la manifestación.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">3 -</span><span>Cerraremos con una reflexión y agradecimiento.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">1 .-</span><span>Nos presentaremos y abriremos el círculo de manifestación.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">2 .-</span><span>Realizaremos una meditación de sintonización energética con respiración consciente y cuencos tibetanos para preparar nuestro cuerpo, mente y alma a la manifestación.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">3 .-</span><span>Cerraremos con una reflexión y agradecimiento.</span></li>
           </ol>
         </section>
         <section class="space-y-2">
@@ -87,9 +87,10 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
         <section class="space-y-2">
           <h3 class="font-heading text-lg font-semibold text-accent">Material</h3>
           <ul class="space-y-1 list-disc pl-5">
-            <li>Un cuaderno de manifestación y pluma.</li>
-            <li>Cuenco tibetano (opcional), o si ya tienes uno, te invitamos a tenerlo a la mano para practicar.</li>
+            <li>Un cuaderno de manifestación y pluma</li>
+            <li>Cuenco tibetano</li>
           </ul>
+          <p class="text-sm italic text-accent/70">* Material opcional. Lo puedes adquirir conmigo o, si ya tienes uno, tenerlo a la mano para hacer diferentes prácticas.</p>
         </section>
       </div>
     `.trim(),
@@ -104,42 +105,39 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
       "Cortarás la hoja que está dividida y quemarás o romperás la parte negativa, dejando solamente la positiva.",
     ],
     location:
-      "Un espacio seguro y tranquilo donde puedas escribir y realizar el ritual con calma. Puede ser el exterior o una mesa bien ventilada donde sea seguro encender una vela o usar incienso.",
+      "Un espacio seguro y tranquilo donde puedas escribir y realizar el ritual con calma. Puede ser tu escritorio o una mesa ventilada donde sea seguro encender una vela o usar un encendedor.",
     materials: [
       "Cuaderno de manifestación y pluma",
-      "Hoja dividida en dos columnas para manifestar",
+      "Hoja de trabajo descargable con las dos columnas para manifestar",
       "Tijeras para cortar la hoja",
-      "Una vela, cerillos o encendedor (usa un recipiente de cerámica o material que no se dañe con el fuego)",
-      "Cuenco tibetano o campana (opcional)",
+      "Una vela, encendedor o cerillos para quemar la parte de lo que no deseas, con la opción de que si no la quieres quemar, también la podrías romper y tirar a la basura",
+      "Tu cuenco tibetano opcional, pero recomendado para acompañar el ritual con vibración sanadora",
     ],
-    materialsNote:
-      "*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.",
     modalContent: `
       <div class="space-y-6 text-base leading-relaxed text-accent/90">
         <section class="space-y-3">
           <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
           <ol class="space-y-2">
-            <li class="flex gap-2"><span class="font-semibold text-accent">1 -</span><span>Realizarás un ejercicio escrito en una hoja con dos columnas: una para lo que no deseas atraer y otra para lo que sí.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">2 -</span><span>Llevarás a cabo un ritual de liberación con el sonido de los cuencos tibetanos y frases empoderadas para soltar lo que ya no funciona y reforzar lo que sí quieres atraer.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">3 -</span><span>Cortarás la hoja que está dividida y quemarás o romperás la parte negativa, dejando solamente la positiva.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">1 .-</span><span>Realizarás un ejercicio escrito en una hoja con dos columnas: una para lo que no deseas atraer y otra para lo que sí.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">2 .-</span><span>Llevarás a cabo un ritual de liberación con el sonido de los cuencos tibetanos y frases empoderadas para soltar lo que ya no funciona y reforzar lo que sí quieres atraer.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">3 .-</span><span>Cortarás la hoja que está dividida y quemarás o romperás la parte negativa, dejando solamente la positiva.</span></li>
           </ol>
         </section>
         <section class="space-y-2">
           <h3 class="font-heading text-lg font-semibold text-accent">Lugar sugerido</h3>
           <p>
-            Un espacio seguro y tranquilo donde puedas escribir y realizar el ritual con calma. Puede ser el exterior o una mesa bien ventilada donde sea seguro encender una vela o usar incienso.
+            Un espacio seguro y tranquilo donde puedas escribir y realizar el ritual con calma. Puede ser tu escritorio o una mesa ventilada donde sea seguro encender una vela o usar un encendedor.
           </p>
         </section>
         <section class="space-y-2">
           <h3 class="font-heading text-lg font-semibold text-accent">Material</h3>
           <ul class="space-y-1 list-disc pl-5">
             <li>Cuaderno de manifestación y pluma</li>
-            <li>Hoja dividida en dos columnas para manifestar</li>
+            <li>Hoja de trabajo descargable con las dos columnas para manifestar</li>
             <li>Tijeras para cortar la hoja</li>
-            <li>Una vela, cerillos o encendedor (usa un recipiente de cerámica o material que no se dañe con el fuego)</li>
-            <li>Cuenco tibetano o campana (opcional)</li>
+            <li>Una vela, encendedor o cerillos para quemar la parte de lo que no deseas, con la opción de que si no la quieres quemar, también la podrías romper y tirar a la basura</li>
+            <li>Tu cuenco tibetano opcional, pero recomendado para acompañar el ritual con vibración sanadora</li>
           </ul>
-          <p class="text-sm italic text-accent/70">*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.</p>
         </section>
       </div>
     `.trim(),
@@ -150,42 +148,46 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
     subtitle: "Habitar el presente",
     highlights: [
       "Redactarás una carta de manifestación en positivo, presente y como si ya lo tuvieras.",
-      "Practicarás la energía de la gratitud y comprenderás su importancia como puente para recibir más bendiciones.",
-      "Potenciarás tu carta con el sonido de los cuencos tibetanos para elevar tu vibración y materializar tus sueños.",
+      "Practicarás la energía de la gratitud y aprenderás su importancia como puente para recibir más bendiciones.",
+      "Potenciarás tu carta con el sonido de los cuencos tibetanos, integrándose en una meditación para magnificar su vibración.",
     ],
     location:
-      "Un espacio tranquilo donde puedas escribir con calma y conectar contigo. Puede ser tu rincón de meditación, tu habitación, tu altar o cualquier lugar donde sientas paz y presencia.",
+      "Un espacio tranquilo donde puedas escribir con calma y conectar contigo mismo. Puede ser tu rincón de meditación, tu habitación o cualquier lugar donde sientas paz y puedas concentrarte.",
     materials: [
-      "Carta de manifestación y pluma",
-      "Hoja adicional o cuaderno personal para tus afirmaciones y ritual de gratitud diaria",
-      "Cuenco tibetano o campana (opcional)",
+      "Cuaderno de manifestación y una pluma",
+      "La hoja del módulo 2 como guía de inspiración para tu carta de manifestación",
+      "Hoja descargable con el ejemplo de una frase de cómo escribir en positivo, presente y como si ya lo tuvieras",
+      "Si tienes un cuenco tibetano, tráelo para acompañar y amplificar la vibración de tu práctica",
     ],
-    materialsNote:
-      "*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para acompañar tu carta durante la práctica.",
     modalContent: `
       <div class="space-y-6 text-base leading-relaxed text-accent/90">
+        <p>
+          En este módulo aprenderás a manifestar tus sueños en positivo, en presente y como si ya estuvieran en tu vida. Cuando te
+          enfocas en el futuro, aparece la ansiedad y la sensación de carencia. En cambio, al escribir como si ya lo tuvieras, te
+          alineas con la vibración del aquí y el ahora, donde todo se manifiesta.
+        </p>
         <section class="space-y-3">
           <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
           <ol class="space-y-2">
-            <li class="flex gap-2"><span class="font-semibold text-accent">1 -</span><span>Redactarás una carta de manifestación en positivo, presente y como si ya lo tuvieras.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">2 -</span><span>Practicarás la energía de la gratitud y comprenderás su importancia como puente para recibir más bendiciones.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">3 -</span><span>Potenciarás tu carta con el sonido de los cuencos tibetanos para elevar tu vibración y materializar tus sueños.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">1 .-</span><span>Redactarás una carta de manifestación en positivo, presente y como si ya lo tuvieras.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">2 .-</span><span>Practicarás la energía de la gratitud y aprenderás su importancia como puente para recibir más bendiciones.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">3 .-</span><span>Potenciarás tu carta con el sonido de los cuencos tibetanos, integrándose en una meditación para magnificar su vibración.</span></li>
           </ol>
         </section>
         <section class="space-y-2">
           <h3 class="font-heading text-lg font-semibold text-accent">Lugar sugerido</h3>
           <p>
-            Un espacio tranquilo donde puedas escribir con calma y conectar contigo. Puede ser tu rincón de meditación, tu habitación, tu altar o cualquier lugar donde sientas paz y presencia.
+            Un espacio tranquilo donde puedas escribir con calma y conectar contigo mismo. Puede ser tu rincón de meditación, tu habitación o cualquier lugar donde sientas paz y puedas concentrarte.
           </p>
         </section>
         <section class="space-y-2">
           <h3 class="font-heading text-lg font-semibold text-accent">Material</h3>
           <ul class="space-y-1 list-disc pl-5">
-            <li>Carta de manifestación y pluma</li>
-            <li>Hoja adicional o cuaderno personal para tus afirmaciones y ritual de gratitud diaria</li>
-            <li>Cuenco tibetano o campana (opcional)</li>
+            <li>Cuaderno de manifestación y una pluma</li>
+            <li>La hoja del módulo 2 como guía de inspiración para tu carta de manifestación</li>
+            <li>Hoja descargable con el ejemplo de una frase de cómo escribir en positivo, presente y como si ya lo tuvieras</li>
+            <li>Si tienes un cuenco tibetano, tráelo para acompañar y amplificar la vibración de tu práctica</li>
           </ul>
-          <p class="text-sm italic text-accent/70">*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para acompañar tu carta durante la práctica.</p>
         </section>
       </div>
     `.trim(),
@@ -197,18 +199,16 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
     highlights: [
       "Identificarás las creencias limitantes que bloquean tu energía y tu manifestación.",
       "Aprenderás a transformarlas en pensamientos y frases positivas para expandir tu energía.",
-      "Utilizarás el poder del sound healing para liberar pensamientos negativos y anclar frases empoderadas como decretos.",
+      "Utilizarás el poder del sound healing para liberar pensamientos negativos y anclar con frases empoderadas y positivas, repitiéndolas como decreto vibracional y energético.",
     ],
     location:
       "Un espacio íntimo y seguro donde puedas reflexionar sobre esas creencias limitantes, en calma y sin interrupciones.",
     materials: [
       "Cuaderno de manifestación y pluma",
-      "Tarjetas o post-its para escribir las creencias limitantes que deseas soltar",
-      "Incienso o spray de limpieza energética (opcional) para crear un ambiente de liberación",
-      "Cuenco tibetano o campana (opcional)",
+      "Hoja especial para escribir las creencias limitantes que deseas soltar",
+      "Hoja especial para escribir tus frases positivas y empoderadas",
+      "Traer tu cuenco tibetano si lo tienes como opcional para acompañar el proceso de liberación y anclaje",
     ],
-    materialsNote:
-      "*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.",
     modalContent: `
       <div class="space-y-6 text-base leading-relaxed text-accent/90">
         <p>
@@ -219,9 +219,9 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
         <section class="space-y-3">
           <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
           <ol class="space-y-2">
-            <li class="flex gap-2"><span class="font-semibold text-accent">1 -</span><span>Identificarás las creencias limitantes que bloquean tu energía y tu manifestación.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">2 -</span><span>Aprenderás a transformarlas en pensamientos y frases positivas para expandir tu energía.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">3 -</span><span>Utilizarás el poder del sound healing para liberar pensamientos negativos y anclar frases empoderadas y positivas, repitiéndolos como decreto vibracional y energético.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">1 .-</span><span>Identificarás las creencias limitantes que bloquean tu energía y tu manifestación.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">2 .-</span><span>Aprenderás a transformarlas en pensamientos y frases positivas para expandir tu energía.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">3 .-</span><span>Utilizarás el poder del sound healing para liberar pensamientos negativos y anclar con frases empoderadas y positivas, repitiéndolas como decreto vibracional y energético.</span></li>
           </ol>
         </section>
         <section class="space-y-2">
@@ -234,11 +234,10 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
           <h3 class="font-heading text-lg font-semibold text-accent">Material</h3>
           <ul class="space-y-1 list-disc pl-5">
             <li>Cuaderno de manifestación y pluma</li>
-            <li>Tarjetas o post-its para escribir las creencias limitantes que deseas soltar</li>
-            <li>Incienso o spray de limpieza energética (opcional) para crear un ambiente de liberación</li>
-            <li>Cuenco tibetano o campana (opcional)</li>
+            <li>Hoja especial para escribir las creencias limitantes que deseas soltar</li>
+            <li>Hoja especial para escribir tus frases positivas y empoderadas</li>
+            <li>Traer tu cuenco tibetano si lo tienes como opcional para acompañar el proceso de liberación y anclaje</li>
           </ul>
-          <p class="text-sm italic text-accent/70">*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.</p>
         </section>
       </div>
     `.trim(),
