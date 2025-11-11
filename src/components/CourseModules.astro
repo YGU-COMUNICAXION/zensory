@@ -1,5 +1,5 @@
 ---
-import Modal from "./Modal.astro";
+import ModuleMobileExperience from "./ModuleMobileExperience";
 
 const createDefaultModalContent = (module: {
   learnings?: string[];
@@ -174,28 +174,7 @@ const MODULES = MODULE_DEFINITIONS.map((module) => ({
     </header>
 
     <div class="lg:hidden">
-      <ul class="flex flex-col gap-3" data-module-list>
-        {MODULES.map((module, index) => (
-          <li>
-            <button
-              type="button"
-              class="flex w-full items-center gap-4 rounded-full border border-accent/25 bg-primary/10 px-5 py-4 text-left text-accent transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent hover:bg-primary/20 active:bg-primary/30"
-              data-module-trigger
-              data-module-index={index}
-            >
-              <div class="flex items-center gap-4">
-                <span class="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20 text-xl font-semibold text-accent">
-                  {module.number}
-                </span>
-                <div class="flex flex-col">
-                  <span class="font-heading text-lg font-semibold italic text-accent">Módulo {module.number}</span>
-                  <span class="text-sm text-accent/70">{module.title}</span>
-                </div>
-              </div>
-            </button>
-          </li>
-        ))}
-      </ul>
+      <ModuleMobileExperience client:load modules={MODULES} />
     </div>
 
     <div class="hidden lg:flex lg:flex-col lg:gap-4" data-module-accordion-group>
@@ -259,136 +238,10 @@ const MODULES = MODULE_DEFINITIONS.map((module) => ({
     </div>
   </div>
 
-  <Modal
-    class="lg:hidden"
-    closeLabel="Cerrar módulo"
-    data-module-modal
-    closeButtonAttrs={{ "data-module-close": "" }}
-  >
-    <div class="flex-1 overflow-y-auto px-6 pb-8 pt-10">
-      <header class="flex items-start gap-4">
-        <span class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent/20 text-lg font-semibold text-accent" data-modal-number></span>
-        <div class="flex flex-col gap-1">
-          <span class="font-heading text-xl font-semibold italic" data-modal-title></span>
-          <span class="text-xs uppercase tracking-[0.35em] text-accent/60" data-modal-subtitle></span>
-        </div>
-      </header>
-      <div class="mt-6 space-y-6" data-modal-content></div>
-    </div>
-    <div class="flex flex-col gap-3 border-t border-accent/15 bg-primary/90 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
-      <button
-        type="button"
-        class="flex-1 rounded-full bg-accent/10 px-5 py-3 text-sm font-semibold uppercase tracking-wide text-accent transition-colors duration-200 hover:bg-accent/20 disabled:cursor-not-allowed disabled:opacity-40 sm:flex-none"
-        data-module-prev
-      >
-        Módulo anterior
-      </button>
-      <button
-        type="button"
-        class="flex-1 rounded-full bg-accent px-5 py-3 text-sm font-semibold uppercase tracking-wide text-primary transition-colors duration-200 hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60 sm:flex-none"
-        data-module-next
-      >
-        Siguiente módulo
-      </button>
-    </div>
-  </Modal>
-
-  <script type="application/json" data-modules-json>{JSON.stringify(MODULES)}</script>
 </section>
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const dataElement = document.querySelector("[data-modules-json]");
-    const modules = dataElement ? JSON.parse(dataElement.textContent ?? "[]") : [];
-
-    const modal = document.querySelector<HTMLElement>("[data-module-modal]");
-    const triggers = document.querySelectorAll("[data-module-trigger]");
-    const closeButton = modal?.querySelector("[data-module-close]");
-    const prevButton = modal?.querySelector("[data-module-prev]");
-    const nextButton = modal?.querySelector("[data-module-next]");
-    const numberEl = modal?.querySelector<HTMLElement>("[data-modal-number]");
-    const titleEl = modal?.querySelector<HTMLElement>("[data-modal-title]");
-    const subtitleEl = modal?.querySelector<HTMLElement>("[data-modal-subtitle]");
-    const contentContainer = modal?.querySelector<HTMLElement>("[data-modal-content]");
-    const overlay = modal;
-
-    let activeIndex = 0;
-
-    const updateNavigationState = () => {
-      if (!prevButton || !nextButton) return;
-      prevButton.toggleAttribute("disabled", activeIndex === 0);
-      nextButton.toggleAttribute("disabled", activeIndex === modules.length - 1);
-    };
-
-    const updateModalContent = (index: number) => {
-      if (!modal || !numberEl || !titleEl || !subtitleEl || !contentContainer) {
-        return;
-      }
-
-      const module = modules[index];
-      if (!module) {
-        return;
-      }
-
-      activeIndex = index;
-
-      numberEl.textContent = String(module.number ?? "");
-      titleEl.textContent = `Módulo ${module.number}: ${module.title}`;
-      subtitleEl.textContent = module.subtitle ?? "";
-      subtitleEl.classList.toggle("hidden", !module.subtitle);
-
-      contentContainer.innerHTML = module.modalContent ?? "";
-
-      updateNavigationState();
-    };
-
-    const openModal = (index: number) => {
-      if (!overlay) return;
-      updateModalContent(index);
-      overlay.classList.remove("hidden");
-      document.body.classList.add("overflow-hidden");
-    };
-
-    const closeModal = () => {
-      if (!overlay) return;
-      overlay.classList.add("hidden");
-      document.body.classList.remove("overflow-hidden");
-    };
-
-    triggers.forEach((trigger) => {
-      trigger.addEventListener("click", (event) => {
-        const target = event.currentTarget as HTMLElement;
-        const index = Number(target.dataset.moduleIndex ?? 0);
-        openModal(index);
-      });
-    });
-
-    closeButton?.addEventListener("click", () => closeModal());
-
-    overlay?.addEventListener("click", (event) => {
-      if (event.target === overlay) {
-        closeModal();
-      }
-    });
-
-    prevButton?.addEventListener("click", () => {
-      if (activeIndex > 0) {
-        updateModalContent(activeIndex - 1);
-      }
-    });
-
-    nextButton?.addEventListener("click", () => {
-      if (activeIndex < modules.length - 1) {
-        updateModalContent(activeIndex + 1);
-      }
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && overlay && !overlay.classList.contains("hidden")) {
-        closeModal();
-      }
-    });
-
     const accordions = Array.from(document.querySelectorAll<HTMLDetailsElement>("[data-module-accordion]"));
     accordions.forEach((details) => {
       details.addEventListener("toggle", () => {
