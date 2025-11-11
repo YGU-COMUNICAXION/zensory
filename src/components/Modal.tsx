@@ -19,7 +19,7 @@ interface ModalProps extends HTMLAttributes<HTMLDivElement> {
 const baseOverlayClasses =
   "fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 py-10";
 const baseDialogClasses =
-  "relative flex w-full max-w-lg flex-col overflow-hidden rounded-3xl bg-primary text-accent shadow-2xl";
+  "relative flex w-full max-w-lg flex-col overflow-hidden rounded-3xl bg-primary text-accent shadow-2xl max-h-[min(90vh,40rem)]";
 const baseCloseButtonClasses =
   "absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent/10 text-accent transition-colors duration-200 hover:bg-accent/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
@@ -102,7 +102,7 @@ function Modal({
             <img src={closeIcon} alt={closeLabel} className="h-5 w-5" loading="lazy" />
           </button>
         ) : null}
-        <div className="flex h-full flex-col">{children}</div>
+        <div className="flex h-full flex-col overflow-hidden">{children}</div>
       </div>
     </div>
   );

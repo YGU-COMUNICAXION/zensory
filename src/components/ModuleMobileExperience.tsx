@@ -13,7 +13,7 @@ type ModuleMobileExperienceProps = {
 };
 
 const triggerBaseClasses =
-  "flex w-full items-center gap-4 rounded-full border border-accent/25 bg-primary/10 px-5 py-4 text-left text-accent transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent hover:bg-primary/20 active:bg-primary/30";
+  "flex w-full items-center gap-4 rounded-full bg-[#2A1A2B] px-5 py-4 text-left text-accent transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent hover:bg-[#3B263D] active:bg-[#4A2E4E]";
 
 const ModuleMobileExperience = ({ modules }: ModuleMobileExperienceProps) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -65,17 +65,12 @@ const ModuleMobileExperience = ({ modules }: ModuleMobileExperienceProps) => {
               className={triggerBaseClasses}
               onClick={() => setActiveIndex(index)}
             >
-              <div className="flex items-center gap-4">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20 text-xl font-semibold text-accent">
-                  {module.number}
-                </span>
-                <div className="flex flex-col">
-                  <span className="font-heading text-lg font-semibold italic text-accent">
-                    Módulo {module.number}
-                  </span>
-                  <span className="text-sm text-accent/70">{module.title}</span>
-                </div>
-              </div>
+              <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent/20 text-lg font-semibold text-accent">
+                {module.number}
+              </span>
+              <span className="flex-1 text-left font-heading text-lg font-semibold italic leading-snug text-accent">
+                Módulo {module.number}: {module.title}
+              </span>
             </button>
           </li>
         ))}
@@ -105,7 +100,7 @@ const ModuleMobileExperience = ({ modules }: ModuleMobileExperienceProps) => {
                 dangerouslySetInnerHTML={{ __html: activeModule.modalContent ?? "" }}
               />
             </div>
-            <div className="flex flex-col gap-3 border-t border-accent/15 bg-primary/90 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-3 border-t border-accent/15 bg-primary/90 px-6 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4 shrink-0">
               <button
                 type="button"
                 className="flex-1 rounded-full bg-accent/10 px-5 py-3 text-sm font-semibold uppercase tracking-wide text-accent transition-colors duration-200 hover:bg-accent/20 disabled:cursor-not-allowed disabled:opacity-40 sm:flex-none"
