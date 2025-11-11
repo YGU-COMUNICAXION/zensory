@@ -297,14 +297,55 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
   },
   {
     number: 6,
-    title: "Soltar y confiar en el proceso",
+    title: "Soltar y confiar en la vibración divina",
     subtitle: "Entrega amorosa",
     highlights: [
-      "Identificamos apegos que dificultan la manifestación.",
-      "Practicamos meditaciones para soltar con amor.",
-      "Anclamos una nueva relación con la confianza.",
+      "Reflexionarás sobre la importancia de soltar el control para permitir que tus sueños se manifiesten.",
+      "Practicarás el arte de confiar y rendirte a la fe y voluntad divina.",
+      "Realizaremos una meditación guiada para soltar y confiar, conectando con tu fe y tus ángeles.",
+      "Recibirás un mensaje divino a través de una carta de ángeles y kabbalah como recordatorio de que no estás solo en tu camino.",
     ],
-    materials: ["Cuaderno de manifestación"],
+    location:
+      "Un espacio tranquilo y sagrado en donde te sientas abierta/o a la introspección, la meditación y la conexión espiritual.",
+    materials: [
+      "Cuaderno de manifestación y pluma",
+      "Carta de ángeles (puede ser una carta de ángeles y kabbalah)",
+      "Cuenco tibetano o campana (opcional) para complementar la meditación",
+    ],
+    materialsNote:
+      "*Material opcional. Lo puedes adquirir conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.",
+    modalContent: `
+      <div class="space-y-6 text-base leading-relaxed text-accent/90">
+        <p>
+          Cuando soltamos y confiamos, abrimos espacio para que la magia del universo actúe. La verdadera fe surge al rendirnos
+          a la vibración divina del universo, confiando en que todo llega en su momento divino.
+        </p>
+        <section class="space-y-3">
+          <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
+          <ol class="space-y-2">
+            <li class="flex gap-2"><span class="font-semibold text-accent">1 -</span><span>Reflexionarás sobre la importancia de soltar el control para permitir que tus sueños se manifiesten.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">2 -</span><span>Practicarás el arte de confiar y rendirte a la fe y voluntad divina.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">3 -</span><span>Realizaremos una meditación guiada para soltar y confiar, conectando con tu fe y tus ángeles.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">4 -</span><span>Recibirás un mensaje divino a través de una carta de ángeles y kabbalah, como recordatorio de que no estás solo en tu camino.</span></li>
+          </ol>
+        </section>
+        <section class="space-y-2">
+          <h3 class="font-heading text-lg font-semibold text-accent">Lugar sugerido</h3>
+          <p>
+            Un espacio tranquilo y sagrado en donde te sientas abierta/o a la introspección, la meditación y la conexión espiritual.
+          </p>
+        </section>
+        <section class="space-y-2">
+          <h3 class="font-heading text-lg font-semibold text-accent">Material</h3>
+          <ul class="space-y-1 list-disc pl-5">
+            <li>Cuaderno de manifestación y pluma</li>
+            <li>Carta de ángeles (puede ser una carta de ángeles y kabbalah)</li>
+            <li>Cuenco tibetano o campana (opcional) para complementar la meditación</li>
+          </ul>
+          <p class="text-sm italic text-accent/70">*Material opcional. Lo puedes adquirir conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.</p>
+        </section>
+      </div>
+    `.trim(),
   },
   {
     number: 7,
