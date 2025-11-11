@@ -99,11 +99,50 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
     title: "Alineación y vibración consciente",
     subtitle: "Reconectar con el propósito",
     highlights: [
-      "Exploramos nuestra intención principal de manifestación.",
-      "Practicamos visualizaciones activas para elevar la vibración.",
-      "Integramos afirmaciones para sostener la energía.",
+      "Realizarás un ejercicio escrito en una hoja con dos columnas: una para lo que no deseas atraer y otra para lo que sí.",
+      "Llevarás a cabo un ritual de liberación con el sonido de los cuencos tibetanos y frases empoderadas para soltar lo que ya no funciona y reforzar lo que sí quieres atraer.",
+      "Cortarás la hoja que está dividida y quemarás o romperás la parte negativa, dejando solamente la positiva.",
     ],
-    materials: ["Cuaderno de manifestación", "Velas o inciensos (opcional)"],
+    location:
+      "Un espacio seguro y tranquilo donde puedas escribir y realizar el ritual con calma. Puede ser el exterior o una mesa bien ventilada donde sea seguro encender una vela o usar incienso.",
+    materials: [
+      "Cuaderno de manifestación y pluma",
+      "Hoja dividida en dos columnas para manifestar",
+      "Tijeras para cortar la hoja",
+      "Una vela, cerillos o encendedor (usa un recipiente de cerámica o material que no se dañe con el fuego)",
+      "Cuenco tibetano o campana (opcional)",
+    ],
+    materialsNote:
+      "*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.",
+    modalContent: `
+      <div class="space-y-6 text-base leading-relaxed text-accent/90">
+        <section class="space-y-3">
+          <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
+          <ol class="space-y-2">
+            <li class="flex gap-2"><span class="font-semibold text-accent">1 -</span><span>Realizarás un ejercicio escrito en una hoja con dos columnas: una para lo que no deseas atraer y otra para lo que sí.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">2 -</span><span>Llevarás a cabo un ritual de liberación con el sonido de los cuencos tibetanos y frases empoderadas para soltar lo que ya no funciona y reforzar lo que sí quieres atraer.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">3 -</span><span>Cortarás la hoja que está dividida y quemarás o romperás la parte negativa, dejando solamente la positiva.</span></li>
+          </ol>
+        </section>
+        <section class="space-y-2">
+          <h3 class="font-heading text-lg font-semibold text-accent">Lugar sugerido</h3>
+          <p>
+            Un espacio seguro y tranquilo donde puedas escribir y realizar el ritual con calma. Puede ser el exterior o una mesa bien ventilada donde sea seguro encender una vela o usar incienso.
+          </p>
+        </section>
+        <section class="space-y-2">
+          <h3 class="font-heading text-lg font-semibold text-accent">Material</h3>
+          <ul class="space-y-1 list-disc pl-5">
+            <li>Cuaderno de manifestación y pluma</li>
+            <li>Hoja dividida en dos columnas para manifestar</li>
+            <li>Tijeras para cortar la hoja</li>
+            <li>Una vela, cerillos o encendedor (usa un recipiente de cerámica o material que no se dañe con el fuego)</li>
+            <li>Cuenco tibetano o campana (opcional)</li>
+          </ul>
+          <p class="text-sm italic text-accent/70">*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.</p>
+        </section>
+      </div>
+    `.trim(),
   },
   {
     number: 3,
