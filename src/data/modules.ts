@@ -195,11 +195,53 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
     title: "Transformación consciente de creencias",
     subtitle: "Reescritura de patrones",
     highlights: [
-      "Reconocemos creencias limitantes que frenan el proceso.",
-      "Aplicamos técnicas de liberación con sonido y respiración.",
-      "Diseñamos nuevas declaraciones que expanden nuestra realidad.",
+      "Identificarás las creencias limitantes que bloquean tu energía y tu manifestación.",
+      "Aprenderás a transformarlas en pensamientos y frases positivas para expandir tu energía.",
+      "Utilizarás el poder del sound healing para liberar pensamientos negativos y anclar frases empoderadas como decretos.",
     ],
-    materials: ["Cuaderno de manifestación", "Tarjetas o post-its"],
+    location:
+      "Un espacio íntimo y seguro donde puedas reflexionar sobre esas creencias limitantes, en calma y sin interrupciones.",
+    materials: [
+      "Cuaderno de manifestación y pluma",
+      "Tarjetas o post-its para escribir las creencias limitantes que deseas soltar",
+      "Incienso o spray de limpieza energética (opcional) para crear un ambiente de liberación",
+      "Cuenco tibetano o campana (opcional)",
+    ],
+    materialsNote:
+      "*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.",
+    modalContent: `
+      <div class="space-y-6 text-base leading-relaxed text-accent/90">
+        <p>
+          Para que tu deseo se manifieste, es importante reconocer las creencias y pensamientos que te limitan, ya sea de forma
+          consciente o inconsciente. En este módulo aprenderás a identificarlas y transformarlas a positivo, abriendo el camino
+          a nuevas bendiciones.
+        </p>
+        <section class="space-y-3">
+          <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
+          <ol class="space-y-2">
+            <li class="flex gap-2"><span class="font-semibold text-accent">1 -</span><span>Identificarás las creencias limitantes que bloquean tu energía y tu manifestación.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">2 -</span><span>Aprenderás a transformarlas en pensamientos y frases positivas para expandir tu energía.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">3 -</span><span>Utilizarás el poder del sound healing para liberar pensamientos negativos y anclar frases empoderadas y positivas, repitiéndolos como decreto vibracional y energético.</span></li>
+          </ol>
+        </section>
+        <section class="space-y-2">
+          <h3 class="font-heading text-lg font-semibold text-accent">Lugar sugerido</h3>
+          <p>
+            Un espacio íntimo y seguro donde puedas reflexionar sobre esas creencias limitantes, en calma y sin interrupciones.
+          </p>
+        </section>
+        <section class="space-y-2">
+          <h3 class="font-heading text-lg font-semibold text-accent">Material</h3>
+          <ul class="space-y-1 list-disc pl-5">
+            <li>Cuaderno de manifestación y pluma</li>
+            <li>Tarjetas o post-its para escribir las creencias limitantes que deseas soltar</li>
+            <li>Incienso o spray de limpieza energética (opcional) para crear un ambiente de liberación</li>
+            <li>Cuenco tibetano o campana (opcional)</li>
+          </ul>
+          <p class="text-sm italic text-accent/70">*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.</p>
+        </section>
+      </div>
+    `.trim(),
   },
   {
     number: 5,
