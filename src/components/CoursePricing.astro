@@ -4,15 +4,10 @@ import PricingInfoCard from "./PricingInfoCard.astro";
 import cardIcon from "@assets/svg/card.svg";
 import arrowsIcon from "@assets/svg/arrows.svg";
 import moneysIcon from "@assets/svg/moneys.svg";
+import alertIcon from "@assets/svg/alert.svg";
 
 interface Props {
   id?: string;
-}
-
-interface PriceTier {
-  label: string;
-  price: string;
-  description?: string;
 }
 
 interface InfoCard {
@@ -25,18 +20,21 @@ interface InfoCard {
 
 const { id = "precios" }: Props = Astro.props;
 
-const priceTiers: PriceTier[] = [
+const priceColumns = [
   {
     label: "Precio promocional de lanzamiento",
-    price: "$4,444",
-    description:
-      "Disponible por tiempo limitado y pagando con la inversión máxima 15 días antes de iniciar el curso.",
+    amount: "$4,444",
+    currency: "MXN",
   },
   {
     label: "Precio general del curso",
-    price: "$8,888",
+    amount: "$8,888",
+    currency: "MXN",
   },
 ];
+
+const upfrontNote =
+  "En una sola exhibición y para quien se inscriba máximo 15 días antes de iniciar el curso.";
 
 const paymentPlans: InfoCard[] = [
   {
@@ -109,33 +107,42 @@ const paymentMethods: InfoCard[] = [
 <section id={id}>
   <div class="bg-primary text-accent">
     <div class="container mx-auto px-4 py-16 md:py-24">
-      <header class="mb-12 text-center md:mb-16">
-        <h2 class="font-heading text-3xl font-semibold uppercase tracking-tight md:text-4xl">
-          Inversión del curso
-        </h2>
-      </header>
+      <div class="grid gap-12 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:items-start md:gap-16">
+        <div class="flex flex-col items-center text-center md:items-start md:text-left">
+          <span class="text-sm font-semibold uppercase tracking-[0.2em] text-accent/80">
+            {priceColumns[0].label}
+          </span>
+          <span class="mt-4 font-heading text-5xl font-semibold md:text-6xl">
+            {priceColumns[0].amount}
+            <span class="ml-2 text-base font-sans font-medium uppercase tracking-[0.3em] text-accent/60">
+              {priceColumns[0].currency}
+            </span>
+          </span>
+        </div>
 
-      <div class="grid gap-6 md:grid-cols-2">
-        {priceTiers.map((tier) => (
-          <article class="flex h-full flex-col justify-between rounded-3xl bg-accent/10 p-8 shadow-lg shadow-black/20">
-            <div class="flex flex-col gap-3">
-              <span class="text-sm font-semibold uppercase tracking-[0.2em] text-accent/80">
-                {tier.label}
-              </span>
-              <span class="font-heading text-4xl font-semibold md:text-5xl">
-                {tier.price}
-                <span class="ml-2 text-base font-sans font-medium uppercase tracking-wider text-accent/60">
-                  mxn
-                </span>
-              </span>
-            </div>
-            {tier.description && (
-              <p class="mt-6 text-sm leading-relaxed text-accent/80 md:text-base">
-                {tier.description}
-              </p>
-            )}
-          </article>
-        ))}
+        <div class="mx-auto h-px w-16 bg-accent/30 md:h-full md:w-px"></div>
+
+        <div class="flex flex-col items-center text-center md:items-start md:text-left">
+          <span class="text-sm font-semibold uppercase tracking-[0.2em] text-accent/80">
+            {priceColumns[1].label}
+          </span>
+          <span class="mt-4 font-heading text-5xl font-semibold md:text-6xl">
+            {priceColumns[1].amount}
+            <span class="ml-2 text-base font-sans font-medium uppercase tracking-[0.3em] text-accent/60">
+              {priceColumns[1].currency}
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="mt-12 flex items-start gap-3 text-left text-sm leading-relaxed text-accent/80 md:text-base">
+        <img
+          src={alertIcon.src}
+          alt="Condiciones de pago"
+          class="mt-0.5 h-5 w-5 flex-shrink-0"
+          loading="lazy"
+        />
+        <p>{upfrontNote}</p>
       </div>
     </div>
   </div>

@@ -20,17 +20,21 @@ const { title, subtitle, description, icon, subtitleIcon } = Astro.props;
     {title}
   </h3>
 
-  <div class="mt-3 flex items-center justify-center gap-2 text-sm font-medium text-primary md:text-base">
-    <img src={subtitleIcon.src} alt="Horario" class="h-4 w-4" loading="lazy" />
-    <span>{subtitle}</span>
-  </div>
+  <div class="mt-6 flex w-full flex-1 flex-col items-center">
+    <div class="w-4/5">
+      <div class="flex items-center gap-2 text-xs font-medium text-primary">
+        <img src={subtitleIcon.src} alt="Horario" class="h-3 w-3" loading="lazy" />
+        <span>{subtitle}</span>
+      </div>
 
-  <hr class="mt-5 border-primary/20" />
+      <hr class="mt-1 w-full border-primary/20" />
 
-  <div class="mt-5 flex flex-1 flex-col gap-4 text-sm leading-relaxed md:text-base">
-    {description.map((item) => (
-      <p>{item}</p>
-    ))}
+      <div class="mt-5 flex flex-col gap-4 text-base leading-relaxed md:text-lg">
+        {description.map((item) => (
+          <p>{item}</p>
+        ))}
+      </div>
+    </div>
   </div>
 </article>
 
