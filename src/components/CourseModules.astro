@@ -161,71 +161,78 @@ const MODULES = MODULE_DEFINITIONS.map((module) => ({
 ---
 
 <section class="bg-primary text-accent">
-  <div class="container mx-auto flex max-w-6xl flex-col gap-16 px-6 py-20">
-    <header class="flex flex-col gap-4 text-center">
-      <h2 class="font-heading text-3xl font-semibold italic md:text-4xl">Módulos</h2>
-      <p class="text-sm font-medium uppercase tracking-[0.35em] text-accent/80 md:text-base">
-        8 módulos de 45 minutos
-      </p>
-      <p class="mx-auto max-w-3xl text-base leading-relaxed text-accent/80 md:text-lg">
-        El curso Manifiesta tu sueño está diseñado con ocho módulos que te guían paso a paso por un proceso de manifestación.
-        Cada módulo se adapta al formato del dispositivo para que explores su contenido de forma intuitiva.
-      </p>
+  <div class="container mx-auto flex flex-col gap-16 px-6 py-20">
+    <header class="flex flex-col gap-6 text-center">
+      <h2 class="font-heading text-4xl font-semibold italic md:text-5xl">Módulos</h2>
+      <p class="text-base font-medium text-accent/80 md:text-lg">8 módulos de 45 minutos</p>
+      <div class="mx-auto flex max-w-3xl flex-col gap-3 text-left text-accent/90">
+        <span class="font-heading text-base font-semibold text-accent">Descripción &gt;</span>
+        <div class="space-y-4 text-base leading-relaxed md:text-lg">
+          <p>
+            El curso Manifiesta tu sueño está diseñado con ocho módulos de 45 minutos, en donde a través de la magia de los
+            cuencos tibetanos, el sound healing, la ley de atracción y la guía divina, aprenderás a manifestar eso que tu
+            corazón y alma desean.
+          </p>
+          <p>
+            Cada módulo te abrirá a recibir nuevas bendiciones y herramientas para atraer tus sueños con claridad, confianza,
+            fe y una vibración elevada.
+          </p>
+        </div>
+      </div>
     </header>
 
     <div class="lg:hidden">
       <ModuleMobileExperience client:load modules={MODULES} />
     </div>
 
-    <div class="hidden lg:flex lg:flex-col lg:gap-4" data-module-accordion-group>
+    <div class="hidden lg:flex lg:flex-col lg:gap-5" data-module-accordion-group>
       {MODULES.map((module) => (
         <details
-          class="overflow-hidden border border-accent/20 bg-primary/40 text-left transition-shadow duration-200 open:shadow-lg"
+          class="overflow-hidden rounded-3xl text-left shadow-sm transition-shadow duration-200 open:shadow-lg"
           data-module-accordion
         >
-          <summary class="flex cursor-pointer items-center justify-between gap-6 px-6 py-5 text-accent">
+          <summary class="flex cursor-pointer items-center justify-between gap-6 rounded-full bg-[#2A1A2B] px-8 py-6 text-accent shadow-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
             <div class="flex items-center gap-6">
-              <span class="flex h-16 w-16 items-center justify-center rounded-full bg-accent/20 text-2xl font-semibold text-accent">
+              <span class="flex h-16 w-16 items-center justify-center rounded-full bg-accent font-heading text-2xl font-light text-primary">
                 {module.number}
               </span>
               <div class="flex flex-col gap-1">
-                <span class="font-heading text-2xl font-semibold italic">Módulo {module.number}</span>
-                <span class="text-base font-medium text-accent/70">{module.title}</span>
+                <span class="font-heading text-2xl font-semibold italic leading-tight">Módulo {module.number}</span>
+                <span class="text-lg font-medium text-accent/80">{module.title}</span>
               </div>
             </div>
-            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-accent/10 text-accent transition-transform duration-200" data-accordion-icon>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                class="h-5 w-5"
-                aria-hidden="true"
-              >
-                <path
-                  d="M6 9l6 6 6-6"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              class="h-8 w-8 text-accent transition-transform duration-200"
+              aria-hidden="true"
+              data-accordion-icon
+            >
+              <path
+                d="M6 9l6 6 6-6"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </summary>
-          <div class="space-y-6 px-6 pb-8 pt-2 text-accent/80">
+          <div class="space-y-6 bg-primary/40 px-8 pb-10 pt-6 text-accent/90">
             <div class="grid gap-4 md:grid-cols-3 md:gap-6">
               {module.learnings.map((item, idx) => (
-                <div class="flex items-start gap-4 rounded-2xl bg-accent/10 p-5">
-                  <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-accent/20 text-lg font-semibold text-accent">
+                <div class="flex items-start gap-4 rounded-2xl bg-primary/60 p-5">
+                  <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-accent text-base font-heading font-light text-primary">
                     {idx + 1}
                   </span>
-                  <p class="text-base leading-relaxed">{item}</p>
+                  <p class="text-base leading-relaxed text-accent/90">{item}</p>
                 </div>
               ))}
             </div>
             {module.materials?.length ? (
               <div class="space-y-2">
                 <h4 class="font-heading text-lg font-semibold text-accent">Material sugerido</h4>
-                <ul class="list-disc space-y-1 pl-5 text-base">
+                <ul class="list-disc space-y-1 pl-5 text-base text-accent/90">
                   {module.materials.map((material) => (
                     <li>{material}</li>
                   ))}
