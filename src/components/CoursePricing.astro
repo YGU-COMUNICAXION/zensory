@@ -1,0 +1,172 @@
+---
+import type { ImageMetadata } from "astro";
+import PricingInfoCard from "./PricingInfoCard.astro";
+import cardIcon from "@assets/svg/card.svg";
+import arrowsIcon from "@assets/svg/arrows.svg";
+import moneysIcon from "@assets/svg/moneys.svg";
+
+interface Props {
+  id?: string;
+}
+
+interface PriceTier {
+  label: string;
+  price: string;
+  description?: string;
+}
+
+interface InfoCard {
+  icon: ImageMetadata;
+  iconAlt: string;
+  title: string;
+  subtitle?: string;
+  items: string[];
+}
+
+const { id = "precios" }: Props = Astro.props;
+
+const priceTiers: PriceTier[] = [
+  {
+    label: "Precio promocional de lanzamiento",
+    price: "$4,444",
+    description:
+      "Disponible por tiempo limitado y pagando con la inversión máxima 15 días antes de iniciar el curso.",
+  },
+  {
+    label: "Precio general del curso",
+    price: "$8,888",
+  },
+];
+
+const paymentPlans: InfoCard[] = [
+  {
+    icon: cardIcon,
+    iconAlt: "Plan en dos pagos",
+    title: "Dos pagos",
+    items: ["1er pago: $2,222", "2do pago: $2,222"],
+  },
+  {
+    icon: arrowsIcon,
+    iconAlt: "Plan en cuatro pagos",
+    title: "Cuatro pagos",
+    items: [
+      "Semana 1: $1,111",
+      "Semana 2: $1,111",
+      "Semana 3: $1,111",
+      "Semana 4: $1,111",
+    ],
+  },
+  {
+    icon: moneysIcon,
+    iconAlt: "Plan en ocho pagos",
+    title: "Ocho pagos",
+    items: [
+      "Semana 1: $555",
+      "Semana 2: $555",
+      "Semana 3: $555",
+      "Semana 4: $555",
+      "Semana 5: $555",
+      "Semana 6: $555",
+      "Semana 7: $555",
+      "Semana 8: $555",
+    ],
+  },
+];
+
+const paymentMethods: InfoCard[] = [
+  {
+    icon: cardIcon,
+    iconAlt: "Pago con tarjeta",
+    title: "Tarjeta de crédito o débito",
+    subtitle: "Pago único o en parcialidades",
+    items: [
+      "Confirma tu lugar al instante con pago seguro.",
+      "Puede aplicar comisión por diferir a meses según tu banco.",
+    ],
+  },
+  {
+    icon: arrowsIcon,
+    iconAlt: "Pago por transferencia",
+    title: "Transferencia",
+    subtitle: "Pago único o en parcialidades",
+    items: [
+      "Solicita los datos bancarios y registra tu comprobante.",
+      "Evita comisiones adicionales al realizarlo desde tu banca en línea.",
+    ],
+  },
+  {
+    icon: moneysIcon,
+    iconAlt: "Pago en efectivo",
+    title: "Efectivo",
+    subtitle: "Pago único o en parcialidades",
+    items: [
+      "Disponible para modalidad presencial o punto autorizado.",
+      "Agenda tu entrega con anticipación para asegurar tu lugar.",
+    ],
+  },
+];
+---
+<section id={id}>
+  <div class="bg-primary text-accent">
+    <div class="container mx-auto px-4 py-16 md:py-24">
+      <header class="mb-12 text-center md:mb-16">
+        <h2 class="font-heading text-3xl font-semibold uppercase tracking-tight md:text-4xl">
+          Inversión del curso
+        </h2>
+      </header>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        {priceTiers.map((tier) => (
+          <article class="flex h-full flex-col justify-between rounded-3xl bg-accent/10 p-8 shadow-lg shadow-black/20">
+            <div class="flex flex-col gap-3">
+              <span class="text-sm font-semibold uppercase tracking-[0.2em] text-accent/80">
+                {tier.label}
+              </span>
+              <span class="font-heading text-4xl font-semibold md:text-5xl">
+                {tier.price}
+                <span class="ml-2 text-base font-sans font-medium uppercase tracking-wider text-accent/60">
+                  mxn
+                </span>
+              </span>
+            </div>
+            {tier.description && (
+              <p class="mt-6 text-sm leading-relaxed text-accent/80 md:text-base">
+                {tier.description}
+              </p>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-accent/10 text-primary">
+    <div class="container mx-auto px-4 py-16 md:py-24">
+      <p class="text-center text-sm uppercase tracking-[0.3em] text-primary/70">
+        O elige entre una de las tres opciones de pago a plazos
+      </p>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {paymentPlans.map((plan) => (
+          <PricingInfoCard {...plan} />
+        ))}
+      </div>
+
+      <div class="mt-16">
+        <h3 class="text-center font-heading text-3xl font-semibold uppercase tracking-tight text-primary">
+          Formas de pago
+        </h3>
+
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          {paymentMethods.map((method) => (
+            <PricingInfoCard {...method} />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @reference "../styles/global.css";
+</style>

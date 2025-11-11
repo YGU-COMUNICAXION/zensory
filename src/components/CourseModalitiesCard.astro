@@ -1,0 +1,39 @@
+---
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  title: string;
+  subtitle: string;
+  description: string[];
+  icon: ImageMetadata;
+  subtitleIcon: ImageMetadata;
+}
+
+const { title, subtitle, description, icon, subtitleIcon } = Astro.props;
+---
+<article class="flex h-full flex-col rounded-3xl bg-accent px-8 py-10 text-primary shadow-[0_10px_40px_-20px_rgba(58,35,59,0.55)]">
+  <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary">
+    <img src={icon.src} alt={`Ícono de ${title}`} class="h-9 w-9" loading="lazy" />
+  </div>
+
+  <h3 class="mt-6 text-center font-heading text-2xl font-semibold text-primary md:text-3xl">
+    {title}
+  </h3>
+
+  <div class="mt-3 flex items-center justify-center gap-2 text-sm font-medium text-primary md:text-base">
+    <img src={subtitleIcon.src} alt="Horario" class="h-4 w-4" loading="lazy" />
+    <span>{subtitle}</span>
+  </div>
+
+  <hr class="mt-5 border-primary/20" />
+
+  <div class="mt-5 flex flex-1 flex-col gap-4 text-sm leading-relaxed md:text-base">
+    {description.map((item) => (
+      <p>{item}</p>
+    ))}
+  </div>
+</article>
+
+<style>
+  @reference "../styles/global.css";
+</style>
