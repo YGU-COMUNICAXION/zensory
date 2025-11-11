@@ -247,19 +247,16 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
     title: "Visualización consciente y sensorial",
     highlights: [
       "Practicarás la visualización consciente y sensorial, integrando imágenes y emociones para conectar profundamente con tu sueño.",
-      "Realizarás una meditación guiada que te permitirá experimentar tu deseo como si ya fuera realidad, sintiendo cada emoción que genera.",
-      "Darás forma a tu visión de manera creativa, mapeando los detalles sensoriales de tu manifestación con un vision board personal.",
+      "Realizarás una meditación guiada que te permitirá experimentar tu deseo como si ya fuera realidad, sintiendo cada emoción que eso genera.",
+      "Darás forma a tu visión de manera creativa, pintando, dibujando o pegando imágenes en tu cuaderno de manifestación, como un vision board personal.",
     ],
     location:
-      "Un espacio tranquilo en el que puedas meditar cómodamente, cerrar los ojos y dejar fluir tu imaginación y tus sensaciones.",
+      "Un espacio tranquilo en donde puedas meditar cómodamente, cerrar los ojos y dejar fluir tu imaginación y tus emociones.",
     materials: [
       "Un cuaderno de manifestación y pluma",
-      "Colores, plumones, revistas, impresiones o materiales para crear tu vision board",
-      "Un objeto significativo que simbolice tu sueño (imagen, fotografía o amuleto)",
-      "Cuenco tibetano o campana (opcional) para acompañar la meditación y elevar la vibración",
+      "Colores, plumones, revistas y materiales para crear tu vision board en el cuaderno",
+      "Si tienes un cuenco tibetano, úsalo para acompañar la meditación y simplificar la visualización y tus emociones",
     ],
-    materialsNote:
-      "*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.",
     modalContent: `
       <div class="space-y-6 text-base leading-relaxed text-accent/90">
         <p>
@@ -270,26 +267,24 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
         <section class="space-y-3">
           <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
           <ol class="space-y-2">
-            <li class="flex gap-2"><span class="font-semibold text-accent">1 -</span><span>Practicarás la visualización consciente y sensorial, integrando imágenes y emociones para conectar profundamente con tu sueño.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">2 -</span><span>Realizarás una meditación guiada que te permitirá experimentar tu deseo como si ya fuera realidad, sintiendo cada emoción que genera.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">3 -</span><span>Darás forma a tu visión de manera creativa, mapeando los detalles sensoriales de tu manifestación con un vision board personal.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">1 .-</span><span>Practicarás la visualización consciente y sensorial, integrando imágenes y emociones para conectar profundamente con tu sueño.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">2 .-</span><span>Realizarás una meditación guiada que te permitirá experimentar tu deseo como si ya fuera realidad, sintiendo cada emoción que eso genera.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">3 .-</span><span>Darás forma a tu visión de manera creativa, pintando, dibujando o pegando imágenes en tu cuaderno de manifestación, como un vision board personal.</span></li>
           </ol>
         </section>
         <section class="space-y-2">
           <h3 class="font-heading text-lg font-semibold text-accent">Lugar sugerido</h3>
           <p>
-            Un espacio tranquilo en el que puedas meditar cómodamente, cerrar los ojos y dejar fluir tu imaginación y tus sensaciones.
+            Un espacio tranquilo en donde puedas meditar cómodamente, cerrar los ojos y dejar fluir tu imaginación y tus emociones.
           </p>
         </section>
         <section class="space-y-2">
           <h3 class="font-heading text-lg font-semibold text-accent">Material</h3>
           <ul class="space-y-1 list-disc pl-5">
             <li>Un cuaderno de manifestación y pluma</li>
-            <li>Colores, plumones, revistas, impresiones o materiales para crear tu vision board</li>
-            <li>Un objeto significativo que simbolice tu sueño (imagen, fotografía o amuleto)</li>
-            <li>Cuenco tibetano o campana (opcional) para acompañar la meditación y elevar la vibración</li>
+            <li>Colores, plumones, revistas y materiales para crear tu vision board en el cuaderno</li>
+            <li>Si tienes un cuenco tibetano, úsalo para acompañar la meditación y simplificar la visualización y tus emociones</li>
           </ul>
-          <p class="text-sm italic text-accent/70">*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.</p>
         </section>
       </div>
     `.trim(),
@@ -302,17 +297,15 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
       "Reflexionarás sobre la importancia de soltar el control para permitir que tus sueños se manifiesten.",
       "Practicarás el arte de confiar y rendirte a la fe y voluntad divina.",
       "Realizaremos una meditación guiada para soltar y confiar, conectando con tu fe y tus ángeles.",
-      "Recibirás un mensaje divino a través de una carta de ángeles y kabbalah como recordatorio de que no estás solo en tu camino.",
+      "Recibirás un mensaje divino a través de una carta de ángeles y kabbalah, como recordatorio de que no estás solo en tu camino.",
     ],
     location:
-      "Un espacio tranquilo y sagrado en donde te sientas abierta/o a la introspección, la meditación y la conexión espiritual.",
+      "Un espacio tranquilo y sagrado en donde te sientas abierto a la introspección, la meditación y la conexión espiritual.",
     materials: [
       "Cuaderno de manifestación y pluma",
-      "Carta de ángeles (puede ser una carta de ángeles y kabbalah)",
-      "Cuenco tibetano o campana (opcional) para complementar la meditación",
+      "Mensaje angelical de una carta de ángeles y kabbalah",
+      "Trae tu cuenco tibetano si cuentas con él para complementar la meditación",
     ],
-    materialsNote:
-      "*Material opcional. Lo puedes adquirir conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.",
     modalContent: `
       <div class="space-y-6 text-base leading-relaxed text-accent/90">
         <p>
@@ -322,26 +315,25 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
         <section class="space-y-3">
           <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
           <ol class="space-y-2">
-            <li class="flex gap-2"><span class="font-semibold text-accent">1 -</span><span>Reflexionarás sobre la importancia de soltar el control para permitir que tus sueños se manifiesten.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">2 -</span><span>Practicarás el arte de confiar y rendirte a la fe y voluntad divina.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">3 -</span><span>Realizaremos una meditación guiada para soltar y confiar, conectando con tu fe y tus ángeles.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">4 -</span><span>Recibirás un mensaje divino a través de una carta de ángeles y kabbalah, como recordatorio de que no estás solo en tu camino.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">1 .-</span><span>Reflexionarás sobre la importancia de soltar el control para permitir que tus sueños se manifiesten.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">2 .-</span><span>Practicarás el arte de confiar y rendirte a la fe y voluntad divina.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">3 .-</span><span>Realizaremos una meditación guiada para soltar y confiar, conectando con tu fe y tus ángeles.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">4 .-</span><span>Recibirás un mensaje divino a través de una carta de ángeles y kabbalah, como recordatorio de que no estás solo en tu camino.</span></li>
           </ol>
         </section>
         <section class="space-y-2">
           <h3 class="font-heading text-lg font-semibold text-accent">Lugar sugerido</h3>
           <p>
-            Un espacio tranquilo y sagrado en donde te sientas abierta/o a la introspección, la meditación y la conexión espiritual.
+            Un espacio tranquilo y sagrado en donde te sientas abierto a la introspección, la meditación y la conexión espiritual.
           </p>
         </section>
         <section class="space-y-2">
           <h3 class="font-heading text-lg font-semibold text-accent">Material</h3>
           <ul class="space-y-1 list-disc pl-5">
             <li>Cuaderno de manifestación y pluma</li>
-            <li>Carta de ángeles (puede ser una carta de ángeles y kabbalah)</li>
-            <li>Cuenco tibetano o campana (opcional) para complementar la meditación</li>
+            <li>Mensaje angelical de una carta de ángeles y kabbalah</li>
+            <li>Trae tu cuenco tibetano si cuentas con él para complementar la meditación</li>
           </ul>
-          <p class="text-sm italic text-accent/70">*Material opcional. Lo puedes adquirir conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.</p>
         </section>
       </div>
     `.trim(),
@@ -351,52 +343,47 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
     title: "Vibrar en gratitud consciente",
     subtitle: "Celebrar el camino",
     highlights: [
-      "Reflexionarás sobre la importancia de agradecer y cómo la práctica diaria eleva tu vibración y atrae abundancia.",
-      "Escribirás en tu cuaderno de manifestación agradeciendo por todo lo que tienes en tu vida aquí y ahora.",
-      "Practicarás el hábito de la gratitud consciente y honrarás tus sueños, visualizando cómo agradecerás al universo.",
-      "Realizaremos una meditación guiada de gratitud para anclar esta energía amorosa en tu corazón.",
+      "Reflexionarás sobre la importancia de agradecer y cómo esta práctica diaria eleva tu vibración y atrae abundancia.",
+      "Escribirás en tu cuaderno de manifestación, agradeciendo por todo lo que tienes en tu vida aquí y ahora.",
+      "Practicarás el hábito de la gratitud como herramienta para atraer tus sueños y descubrirás cómo llevarlo a tu día a día en un diario de agradecimiento.",
+      "Realizaremos una meditación guiada de gratitud para expandir tu corazón y conectar con la energía amorosa del universo.",
     ],
     location:
-      "Un espacio tranquilo y amoroso donde sientas calma y conexión; tu rincón favorito en casa, un jardín o un lugar sagrado que te inspire paz.",
+      "Un espacio tranquilo y amoroso donde sientas calma y conexión: tu rincón favorito en casa, un jardín o un lugar sagrado que te inspire paz.",
     materials: [
       "Cuaderno de manifestación y pluma",
-      "Hoja adicional o tarjetas para tu práctica diaria de gratitud",
-      "Vela, incienso o spray de limpieza energética para crear el ambiente",
-      "Cuenco tibetano o campana (opcional) para cerrar la práctica",
+      "Hoja descargable de agradecimiento para tu práctica diaria",
+      "Cuenco tibetano para abrir y cerrar la práctica",
     ],
-    materialsNote:
-      "*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para acompañar tus rituales de gratitud.",
     modalContent: `
       <div class="space-y-6 text-base leading-relaxed text-accent/90">
         <p>
           Cuando agradecemos, nos damos cuenta de todo lo que tenemos en nuestra vida. La gratitud nos conecta con el presente,
-          abre nuestro corazón y nos alinea con una frecuencia divina que nos llena de amor y abre las puertas para recibir más
-          bendiciones.
+          abre nuestro corazón y nos eleva a una frecuencia más alta. La gratitud es una frecuencia divina que nos llena de amor
+          y nos abre las puertas para recibir más bendiciones.
         </p>
         <section class="space-y-3">
           <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
           <ol class="space-y-2">
-            <li class="flex gap-2"><span class="font-semibold text-accent">1 -</span><span>Reflexionarás sobre la importancia de agradecer y cómo esa práctica diaria eleva tu vibración y atrae abundancia.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">2 -</span><span>Escribirás en tu cuaderno de manifestación, agradeciendo por todo lo que tienes en tu vida aquí y ahora.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">3 -</span><span>Practicarás el hábito de la gratitud consciente y honrarás tus sueños, visualizando cómo agradecerás al universo.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">4 -</span><span>Realizaremos una meditación guiada de gratitud para anclar esta energía amorosa en tu corazón.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">1 .-</span><span>Reflexionarás sobre la importancia de agradecer y cómo esta práctica diaria eleva tu vibración y atrae abundancia.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">2 .-</span><span>Escribirás en tu cuaderno de manifestación, agradeciendo por todo lo que tienes en tu vida aquí y ahora.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">3 .-</span><span>Practicarás el hábito de la gratitud como herramienta para atraer tus sueños y descubrirás cómo llevarlo a tu día a día en un diario de agradecimiento.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">4 .-</span><span>Realizaremos una meditación guiada de gratitud para expandir tu corazón y conectar con la energía amorosa del universo.</span></li>
           </ol>
         </section>
         <section class="space-y-2">
           <h3 class="font-heading text-lg font-semibold text-accent">Lugar sugerido</h3>
           <p>
-            Un espacio tranquilo y amoroso donde sientas calma y conexión; tu rincón favorito en casa, un jardín o un lugar sagrado que te inspire paz.
+            Un espacio tranquilo y amoroso donde sientas calma y conexión: tu rincón favorito en casa, un jardín o un lugar sagrado que te inspire paz.
           </p>
         </section>
         <section class="space-y-2">
           <h3 class="font-heading text-lg font-semibold text-accent">Material</h3>
           <ul class="space-y-1 list-disc pl-5">
             <li>Cuaderno de manifestación y pluma</li>
-            <li>Hoja adicional o tarjetas para tu práctica diaria de gratitud</li>
-            <li>Vela, incienso o spray de limpieza energética para crear el ambiente</li>
-            <li>Cuenco tibetano o campana (opcional) para cerrar la práctica</li>
+            <li>Hoja descargable de agradecimiento para tu práctica diaria</li>
+            <li>Cuenco tibetano para abrir y cerrar la práctica</li>
           </ul>
-          <p class="text-sm italic text-accent/70">*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para acompañar tus rituales de gratitud.</p>
         </section>
       </div>
     `.trim(),
@@ -407,53 +394,49 @@ const MODULE_DEFINITIONS: ModuleDefinition[] = [
     subtitle: "Cierre del proceso",
     highlights: [
       "Integrarás todo lo trabajado en los módulos anteriores en una experiencia sonora única y transformadora.",
-      "Vibrarás con la magia de los sonidos sagrados por medio de una meditación que abre tu corazón y te conecta con tu sueño.",
-      "Manifestarás tu sueño desde un estado de certeza, gratitud y amor infinito.",
-      "Compartirás tu experiencia y cerrarás el círculo compartido consciente del inicio del proceso.",
+      "Vibrarás con la energía de los sonidos sagrados por medio de una meditación guiada mágica que armonizará tu cuerpo, mente y espíritu.",
+      "Manifestarás tu sueño en un estado de paz, gratitud y apertura al universo.",
+      "Compartirás tu experiencia. Cerraremos el círculo compartiendo cómo se sintió el proceso.",
     ],
     location:
-      "Escoge tu ceremonial sagrado, sala de meditación, jardín, habitación o cualquier lugar donde puedas expandirte y envolver tu ser.",
+      "Un espacio ceremonial sagrado, sala de meditación, jardín, templo interior o cualquier lugar donde el sonido pueda expandirse y envolver tu ser.",
     materials: [
-      "Cuenco tibetano o set de cuencos (flores, cuarzos, intenciones, vela)",
-      "Hangpan o Jiuri Drum (si cuentas con ellos)",
-      "Audio guía del módulo",
-      "Manta ligera",
+      "Cojín o tapete de meditación",
+      "Elementos simbólicos para el cierre (flores, cuarzo, incienso, vela)",
+      "Cuaderno de manifestación y pluma",
+      "Hoja descargable",
     ],
-    materialsNote:
-      "*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.",
     modalContent: `
       <div class="space-y-6 text-base leading-relaxed text-accent/90">
         <p>
-          Integramos lo aprendido a través de una meditación sonora sagrada. Los cuencos tibetanos, el hangpan, el jiuri drum
-          y otros instrumentos sagrados resuenan en tu alma para acompañarte a manifestar ese sueño de manera consciente y
+          Integraremos lo aprendido a través de una meditación sonora sagrada. Los cuencos tibetanos, el handpan, el jicuri drum,
+          el arpa y otros instrumentos mágicos resonarán en tu alma para acompañarte a manifestar ese sueño de manera consciente y
           elevada. El sonido es oración, es frecuencia divina, es el lenguaje del alma. Con cada vibración, tu energía se alinea
           con el universo y tu manifestación se siembra en la realidad.
         </p>
         <section class="space-y-3">
           <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
           <ol class="space-y-2">
-            <li class="flex gap-2"><span class="font-semibold text-accent">1 -</span><span>Integrarás todo lo trabajado en los módulos anteriores en una experiencia sonora única y transformadora.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">2 -</span><span>Vibrarás con la magia de los sonidos sagrados por medio de una meditación que abre tu corazón y te conecta con tu sueño.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">3 -</span><span>Manifestarás tu sueño desde un estado de certeza, gratitud y amor infinito.</span></li>
-            <li class="flex gap-2"><span class="font-semibold text-accent">4 -</span><span>Compartirás tu experiencia y cerrarás el círculo compartido consciente del inicio del proceso.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">1 .-</span><span>Integrarás todo lo trabajado en los módulos anteriores en una experiencia sonora única y transformadora.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">2 .-</span><span>Vibrarás con la energía de los sonidos sagrados por medio de una meditación guiada mágica que armonizará tu cuerpo, mente y espíritu.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">3 .-</span><span>Manifestarás tu sueño en un estado de paz, gratitud y apertura al universo.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">4 .-</span><span>Compartirás tu experiencia. Cerraremos el círculo compartiendo cómo se sintió el proceso.</span></li>
           </ol>
         </section>
         <section class="space-y-2">
           <h3 class="font-heading text-lg font-semibold text-accent">Lugar sugerido</h3>
           <p>
-            Escoge tu ceremonial sagrado, sala de meditación, jardín, habitación o cualquier lugar donde puedas expandirte y
-            envolver tu ser.
+            Un espacio ceremonial sagrado, sala de meditación, jardín, templo interior o cualquier lugar donde el sonido pueda expandirse y envolver tu ser.
           </p>
         </section>
         <section class="space-y-2">
           <h3 class="font-heading text-lg font-semibold text-accent">Material</h3>
           <ul class="space-y-1 list-disc pl-5">
-            <li>Cuenco tibetano o set de cuencos (flores, cuarzos, intenciones, vela)</li>
-            <li>Hangpan o Jiuri Drum (si cuentas con ellos)</li>
-            <li>Audio guía del módulo</li>
-            <li>Manta ligera</li>
+            <li>Cojín o tapete de meditación</li>
+            <li>Elementos simbólicos para el cierre (flores, cuarzo, incienso, vela)</li>
+            <li>Cuaderno de manifestación y pluma</li>
+            <li>Hoja descargable</li>
           </ul>
-          <p class="text-sm italic text-accent/70">*Material opcional. Puedes adquirirlo conmigo o, si ya tienes uno, tenlo a la mano para hacer diferentes prácticas.</p>
         </section>
       </div>
     `.trim(),
