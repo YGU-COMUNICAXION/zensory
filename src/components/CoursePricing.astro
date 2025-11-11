@@ -118,7 +118,7 @@ const paymentMethods = [
       </div>
 
       <div
-        class="absolute bottom-6 left-6 right-6 flex max-w-sm items-start gap-3 text-left text-sm leading-relaxed text-accent/80 md:bottom-10 md:left-10 md:right-auto md:text-base"
+        class="absolute bottom-6 left-6 right-6 flex items-start gap-3 text-left text-sm leading-relaxed text-accent/80 md:bottom-10 md:left-10 md:right-10 md:text-base"
       >
         <img
           src={alertIcon.src}
@@ -126,7 +126,7 @@ const paymentMethods = [
           class="mt-0.5 h-5 w-5 flex-shrink-0"
           loading="lazy"
         />
-        <p>{upfrontNote}</p>
+        <p class="md:whitespace-nowrap">{upfrontNote}</p>
       </div>
     </div>
   </div>
