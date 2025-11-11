@@ -7,7 +7,7 @@ const { text }: Props = Astro.props;
 ---
 
 <div class="highlight-card px-4 py-8 md:px-6 md:py-8">
-  <p class="highlight-card__text text-xs md:text-base lg:text-lg">
+  <p class="highlight-card__text text-xs md:text-sm lg:text-base">
     {text}
   </p>
 </div>
@@ -42,7 +42,7 @@ const { text }: Props = Astro.props;
   }
 
   .highlight-card::after {
-    inset: .5rem;
+    inset: 0.5rem;
     border-radius: 2.75rem;
     border: 1px solid rgba(223, 213, 200, 0.5);
   }
