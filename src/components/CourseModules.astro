@@ -1,8 +1,43 @@
 ---
-import { Image } from "astro:assets";
-import closeIcon from "@assets/svg/close.svg";
+import Modal from "./Modal.astro";
 
-const MODULES = [
+const createDefaultModalContent = (module: {
+  learnings?: string[];
+  materials?: string[];
+}) => {
+  const sections: string[] = [];
+
+  if (module.learnings?.length) {
+    sections.push(`
+      <section class="space-y-3">
+        <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
+        <ol class="space-y-2 text-base leading-relaxed text-accent/90">
+          ${module.learnings
+            .map(
+              (learning, idx) =>
+                `<li class="flex gap-2"><span class="font-semibold text-accent">${idx + 1}.</span><span>${learning}</span></li>`
+            )
+            .join("")}
+        </ol>
+      </section>
+    `);
+  }
+
+  if (module.materials?.length) {
+    sections.push(`
+      <section class="space-y-2">
+        <h3 class="font-heading text-lg font-semibold text-accent">Material sugerido</h3>
+        <ul class="space-y-1 list-disc pl-5 text-base leading-relaxed text-accent/80">
+          ${module.materials.map((item) => `<li>${item}</li>`).join("")}
+        </ul>
+      </section>
+    `);
+  }
+
+  return `<div class="space-y-6">${sections.join("")}</div>`;
+};
+
+const MODULE_DEFINITIONS = [
   {
     number: 1,
     title: "Sintonización energética",
@@ -13,6 +48,32 @@ const MODULES = [
       "Cerramos con una intención compartida y agradecimiento.",
     ],
     materials: ["Cuaderno de manifestación", "Pluma", "Cuenco tibetano (opcional)"],
+    modalContent: `
+      <div class="space-y-6 text-base leading-relaxed text-accent/90">
+        <section class="space-y-3">
+          <h3 class="font-heading text-lg font-semibold text-accent">En este módulo:</h3>
+          <ol class="space-y-2">
+            <li class="flex gap-2"><span class="font-semibold text-accent">1 -</span><span>Nos presentaremos y abriremos el círculo de manifestación.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">2 -</span><span>Realizaremos una meditación de sintonización energética con respiración consciente y cuencos tibetanos para preparar nuestro cuerpo, mente y alma a la manifestación.</span></li>
+            <li class="flex gap-2"><span class="font-semibold text-accent">3 -</span><span>Cerraremos con una reflexión y agradecimiento.</span></li>
+          </ol>
+        </section>
+        <section class="space-y-2">
+          <h3 class="font-heading text-lg font-semibold text-accent">Lugar sugerido</h3>
+          <p>
+            Prepara un espacio cómodo y tranquilo. Puede ser un lugar donde te sientas en paz, ya sea sentado en una silla o un cojín,
+            o acostado sobre una colchoneta o cama. Lo importante es que tu cuerpo esté relajado y tu mente pueda enfocarse en la meditación.
+          </p>
+        </section>
+        <section class="space-y-2">
+          <h3 class="font-heading text-lg font-semibold text-accent">Material</h3>
+          <ul class="space-y-1 list-disc pl-5">
+            <li>Un cuaderno de manifestación y pluma.</li>
+            <li>Cuenco tibetano (opcional), o si ya tienes uno, te invitamos a tenerlo a la mano para practicar.</li>
+          </ul>
+        </section>
+      </div>
+    `.trim(),
   },
   {
     number: 2,
@@ -92,6 +153,11 @@ const MODULES = [
     materials: ["Cuaderno de manifestación", "Elemento simbólico personal"],
   },
 ];
+
+const MODULES = MODULE_DEFINITIONS.map((module) => ({
+  ...module,
+  modalContent: module.modalContent ?? createDefaultModalContent(module),
+}));
 ---
 
 <section class="bg-primary text-accent">
@@ -193,53 +259,39 @@ const MODULES = [
     </div>
   </div>
 
-  <div
-    class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 px-4 py-10"
-    role="dialog"
-    aria-modal="true"
+  <Modal
+    class="lg:hidden"
+    closeLabel="Cerrar módulo"
     data-module-modal
+    closeButtonAttrs={{ "data-module-close": "" }}
   >
-    <div class="relative flex w-full max-w-lg flex-col overflow-hidden rounded-3xl bg-primary text-accent shadow-2xl">
+    <div class="flex-1 overflow-y-auto px-6 pb-8 pt-10">
+      <header class="flex items-start gap-4">
+        <span class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent/20 text-lg font-semibold text-accent" data-modal-number></span>
+        <div class="flex flex-col gap-1">
+          <span class="font-heading text-xl font-semibold italic" data-modal-title></span>
+          <span class="text-xs uppercase tracking-[0.35em] text-accent/60" data-modal-subtitle></span>
+        </div>
+      </header>
+      <div class="mt-6 space-y-6" data-modal-content></div>
+    </div>
+    <div class="flex flex-col gap-3 border-t border-accent/15 bg-primary/90 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
       <button
         type="button"
-        class="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent/10 text-accent transition-colors duration-200 hover:bg-accent/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        aria-label="Cerrar módulo"
-        data-module-close
+        class="flex-1 rounded-full bg-accent/10 px-5 py-3 text-sm font-semibold uppercase tracking-wide text-accent transition-colors duration-200 hover:bg-accent/20 disabled:cursor-not-allowed disabled:opacity-40 sm:flex-none"
+        data-module-prev
       >
-        <Image src={closeIcon} alt="Cerrar" class="h-5 w-5" />
+        Módulo anterior
       </button>
-      <div class="flex-1 overflow-y-auto px-6 pb-8 pt-10">
-        <header class="flex items-center gap-4">
-          <span class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent/20 text-lg font-semibold text-accent" data-modal-number></span>
-          <div class="flex flex-col">
-            <span class="font-heading text-xl font-semibold italic" data-modal-title></span>
-            <span class="text-sm uppercase tracking-[0.3em] text-accent/60" data-modal-subtitle></span>
-          </div>
-        </header>
-        <div class="mt-6 space-y-4" data-modal-learnings></div>
-        <div class="mt-6 space-y-2" data-modal-materials-wrapper hidden>
-          <h4 class="font-heading text-lg font-semibold">Material sugerido</h4>
-          <ul class="list-disc space-y-1 pl-5 text-base" data-modal-materials></ul>
-        </div>
-      </div>
-      <div class="flex flex-col gap-3 border-t border-accent/20 bg-primary/80 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
-        <button
-          type="button"
-          class="flex-1 rounded-full bg-accent/10 px-5 py-3 text-sm font-semibold uppercase tracking-wide text-accent transition-colors duration-200 hover:bg-accent/20 disabled:cursor-not-allowed disabled:opacity-40 sm:flex-none"
-          data-module-prev
-        >
-          Módulo anterior
-        </button>
-        <button
-          type="button"
-          class="flex-1 rounded-full bg-accent px-5 py-3 text-sm font-semibold uppercase tracking-wide text-primary transition-colors duration-200 hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60 sm:flex-none"
-          data-module-next
-        >
-          Siguiente módulo
-        </button>
-      </div>
+      <button
+        type="button"
+        class="flex-1 rounded-full bg-accent px-5 py-3 text-sm font-semibold uppercase tracking-wide text-primary transition-colors duration-200 hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60 sm:flex-none"
+        data-module-next
+      >
+        Siguiente módulo
+      </button>
     </div>
-  </div>
+  </Modal>
 
   <script type="application/json" data-modules-json>{JSON.stringify(MODULES)}</script>
 </section>
@@ -257,9 +309,7 @@ const MODULES = [
     const numberEl = modal?.querySelector<HTMLElement>("[data-modal-number]");
     const titleEl = modal?.querySelector<HTMLElement>("[data-modal-title]");
     const subtitleEl = modal?.querySelector<HTMLElement>("[data-modal-subtitle]");
-    const learningsContainer = modal?.querySelector<HTMLElement>("[data-modal-learnings]");
-    const materialsWrapper = modal?.querySelector<HTMLElement>("[data-modal-materials-wrapper]");
-    const materialsList = modal?.querySelector<HTMLElement>("[data-modal-materials]");
+    const contentContainer = modal?.querySelector<HTMLElement>("[data-modal-content]");
     const overlay = modal;
 
     let activeIndex = 0;
@@ -271,7 +321,7 @@ const MODULES = [
     };
 
     const updateModalContent = (index: number) => {
-      if (!modal || !numberEl || !titleEl || !subtitleEl || !learningsContainer || !materialsWrapper || !materialsList) {
+      if (!modal || !numberEl || !titleEl || !subtitleEl || !contentContainer) {
         return;
       }
 
@@ -287,36 +337,7 @@ const MODULES = [
       subtitleEl.textContent = module.subtitle ?? "";
       subtitleEl.classList.toggle("hidden", !module.subtitle);
 
-      learningsContainer.innerHTML = "";
-      if (Array.isArray(module.learnings)) {
-        module.learnings.forEach((learning: string, idx: number) => {
-          const item = document.createElement("div");
-          item.className = "flex items-start gap-4 rounded-2xl bg-accent/10 p-4";
-
-          const badge = document.createElement("span");
-          badge.className = "flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-accent/20 text-base font-semibold text-accent";
-          badge.textContent = String(idx + 1);
-
-          const text = document.createElement("p");
-          text.className = "text-base leading-relaxed";
-          text.textContent = learning;
-
-          item.appendChild(badge);
-          item.appendChild(text);
-          learningsContainer.appendChild(item);
-        });
-      }
-
-      materialsList.innerHTML = "";
-      const hasMaterials = Array.isArray(module.materials) && module.materials.length > 0;
-      materialsWrapper.toggleAttribute("hidden", !hasMaterials);
-      if (hasMaterials) {
-        (module.materials as string[]).forEach((material) => {
-          const li = document.createElement("li");
-          li.textContent = material;
-          materialsList.appendChild(li);
-        });
-      }
+      contentContainer.innerHTML = module.modalContent ?? "";
 
       updateNavigationState();
     };
