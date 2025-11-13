@@ -1,0 +1,132 @@
+---
+import { Image } from "astro:assets";
+import instagramIcon from "@assets/svg/instagram.svg";
+import tiktokIcon from "@assets/svg/tiktok.svg";
+import youtubeIcon from "@assets/svg/youtube.svg";
+import whatsappIcon from "@assets/svg/whatsapp.svg";
+import smsIcon from "@assets/svg/sms.svg";
+
+interface Props {
+  id?: string;
+}
+
+const { id = "contacto" }: Props = Astro.props;
+
+const contactLinks = [
+  {
+    icon: instagramIcon,
+    label: "@galimari",
+    href: "https://www.instagram.com/galimari",
+  },
+  {
+    icon: tiktokIcon,
+    label: "@galimari",
+    href: "https://www.tiktok.com/@galimari",
+  },
+  {
+    icon: youtubeIcon,
+    label: "Galimari Sound Healing",
+    href: "https://www.youtube.com/@galimarisoundhealing",
+  },
+  {
+    icon: whatsappIcon,
+    label: "+52 55 4555 2007",
+    href: "https://wa.me/525545552007",
+  },
+  {
+    icon: smsIcon,
+    label: "galimari.soundhealing@gmail.com",
+    href: "mailto:galimari.soundhealing@gmail.com",
+  },
+];
+---
+
+<section
+  id={id}
+  class="lg:border-t lg:border-primary md:bg-linear-to-r from-transparent from-50% to-primary to-50%"
+>
+  <div class="container mx-auto ">
+    <div
+      class="flex flex-col gap-12 md:grid md:grid-cols-[minmax(0,450px)_1fr] md:gap-16 lg:gap-24"
+    >
+      <div class="md:border-r md:border-primary/20 md:pr-10 lg:pr-16 py-8 px-4 md:px-0">
+        <h2
+          class="text-center font-heading text-4xl font-extrabold italic
+         text-primary md:text-left md:text-5xl"
+        >
+          Contacto
+        </h2>
+
+        <div class="mt-10 space-y-6 text-primary">
+          {
+            contactLinks.map((item) => (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-4 text-base transition hover:text-primary/70 md:text-lg"
+              >
+                <Image
+                  src={item.icon}
+                  alt={item.label}
+                  class="h-6 w-6"
+                  loading="lazy"
+                />
+                <span class="font-sans font-normal">{item.label}</span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="bg-primary px-6 text-accent md:px-12 py-8">
+        <p
+          class="font-heading text-3xl font-extrabold italic md:text-4xl lg:text-5xl mb-6"
+        >
+          ¿Quieres mandarme algún mensaje?
+        </p>
+
+        <form class="mt-10 space-y-8 font-light" action="#" method="post">
+          <label class="block">
+            <span class="sr-only">Nombre</span>
+            <input
+              type="text"
+              name="name"
+              class="w-full border-0 border-b border-accent/60 bg-transparent pb-3 text-lg text-accent placeholder:text-accent focus:border-accent focus:outline-none"
+              placeholder="Nombre"
+              required
+            />
+          </label>
+
+          <label class="block">
+            <span class="sr-only">Correo</span>
+            <input
+              type="email"
+              name="email"
+              class="w-full border-0 border-b border-accent/60 bg-transparent pb-3 text-lg text-accent placeholder:text-accent focus:border-accent focus:outline-none"
+              placeholder="Correo"
+              required
+            />
+          </label>
+
+          <label class="block">
+            <span class="sr-only">Mensaje</span>
+            <textarea
+              name="message"
+              rows={3}
+              class="w-full border-0 border-b border-accent/60 bg-transparent pb-3 text-lg text-accent placeholder:text-accent focus:border-accent focus:outline-none"
+              placeholder="Mensaje"
+              required></textarea>
+          </label>
+
+          <button
+            type="submit"
+            class="mx-auto block font-medium text-lg italic text-accent underline decoration-accent decoration-2 underline-offset-4 transition hover:text-accent/80"
+          >
+            Enviar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
