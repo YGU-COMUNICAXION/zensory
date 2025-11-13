@@ -41,38 +41,52 @@ const contactLinks = [
 ];
 ---
 
-<section id={id}>
-  <div class="container mx-auto px-4 py-16 md:py-24">
-    <div class="flex flex-col gap-12 md:grid md:grid-cols-[minmax(0,320px)_1fr] md:gap-16">
-      <div class="md:border-r md:border-primary/20 md:pr-10 lg:pr-16">
-        <h2 class="text-center font-heading text-4xl font-semibold italic text-primary md:text-left md:text-5xl">
+<section
+  id={id}
+  class="lg:border-t lg:border-primary md:bg-linear-to-r from-transparent from-50% to-primary to-50%"
+>
+  <div class="container mx-auto ">
+    <div
+      class="flex flex-col gap-12 md:grid md:grid-cols-[minmax(0,450px)_1fr] md:gap-16 lg:gap-24"
+    >
+      <div class="md:border-r md:border-primary/20 md:pr-10 lg:pr-16 py-8 px-4 md:px-0">
+        <h2
+          class="text-center font-heading text-4xl font-extrabold italic
+         text-primary md:text-left md:text-5xl"
+        >
           Contacto
         </h2>
 
         <div class="mt-10 space-y-6 text-primary">
-          {contactLinks.map((item) => (
-            <a
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="flex items-center gap-4 text-base transition hover:text-primary/70 md:text-lg"
-            >
-              <Image src={item.icon} alt={item.label} class="h-6 w-6" loading="lazy" />
-              <span class="font-sans font-medium">{item.label}</span>
-            </a>
-          ))}
+          {
+            contactLinks.map((item) => (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-4 text-base transition hover:text-primary/70 md:text-lg"
+              >
+                <Image
+                  src={item.icon}
+                  alt={item.label}
+                  class="h-6 w-6"
+                  loading="lazy"
+                />
+                <span class="font-sans font-normal">{item.label}</span>
+              </a>
+            ))
+          }
         </div>
       </div>
 
-      <div class="bg-primary px-6 py-10 text-accent md:px-12">
-        <p class="font-heading text-3xl font-semibold italic md:text-4xl">
+      <div class="bg-primary px-6 text-accent md:px-12 py-8">
+        <p
+          class="font-heading text-3xl font-extrabold italic md:text-4xl lg:text-5xl mb-6"
+        >
           ¿Quieres mandarme algún mensaje?
         </p>
-        <p class="mt-2 font-heading text-lg italic text-accent/70">
-          Déjame tus datos
-        </p>
 
-        <form class="mt-10 space-y-8" action="#" method="post">
+        <form class="mt-10 space-y-8 font-light" action="#" method="post">
           <label class="block">
             <span class="sr-only">Nombre</span>
             <input
@@ -99,16 +113,15 @@ const contactLinks = [
             <span class="sr-only">Mensaje</span>
             <textarea
               name="message"
-              rows={4}
+              rows={3}
               class="w-full border-0 border-b border-accent/60 bg-transparent pb-3 text-lg text-accent placeholder:text-accent focus:border-accent focus:outline-none"
               placeholder="Mensaje"
-              required
-            ></textarea>
+              required></textarea>
           </label>
 
           <button
             type="submit"
-            class="mx-auto block font-heading text-lg italic text-accent underline decoration-accent decoration-2 underline-offset-4 transition hover:text-accent/80"
+            class="mx-auto block font-medium text-lg italic text-accent underline decoration-accent decoration-2 underline-offset-4 transition hover:text-accent/80"
           >
             Enviar
           </button>
