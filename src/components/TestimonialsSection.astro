@@ -1,0 +1,19 @@
+---
+import { testimonials } from "../data/testimonials";
+import { TestimonialsCarousel } from "./TestimonialsCarousel";
+
+interface Props {
+  id?: string;
+}
+
+const { id = "testimonios" }: Props = Astro.props;
+---
+
+<section id={id} class="px-4 py-16 text-primary md:py-24">
+  <div class="container mx-auto flex flex-col gap-10">
+    <div>
+      <p class="font-heading text-3xl font-semibold italic md:text-5xl">Testimonios</p>
+    </div>
+    <TestimonialsCarousel client:load testimonials={testimonials} />
+  </div>
+</section>
