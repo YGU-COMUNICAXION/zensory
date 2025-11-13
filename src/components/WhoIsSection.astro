@@ -1,0 +1,126 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import whoImage from "@assets/who.jpg";
+
+interface Props {
+  id?: string;
+  mediaType?: "image" | "video";
+  videoSrc?: string;
+  posterImage?: ImageMetadata;
+}
+
+const {
+  id = "quien-es",
+  mediaType = "image",
+  videoSrc,
+  posterImage = whoImage,
+}: Props = Astro.props;
+
+const isVideo =
+  mediaType === "video" && typeof videoSrc === "string" && videoSrc.length > 0;
+---
+
+<section id={id} class="bg-primary text-accent">
+  <div
+    class="container mx-auto flex flex-col gap-4
+  px-6 lg:px-0 py-4 lg:flex-row lg:items-start lg:gap-12 lg:py-24 xl:py-32"
+  >
+    <div class="flex-1">
+      <h2
+        class="font-heading text-2xl md:text-4xl font-bold lg:hidden
+        mb-4"
+      >
+        ¿Quién es Gali Marli?
+      </h2>
+      {
+        isVideo ? (
+          <div class="relative overflow-hidden rounded-3xl shadow-xl">
+            <video
+              class="h-full w-full object-cover"
+              controls
+              poster={posterImage.src}
+            >
+              <source src={videoSrc} type="video/mp4" />
+              Tu navegador no soporta la reproducción de video.
+            </video>
+          </div>
+        ) : (
+          <Image
+            src={posterImage}
+            alt="Retrato de Gali Marli sonriendo junto a cuencos tibetanos"
+            class="h-full w-full rounded-lg object-cover shadow-xl aspect-[5/6] lg:aspect-auto"
+            widths={[320, 640, 960, 1280]}
+            sizes="(min-width: 1024px) 33vw, 100vw"
+            loading="lazy"
+            decoding="async"
+          />
+        )
+      }
+    </div>
+
+    <div class="flex-2 space-y-0">
+      <h2
+        class="hidden lg:inline-block mb-8
+        font-heading text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl"
+      >
+        ¿Quién es Gali Marli?
+      </h2>
+      <div class="space-y-5 font-sans text-sm leading-relaxed md:text-base">
+        <p>
+          Licenciada en comunicación humana y educación especial egresada de la
+          Universidad de las Américas. Con más de 25 años de experiencia en
+          inclusión educativa para personas con discapacidad.
+        </p>
+        <p>
+          Su misión de vida: sanar y transformar la conciencia a través de la
+          sonoridad de los cuencos tibetanos y la espiritualidad consciente.
+        </p>
+        <p>
+          A partir de 2014, comenzó su camino de formación espiritual y
+          holística con estudios de meditación, sanación energética, registros
+          akáshicos, terapia de respuesta espiritual, sonidos de poder,
+          armonización con cuencos tibetanos, sanación akáshica, numerología y
+          espiritualidad consciente.
+        </p>
+        <p>
+          Actualmente, Gallimari es terapeuta sonora, guía espiritual y creadora
+          de contenido, integrando en su práctica un enfoque holístico que
+          combina herramientas ancestrales.
+        </p>
+        <p>
+          En paralelo, comparte su misión en redes sociales como TikTok,
+          Instagram y YouTube, en donde ha conectado con una comunidad de más de
+          500,000 seguidores, inspirándolos a vivir con armonía, conciencia y
+          amor propio.
+        </p>
+        <p>
+          Con más de 25 años acompañando a niños, sus familias y sus
+          comunidades, su vocación ha sido la de transformar realidades a través
+          del amor. Su tarea, tanto en la educación especial como en la
+          espiritualidad, es la de sostener procesos humanos con presencia,
+          entrega y sensibilidad.
+        </p>
+        <p>
+          Más allá de los grandes aprendizajes que usa como voz, su corazón se
+          llena de alegría al saber que la luz no es suya, sino de aquellos que
+          la reciben y la comparten.
+        </p>
+
+        <p class="hidden lg:block">
+          Recordando siempre que <span class="uppercase"
+            >no hay coincidencias, solamente diosidencias.</span
+          >
+        </p>
+      </div>
+      <div class="lg:hidden border-t-2 border-accent bg-[#DFD5C85C] mt-6">
+        <p
+          class="container mx-auto px-2 py-4 text-center font-sans text-sm uppercase
+           text-accent"
+        >
+          “NO HAY COINCIDENCIAS, SOLAMENTE DIOSIDENCIAS.”
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
