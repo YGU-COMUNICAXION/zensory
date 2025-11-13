@@ -9,12 +9,15 @@ interface TestimonialsCarouselProps {
 const DESKTOP_BREAKPOINT = 1024;
 const GAP_REM = 1.5;
 
-export function TestimonialsCarousel({ testimonials }: TestimonialsCarouselProps) {
+export function TestimonialsCarousel({
+  testimonials,
+}: TestimonialsCarouselProps) {
   const [itemsPerView, setItemsPerView] = useState(1);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const getItemsPerView = () => (window.innerWidth >= DESKTOP_BREAKPOINT ? 3 : 1);
+    const getItemsPerView = () =>
+      window.innerWidth >= DESKTOP_BREAKPOINT ? 3 : 1;
 
     const updateItemsPerView = () => {
       setItemsPerView((prev) => {
@@ -52,7 +55,7 @@ export function TestimonialsCarousel({ testimonials }: TestimonialsCarouselProps
 
   const itemWidth = useMemo(
     () => `calc((100% - ${(itemsPerView - 1) * GAP_REM}rem) / ${itemsPerView})`,
-    [itemsPerView],
+    [itemsPerView]
   );
 
   return (
@@ -60,7 +63,9 @@ export function TestimonialsCarousel({ testimonials }: TestimonialsCarouselProps
       <div className="flex items-center gap-4">
         <button
           type="button"
-          onClick={() => canGoPrev && setCurrentIndex((value) => Math.max(0, value - 1))}
+          onClick={() =>
+            canGoPrev && setCurrentIndex((value) => Math.max(0, value - 1))
+          }
           className="hidden h-10 w-10 items-center justify-center rounded-full border border-primary text-primary transition hover:bg-primary hover:text-accent disabled:cursor-not-allowed disabled:border-primary/30 disabled:text-primary/30 lg:flex"
           disabled={!canGoPrev}
           aria-label="Testimonio anterior"
@@ -85,7 +90,10 @@ export function TestimonialsCarousel({ testimonials }: TestimonialsCarouselProps
         </div>
         <button
           type="button"
-          onClick={() => canGoNext && setCurrentIndex((value) => Math.min(maxIndex, value + 1))}
+          onClick={() =>
+            canGoNext &&
+            setCurrentIndex((value) => Math.min(maxIndex, value + 1))
+          }
           className="hidden h-10 w-10 items-center justify-center rounded-full border border-primary text-primary transition hover:bg-primary hover:text-accent disabled:cursor-not-allowed disabled:border-primary/30 disabled:text-primary/30 lg:flex"
           disabled={!canGoNext}
           aria-label="Siguiente testimonio"
