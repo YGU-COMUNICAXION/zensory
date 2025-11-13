@@ -80,7 +80,13 @@ const { id = "faqs", faqs = FAQS }: Props = Astro.props;
 <style>
   @reference "../styles/global.css";
 
-  summary::-webkit-details-marker {
+  summary {
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker,
+  summary::marker,
+  summary::-moz-list-bullet {
     display: none;
   }
 </style>
