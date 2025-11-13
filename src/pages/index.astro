@@ -1,9 +1,13 @@
 ---
 import Layout from "../layout/Layout.astro";
 import Banner from "@components/Banner.astro";
+import CourseForYou from "@components/CourseForYou.astro";
+import CourseModules from "@components/CourseModules.astro";
 import CourseOverview from "@components/CourseOverview.astro";
 import CourseHighlights from "@components/CourseHighlights.astro";
 import WhoIsSection from "@components/WhoIsSection.astro";
+import CourseModalities from "@components/CourseModalities.astro";
+import CoursePricing from "@components/CoursePricing.astro";
 ---
 
 <Layout>
@@ -11,4 +15,8 @@ import WhoIsSection from "@components/WhoIsSection.astro";
   <CourseOverview id="curso" />
   <WhoIsSection id="quien-es" />
   <CourseHighlights />
+  <CourseForYou />
+  <CourseModules />
+  <CourseModalities />
+  <CoursePricing />
 </Layout>

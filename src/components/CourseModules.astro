@@ -1,0 +1,184 @@
+---
+import ModuleMobileExperience from "./ModuleMobileExperience";
+import { MODULES } from "../data/modules";
+---
+
+<section class="container mx-auto bg-primary text-accent rounded-b-3xl">
+  <div class="flex flex-col gap-8 px-6 lg:px-8 py-16">
+    <header class="flex flex-col gap-6 text-center">
+      <h2
+        class="font-heading text-4xl lg:text-5xl font-extrabold italic md:text-5xl"
+      >
+        Módulos
+      </h2>
+      <p class="text-base md:text-lg lg:text-2xl font-normal text-accent/80">
+        8 módulos de 45 minutos
+      </p>
+      <div class="mx-auto flex flex-col gap-3 text-left text-accent/90">
+        <span class="text-base lg:text-xl xl:text-2xl text-accent underline"
+          >Descripción &gt;</span
+        >
+        <div class="space-y-4 text-base leading-relaxed md:text-lg">
+          <p>
+            El curso Manifiesta tu sueño está diseñado con ocho módulos de 45
+            minutos, en donde a través de la magia de los cuencos tibetanos, el
+            sound healing, la ley de atracción y la guía divina, aprenderás a
+            manifestar eso que tu corazón y alma desean.
+          </p>
+          <p>
+            Cada módulo te abrirá a recibir nuevas bendiciones y herramientas
+            para atraer tus sueños con claridad, confianza, fe y una vibración
+            elevada.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <div class="lg:hidden">
+      <ModuleMobileExperience client:load modules={MODULES} />
+    </div>
+
+    <div
+      class="hidden lg:flex lg:flex-col lg:gap-6"
+      data-module-accordion-group
+    >
+      {
+        MODULES.map((module) => (
+          <details
+            class="group overflow-hidden rounded-3xl text-left shadow-sm transition-shadow duration-300"
+            data-module-accordion
+          >
+            <summary
+              class="flex cursor-pointer items-center justify-between gap-6 rounded-4xl bg-[#2A1A2B]
+            px-4 py-4 text-accent transition-colors duration-200 group-open:rounded-b-none
+            focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              <div class="flex items-center gap-6">
+                <span
+                  class="flex h-20 w-20 items-center justify-center rounded-full lg:pb-2
+                bg-accent font-heading text-2xl lg:text-4xl leading-none font-light text-primary"
+                >
+                  {module.number}
+                </span>
+                <div class="flex flex-row gap-1 justify-center items-center text-left">
+                  <span class="text-2xl font-normal leading-tight">
+                    Módulo {module.number}:
+                  </span>
+                  <span class="text-2xl font-light italic text-accent/80">
+                    {module.title}
+                  </span>
+                </div>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="h-10 w-10 text-accent transition-transform duration-200 group-open:rotate-180"
+                aria-hidden="true"
+                data-accordion-icon
+              >
+                <path
+                  d="M6 9l6 6 6-6"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </summary>
+            <div class="bg-[#2A1A2B]">
+              <div class="space-y-8 border-t border-accent/10 px-8 pb-10 pt-8 text-accent/90">
+                <header class="flex flex-col gap-2 text-accent">
+                  <span class="text-base text-accent/70">
+                    {module.description}
+                  </span>
+                </header>
+
+                {module.highlights?.length ? (
+                  <section class="space-y-4">
+                    <ol
+                      class={`grid gap-5 md:grid-cols-${module.highlights?.length}`}
+                    >
+                      {module.highlights.map((item, idx) => (
+                        <li
+                          class="flex items-center flex-col gap-4"
+                          key={`${module.number}-${idx}`}
+                        >
+                          <span
+                            class="flex h-12 w-12 flex-shrink-0 items-center justify-center
+                          rounded-full bg-accent text-lg font-heading font-light text-primary"
+                          >
+                            {idx + 1}
+                          </span>
+                          <p class="text-base leading-relaxed text-accent text-center">
+                            {item}
+                          </p>
+                        </li>
+                      ))}
+                    </ol>
+                  </section>
+                ) : null}
+
+                {module.location ? (
+                  <section class="space-y-3">
+                    <h3 class="text-lg font-semibold text-accent">
+                      Lugar sugerido
+                    </h3>
+                    <p class="text-base leading-relaxed text-accent">
+                      {module.location}
+                    </p>
+                  </section>
+                ) : null}
+
+                {module.materials?.length ? (
+                  <section class="space-y-3">
+                    <h3 class="text-lg font-semibold text-accent">
+                      Material sugerido
+                    </h3>
+                    <ul class="list-disc space-y-2 pl-6 text-base text-accent">
+                      {module.materials.map((material) => (
+                        <li key={material}>{material}</li>
+                      ))}
+                    </ul>
+                    <p class="text-sm italic text-accent/70">
+                      * Material opcional. Lo puedes adquirir conmigo o, si ya
+                      tienes uno, tenerlo a la mano para hacer diferentes
+                      prácticas.
+                    </p>
+                  </section>
+                ) : null}
+              </div>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const accordions = Array.from(
+      document.querySelectorAll<HTMLDetailsElement>("[data-module-accordion]")
+    );
+    accordions.forEach((details) => {
+      details.addEventListener("toggle", () => {
+        if (details.open) {
+          accordions.forEach((other) => {
+            if (other !== details) {
+              other.open = false;
+            }
+          });
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  @reference "../styles/global.css";
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

@@ -1,0 +1,88 @@
+---
+import CourseModalitiesCard from "./CourseModalitiesCard.astro";
+import type { ImageMetadata } from "astro";
+import profileIcon from "@assets/svg/profile.svg";
+import videoSquareIcon from "@assets/svg/video-square.svg";
+import videoIcon from "@assets/svg/video.svg";
+import clockIcon from "@assets/svg/clock.svg";
+
+interface Props {
+  id?: string;
+}
+
+interface ModeCard {
+  title: string;
+  subtitle: string;
+  description: string[];
+  icon: ImageMetadata;
+}
+
+const { id = "modalidad" }: Props = Astro.props;
+
+const modes: ModeCard[] = [
+  {
+    title: "Presencial",
+    subtitle: "Jueves en la noche",
+    description: [
+      "Encuentros en vivo, con práctica grupal y cierre compartido, experimentando en el momento cada sonido.",
+      "Incluye material para integrar tu proceso.",
+    ],
+    icon: profileIcon,
+  },
+  {
+    title: "Online en vivo",
+    subtitle: "Jueves en la noche",
+    description: [
+      "Sesiones transmitidas en vivo, vía Zoom u otra plataforma similar.",
+      "Incluyen integración digital, grupo compartido al final de la sesión e integración semanal.",
+    ],
+    icon: videoIcon,
+  },
+  {
+    title: "Pregrabado",
+    subtitle: "A tu propio ritmo",
+    description: [
+      "Acceso al curso grabado para que avances a tu tiempo, con sesiones y recursos diseñados para integrarlo en tu día a día.",
+      "Incluye sesiones en vivo mensuales, recursos y hojas descargables para integrar tu proceso.",
+    ],
+    icon: videoSquareIcon,
+  },
+];
+
+const materials: string[] = [
+  "Cuaderno de manifestación o diario personal y una pluma",
+  "Botella de agua",
+  "Aceites esenciales de cada módulo (menta, geranio, rosas, vetiver, eucalipto y meditación)",
+  "Meditaciones guiadas de cada módulo",
+  "Cuenco tibetano o campana para complementar el curso",
+];
+---
+
+<section id={id} class="px-4 py-16 md:py-24">
+  <div class="container mx-auto">
+    <header class="mb-12 text-center md:mb-16">
+      <h2 class="font-heading text-3xl font-semibold uppercase tracking-tight text-primary md:text-4xl">
+        Modalidad
+      </h2>
+    </header>
+
+    <div class="grid gap-6 md:grid-cols-3 md:gap-8">
+      {modes.map((mode) => (
+        <CourseModalitiesCard {...mode} subtitleIcon={clockIcon} />
+      ))}
+    </div>
+
+    <div class="mt-12 text-primary md:mt-16">
+      <p class="text-base leading-relaxed md:text-lg">Materiales sugeridos</p>
+      <ul class="mt-3 list-disc space-y-3 pl-5 text-base leading-relaxed md:text-lg">
+        {materials.map((material) => (
+          <li>{material}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  @reference "../styles/global.css";
+</style>
