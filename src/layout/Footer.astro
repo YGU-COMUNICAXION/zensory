@@ -1,11 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import logo from "@assets/svg/logo.svg";
-import instagramIcon from "@assets/svg/instagram.svg";
-import tiktokIcon from "@assets/svg/tiktok.svg";
-import youtubeIcon from "@assets/svg/youtube.svg";
-import whatsappIcon from "@assets/svg/whatsapp.svg";
-import smsIcon from "@assets/svg/sms.svg";
+import InstagramIcon from "@components/icons/Instagram.astro";
+import TikTokIcon from "@components/icons/TikTok.astro";
+import YouTubeIcon from "@components/icons/YouTube.astro";
+import WhatsAppIcon from "@components/icons/WhatsApp.astro";
+import SmsIcon from "@components/icons/Sms.astro";
 
 const currentYear = new Date().getFullYear();
 
@@ -25,19 +25,19 @@ const socialLinks = [
     name: "Instagram",
     handle: "@galimari",
     href: "https://www.instagram.com/galimari",
-    icon: instagramIcon,
+    icon: InstagramIcon,
   },
   {
     name: "TikTok",
     handle: "@galimari",
     href: "https://www.tiktok.com/@galimari",
-    icon: tiktokIcon,
+    icon: TikTokIcon,
   },
   {
     name: "YouTube",
     handle: "Galimari Sound Healing",
     href: "https://www.youtube.com/@galimarisoundhealing",
-    icon: youtubeIcon,
+    icon: YouTubeIcon,
   },
 ];
 
@@ -45,38 +45,38 @@ const contactLinks = [
   {
     label: "+52 55 4555 2007",
     href: "https://wa.me/525545552007",
-    icon: whatsappIcon,
+    icon: WhatsAppIcon,
   },
   {
     label: "galimari.soundhealing@gmail.com",
     href: "mailto:galimari.soundhealing@gmail.com",
-    icon: smsIcon,
+    icon: SmsIcon,
   },
 ];
 
 const topIcons = [
-  { href: socialLinks[0].href, icon: instagramIcon, label: "Instagram" },
-  { href: socialLinks[1].href, icon: tiktokIcon, label: "TikTok" },
-  { href: socialLinks[2].href, icon: youtubeIcon, label: "YouTube" },
-  { href: contactLinks[0].href, icon: whatsappIcon, label: "WhatsApp" },
-  { href: contactLinks[1].href, icon: smsIcon, label: "Correo" },
+  { href: socialLinks[0].href, icon: InstagramIcon, label: "Instagram" },
+  { href: socialLinks[1].href, icon: TikTokIcon, label: "TikTok" },
+  { href: socialLinks[2].href, icon: YouTubeIcon, label: "YouTube" },
+  { href: contactLinks[0].href, icon: WhatsAppIcon, label: "WhatsApp" },
+  { href: contactLinks[1].href, icon: SmsIcon, label: "Correo" },
 ];
 ---
 
 <footer
-  class="mt-16 bg-primary text-accent rounded-tl-[3rem] rounded-tr-[4.5rem]"
+  class="mt-16 bg-primary text-accent rounded-tl-[3rem] rounded-tr-[3.5rem] sm:rounded-tl-[4rem] sm:rounded-tr-[4.75rem]"
 >
-  <div class="mx-auto w-full max-w-6xl px-5 py-12 md:px-8 lg:px-10 lg:py-20">
+  <div class="mx-auto w-full max-w-6xl px-5 py-10 md:px-8 md:py-12 lg:px-10 lg:py-16">
     <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
       {topIcons.map((item) => (
         <a
           href={item.href}
-          class="flex h-12 w-12 items-center justify-center rounded-full border border-accent/40 transition-colors duration-200 hover:border-accent hover:bg-accent/10"
+          class="flex h-12 w-12 items-center justify-center rounded-full border border-accent/40 text-accent transition-colors duration-200 hover:border-accent hover:bg-accent/10 hover:text-white"
           aria-label={item.label}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image src={item.icon} alt={item.label} class="h-6 w-6" loading="lazy" />
+          <item.icon class="h-6 w-6" />
         </a>
       ))}
     </div>
@@ -99,8 +99,8 @@ const topIcons = [
                   rel="noopener noreferrer"
                   class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/80"
                 >
-                  <span class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-accent/30 group-hover:border-accent/60">
-                    <Image src={item.icon} alt={item.name} class="h-4 w-4" loading="lazy" />
+                  <span class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-accent/30 text-accent group-hover:border-accent/60 group-hover:text-white">
+                    <item.icon class="h-4 w-4" />
                   </span>
                   <span class="font-sans text-base">{item.handle}</span>
                 </a>
@@ -115,8 +115,8 @@ const topIcons = [
                   rel="noopener noreferrer"
                   class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/80"
                 >
-                  <span class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-accent/30 group-hover:border-accent/60">
-                    <Image src={item.icon} alt={item.label} class="h-4 w-4" loading="lazy" />
+                  <span class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-accent/30 text-accent group-hover:border-accent/60 group-hover:text-white">
+                    <item.icon class="h-4 w-4" />
                   </span>
                   <span class="font-sans text-base">{item.label}</span>
                 </a>
@@ -183,8 +183,8 @@ const topIcons = [
                   rel="noopener noreferrer"
                   class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/70"
                 >
-                  <span class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-accent/30 group-hover:border-accent/60">
-                    <Image src={item.icon} alt={item.name} class="h-4 w-4" loading="lazy" />
+                  <span class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-accent/30 text-accent group-hover:border-accent/60 group-hover:text-white">
+                    <item.icon class="h-4 w-4" />
                   </span>
                   <div class="flex flex-col leading-tight">
                     <span class="text-xs uppercase tracking-[0.3em] text-accent/60">
@@ -211,8 +211,8 @@ const topIcons = [
                   rel="noopener noreferrer"
                   class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/70"
                 >
-                  <span class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-accent/30 group-hover:border-accent/60">
-                    <Image src={item.icon} alt={item.label} class="h-4 w-4" loading="lazy" />
+                  <span class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-accent/30 text-accent group-hover:border-accent/60 group-hover:text-white">
+                    <item.icon class="h-4 w-4" />
                   </span>
                   <span>{item.label}</span>
                 </a>
