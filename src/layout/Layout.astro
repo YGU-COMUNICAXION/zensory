@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import Header from "./Header.astro";
+import Footer from "./Footer.astro";
 import "../styles/global.css";
 ---
 
@@ -23,6 +24,7 @@ import "../styles/global.css";
     <main class="flex-1 pt-15 lg:pt-20">
       <slot />
     </main>
+    <Footer />
   </body>
 </html>
 

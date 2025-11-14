@@ -59,7 +59,7 @@ const ModuleMobileExperience = ({ modules }: ModuleMobileExperienceProps) => {
               className={triggerBaseClasses}
               onClick={() => setActiveIndex(index)}
             >
-              <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent/20 text-lg font-semibold text-accent">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent/20 text-lg font-semibold text-accent">
                 {module.number}
               </span>
               <span className="flex-1 text-left font-heading text-lg font-semibold italic leading-snug text-accent">
@@ -80,7 +80,7 @@ const ModuleMobileExperience = ({ modules }: ModuleMobileExperienceProps) => {
           <>
             <div className="flex-1 overflow-y-auto px-6 pb-8 pt-10">
               <header className="flex items-start gap-4">
-                <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent/20 text-lg font-semibold text-accent">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent/20 text-lg font-semibold text-accent">
                   {activeModule.number}
                 </span>
                 <div className="flex flex-col gap-1">

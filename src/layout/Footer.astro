@@ -1,12 +1,254 @@
 ---
+import { Image } from "astro:assets";
+import logo from "@assets/svg/logo.svg";
+import InstagramIcon from "@components/icons/Instagram.astro";
+import TikTokIcon from "@components/icons/TikTok.astro";
+import YouTubeIcon from "@components/icons/YouTube.astro";
+import WhatsAppIcon from "@components/icons/WhatsApp.astro";
+import SmsIcon from "@components/icons/Sms.astro";
+
 const currentYear = new Date().getFullYear();
+
+const navigationLinks = [
+  { label: "Inicio", href: "/#inicio" },
+  { label: "Curso", href: "/#curso" },
+  { label: "Modalidades", href: "/#modalidad" },
+  { label: "Inversión", href: "/#precios" },
+  { label: "¿Quién es Gali Marli?", href: "/#quien-es" },
+  { label: "Testimonios", href: "/#testimonios" },
+  { label: "FAQs", href: "/#faqs" },
+  { label: "Contacto", href: "/#contacto" },
+];
+
+const socialLinks = [
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/galimari",
+    icon: InstagramIcon,
+  },
+  {
+    name: "TikTok",
+    href: "https://www.tiktok.com/@galimari",
+    icon: TikTokIcon,
+  },
+  {
+    name: "YouTube",
+    href: "https://www.youtube.com/@galimarisoundhealing",
+    icon: YouTubeIcon,
+  },
+];
+
+const contactLinks = [
+  {
+    type: "email",
+    label: "galimari.soundhealing@gmail.com",
+    href: "mailto:galimari.soundhealing@gmail.com",
+    icon: SmsIcon,
+  },
+  {
+    type: "whatsapp",
+    label: "+52 55 4555 2007",
+    href: "https://wa.me/525545552007",
+    icon: WhatsAppIcon,
+  },
+];
+
+const whatsappContact = contactLinks.find((item) => item.type === "whatsapp");
+const emailContact = contactLinks.find((item) => item.type === "email");
+
+const topIcons = [
+  {
+    href: socialLinks[0].href,
+    icon: InstagramIcon,
+    label: socialLinks[0].name,
+  },
+  { href: socialLinks[1].href, icon: TikTokIcon, label: socialLinks[1].name },
+  { href: socialLinks[2].href, icon: YouTubeIcon, label: socialLinks[2].name },
+  { href: whatsappContact?.href ?? "#", icon: WhatsAppIcon, label: "WhatsApp" },
+  { href: emailContact?.href ?? "#", icon: SmsIcon, label: "Correo" },
+];
 ---
 
-<footer class="bg-primary py-8 text-accent">
-  <div class="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 text-center text-sm lg:flex-row lg:items-center lg:justify-between lg:text-left">
-    <p class="font-sans uppercase tracking-[0.3em]">Zensory</p>
-    <p class="text-xs text-accent/80">
-      © {currentYear} Zensory. Todos los derechos reservados.
+<footer class="border-t border-white bg-primary text-accent font-heading">
+  <div class="container mx-auto px-5 py-6 md:px-8 md:py-8 lg:px-10 lg:py-10">
+    <div
+      class="flex flex-wrap items-center justify-center gap-4 sm:gap-5 lg:hidden"
+    >
+      {
+        topIcons.map((item) => (
+          <a
+            href={item.href}
+            class="flex items-center justify-center p-2 text-accent transition-colors duration-200 hover:text-white sm:p-3"
+            aria-label={item.label}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <item.icon class="h-7 w-7 sm:h-8 sm:w-8" />
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="mt-8 grid gap-8 lg:gap-14">
+      <div class="grid grid-cols-2 gap-10 lg:hidden">
+        <div class="space-y-6">
+          <a href="/" class="inline-flex items-center gap-3">
+            <Image src={logo} alt="Zensory" class="h-8 w-auto" loading="lazy" />
+          </a>
+
+          <ul class="space-y-4 text-lg">
+            {
+              socialLinks.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group flex items-start gap-3 transition-colors duration-200 hover:text-accent/80"
+                  >
+                    <item.icon class="h-6 w-6 shrink-0" />
+                    <span class="block min-w-0 font-light underline underline-offset-4 decoration-accent/40 break-words">
+                      {item.name}
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+
+            {
+              contactLinks.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group flex items-start gap-3 transition-colors duration-200 hover:text-accent/80"
+                  >
+                    <item.icon class="h-6 w-6 shrink-0" />
+                    <span class="block min-w-0 font-light underline underline-offset-4 decoration-accent/40 break-words">
+                      {item.label}
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div>
+          <h3
+            class="font-heading text-xl font-semibold uppercase tracking-[0.2em] text-accent"
+          >
+            Navegación
+          </h3>
+          <ul class="mt-6 space-y-3 text-lg">
+            {
+              navigationLinks.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="font-light underline underline-offset-4 decoration-accent/40 transition-colors duration-200 hover:text-accent/80"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <div class="hidden grid-cols-[1.4fr_1.8fr_1.1fr_1.1fr] gap-12 lg:grid">
+        <div class="space-y-8">
+          <a href="/" class="inline-flex items-center">
+            <Image src={logo} alt="Zensory" class="h-9 w-auto" loading="lazy" />
+          </a>
+        </div>
+
+        <div>
+          <h3
+            class="font-heading text-lg font-semibold uppercase tracking-[0.3em] text-accent"
+          >
+            Navegación
+          </h3>
+          <div class="mt-6 grid grid-cols-2 gap-x-10 gap-y-3 text-lg">
+            {
+              navigationLinks.map((item) => (
+                <a
+                  href={item.href}
+                  class="font-light underline underline-offset-4 decoration-accent/40 transition-colors duration-200 hover:text-accent/70"
+                >
+                  {item.label}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <div>
+          <h3
+            class="font-heading text-lg font-semibold uppercase tracking-[0.3em] text-accent"
+          >
+            Redes sociales
+          </h3>
+          <ul class="mt-6 space-y-4 text-lg">
+            {
+              socialLinks.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group flex items-start gap-3 transition-colors duration-200 hover:text-accent/70"
+                  >
+                    <item.icon class="h-6 w-6 shrink-0" />
+                    <span class="block min-w-0 font-light underline underline-offset-4 decoration-accent/40 break-words">
+                      {item.name}
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div>
+          <h3
+            class="font-heading text-lg font-semibold uppercase tracking-[0.3em] text-accent"
+          >
+            Contacto
+          </h3>
+          <ul class="mt-6 space-y-4 text-lg">
+            {
+              contactLinks.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group flex items-start gap-3 transition-colors duration-200 hover:text-accent/70"
+                  >
+                    <item.icon class="h-6 w-6 shrink-0" />
+                    <span class="block min-w-0 font-light underline underline-offset-4 decoration-accent/40 break-words">
+                      {item.label}
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 hidden h-px w-full bg-accent/20 lg:block"></div>
+
+    <p class="mt-6 text-center text-lg font-light text-accent lg:mt-8">
+      © {currentYear} Zensory
     </p>
   </div>
 </footer>
+
+<style>
+  @reference "../styles/global.css";
+</style>
