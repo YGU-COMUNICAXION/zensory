@@ -64,19 +64,19 @@ const topIcons = [
 ---
 
 <footer
-  class="mt-16 bg-primary text-accent rounded-tl-[3rem] rounded-tr-[3.5rem] sm:rounded-tl-[4rem] sm:rounded-tr-[4.75rem]"
+  class="mt-16 bg-primary text-accent border-t border-accent/30 sm:border-none"
 >
   <div class="mx-auto w-full max-w-6xl px-5 py-10 md:px-8 md:py-12 lg:px-10 lg:py-16">
-    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+    <div class="flex flex-wrap items-center justify-center gap-5 sm:gap-7">
       {topIcons.map((item) => (
         <a
           href={item.href}
-          class="flex h-12 w-12 items-center justify-center rounded-full border border-accent/40 text-accent transition-colors duration-200 hover:border-accent hover:bg-accent/10 hover:text-white"
+          class="flex items-center justify-center p-2 text-accent transition-colors duration-200 hover:text-white sm:p-3"
           aria-label={item.label}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <item.icon class="h-6 w-6" />
+          <item.icon class="h-7 w-7 sm:h-8 sm:w-8" />
         </a>
       ))}
     </div>
@@ -84,7 +84,7 @@ const topIcons = [
     <div class="mt-10 h-px w-full bg-accent/20" />
 
     <div class="mt-10 grid gap-10 lg:gap-14">
-      <div class="grid gap-10 sm:grid-cols-2 lg:hidden">
+      <div class="grid grid-cols-2 gap-10 lg:hidden">
         <div class="space-y-6">
           <a href="/" class="inline-flex items-center gap-3">
             <Image src={logo} alt="Zensory" class="h-8 w-auto" loading="lazy" />
@@ -99,9 +99,7 @@ const topIcons = [
                   rel="noopener noreferrer"
                   class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/80"
                 >
-                  <span class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-accent/30 text-accent group-hover:border-accent/60 group-hover:text-white">
-                    <item.icon class="h-4 w-4" />
-                  </span>
+                  <item.icon class="h-6 w-6 flex-shrink-0" />
                   <span class="font-sans text-base">{item.handle}</span>
                 </a>
               </li>
@@ -115,9 +113,7 @@ const topIcons = [
                   rel="noopener noreferrer"
                   class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/80"
                 >
-                  <span class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-accent/30 text-accent group-hover:border-accent/60 group-hover:text-white">
-                    <item.icon class="h-4 w-4" />
-                  </span>
+                  <item.icon class="h-6 w-6 flex-shrink-0" />
                   <span class="font-sans text-base">{item.label}</span>
                 </a>
               </li>
@@ -183,9 +179,7 @@ const topIcons = [
                   rel="noopener noreferrer"
                   class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/70"
                 >
-                  <span class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-accent/30 text-accent group-hover:border-accent/60 group-hover:text-white">
-                    <item.icon class="h-4 w-4" />
-                  </span>
+                  <item.icon class="h-6 w-6 flex-shrink-0" />
                   <div class="flex flex-col leading-tight">
                     <span class="text-xs uppercase tracking-[0.3em] text-accent/60">
                       {item.name}
@@ -211,9 +205,7 @@ const topIcons = [
                   rel="noopener noreferrer"
                   class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/70"
                 >
-                  <span class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-accent/30 text-accent group-hover:border-accent/60 group-hover:text-white">
-                    <item.icon class="h-4 w-4" />
-                  </span>
+                  <item.icon class="h-6 w-6 flex-shrink-0" />
                   <span>{item.label}</span>
                 </a>
               </li>
