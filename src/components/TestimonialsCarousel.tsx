@@ -22,11 +22,15 @@ export function TestimonialsCarousel({
 }: TestimonialsCarouselProps) {
   const [itemsPerView, setItemsPerView] = useState(1);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPointerActive, setIsPointerActive] = useState(false);
+  const [itemOffsetPx, setItemOffsetPx] = useState(0);
   const dragState = useRef({
     pointerId: null as number | null,
     startX: 0,
     isDragging: false,
   });
+  const trackRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const getItemsPerView = () =>
@@ -54,6 +58,40 @@ export function TestimonialsCarousel({
   useEffect(() => {
     setCurrentIndex((prev) => Math.min(prev, maxIndex));
   }, [itemsPerView, maxIndex]);
+
+  useEffect(() => {
+    const updateItemOffset = () => {
+      const track = trackRef.current;
+      if (!track) return;
+
+      const children = track.children;
+      if (children.length <= 1) {
+        const viewportWidth = viewportRef.current?.clientWidth ?? 0;
+        const singleWidth = (children[0] as HTMLElement | undefined)?.offsetWidth ?? viewportWidth;
+        setItemOffsetPx(singleWidth);
+        return;
+      }
+
+      const firstChild = children[0] as HTMLElement;
+      const secondChild = children[1] as HTMLElement;
+      const offsetLeftDifference = secondChild.offsetLeft - firstChild.offsetLeft;
+
+      if (offsetLeftDifference > 0) {
+        setItemOffsetPx(offsetLeftDifference);
+        return;
+      }
+
+      const rectDifference = secondChild.getBoundingClientRect().left - firstChild.getBoundingClientRect().left;
+      setItemOffsetPx(rectDifference > 0 ? rectDifference : firstChild.offsetWidth);
+    };
+
+    updateItemOffset();
+    window.addEventListener("resize", updateItemOffset);
+
+    return () => {
+      window.removeEventListener("resize", updateItemOffset);
+    };
+  }, [itemsPerView, testimonials.length]);
 
   const canGoPrev = currentIndex > 0;
   const canGoNext = currentIndex < maxIndex;
@@ -90,6 +128,7 @@ export function TestimonialsCarousel({
         startX: 0,
         isDragging: false,
       };
+      setIsPointerActive(false);
 
       if (event.currentTarget.hasPointerCapture(event.pointerId)) {
         event.currentTarget.releasePointerCapture(event.pointerId);
@@ -104,6 +143,7 @@ export function TestimonialsCarousel({
       startX: event.clientX,
       isDragging: true,
     };
+    setIsPointerActive(true);
 
     event.currentTarget.setPointerCapture(event.pointerId);
   }, []);
@@ -132,6 +172,7 @@ export function TestimonialsCarousel({
       startX: 0,
       isDragging: false,
     };
+    setIsPointerActive(false);
 
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
@@ -139,12 +180,11 @@ export function TestimonialsCarousel({
   }, []);
 
   const trackStyles = useMemo(() => {
-    const translatePercentage = (100 / itemsPerView) * currentIndex;
     return {
-      transform: `translateX(-${translatePercentage}%)`,
+      transform: `translateX(-${currentIndex * itemOffsetPx}px)`,
       gap: `${GAP_REM}rem`,
     };
-  }, [currentIndex, itemsPerView]);
+  }, [currentIndex, itemOffsetPx]);
 
   const itemWidth = useMemo(
     () => `calc((100% - ${(itemsPerView - 1) * GAP_REM}rem) / ${itemsPerView})`,
@@ -163,9 +203,12 @@ export function TestimonialsCarousel({
         >
           <span aria-hidden="true">❮</span>
         </button>
-        <div className="relative w-full overflow-hidden">
+        <div ref={viewportRef} className="relative w-full overflow-hidden">
           <div
-            className="flex w-full transition-transform duration-500 ease-in-out touch-pan-y"
+            ref={trackRef}
+            className={`flex w-full transition-transform duration-500 ease-in-out touch-pan-y ${
+              isPointerActive ? "cursor-grabbing" : "cursor-grab"
+            }`}
             style={trackStyles}
             onPointerMove={handlePointerMove}
             onPointerDown={handlePointerDown}
