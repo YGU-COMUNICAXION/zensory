@@ -14,7 +14,7 @@ const navigationLinks = [
   { label: "Curso", href: "/#curso" },
   { label: "Modalidades", href: "/#modalidad" },
   { label: "Inversión", href: "/#precios" },
-  { label: "¿Quién es Gali Marli?", href: "/#quien-es" },
+  { label: "¿Quién es Gali Marli?", href: "/#gali-marli" },
   { label: "Testimonios", href: "/#testimonios" },
   { label: "FAQs", href: "/#faqs" },
   { label: "Contacto", href: "/#contacto" },
@@ -148,6 +148,7 @@ const topIcons = [
                   <a
                     href={item.href}
                     class="font-light underline underline-offset-4 decoration-accent/40 transition-colors duration-200 hover:text-accent/80"
+                    data-scroll-link
                   >
                     {item.label}
                   </a>
@@ -177,6 +178,7 @@ const topIcons = [
                 <a
                   href={item.href}
                   class="font-light underline underline-offset-4 decoration-accent/40 transition-colors duration-200 hover:text-accent/70"
+                  data-scroll-link
                 >
                   {item.label}
                 </a>
