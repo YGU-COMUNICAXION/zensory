@@ -23,7 +23,7 @@ export function TestimonialsCarousel({
   const [itemsPerView, setItemsPerView] = useState(1);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPointerActive, setIsPointerActive] = useState(false);
-  const [itemOffsetPx, setItemOffsetPx] = useState(0);
+  const [currentOffsetPx, setCurrentOffsetPx] = useState(0);
   const dragState = useRef({
     pointerId: null as number | null,
     startX: 0,
@@ -59,39 +59,30 @@ export function TestimonialsCarousel({
     setCurrentIndex((prev) => Math.min(prev, maxIndex));
   }, [itemsPerView, maxIndex]);
 
+  const updateCurrentOffset = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const target = track.children[currentIndex] as HTMLElement | undefined;
+    if (!target) {
+      setCurrentOffsetPx(0);
+      return;
+    }
+
+    setCurrentOffsetPx(target.offsetLeft);
+  }, [currentIndex]);
+
   useEffect(() => {
-    const updateItemOffset = () => {
-      const track = trackRef.current;
-      if (!track) return;
+    updateCurrentOffset();
+  }, [updateCurrentOffset, itemsPerView, testimonials.length]);
 
-      const children = track.children;
-      if (children.length <= 1) {
-        const viewportWidth = viewportRef.current?.clientWidth ?? 0;
-        const singleWidth = (children[0] as HTMLElement | undefined)?.offsetWidth ?? viewportWidth;
-        setItemOffsetPx(singleWidth);
-        return;
-      }
-
-      const firstChild = children[0] as HTMLElement;
-      const secondChild = children[1] as HTMLElement;
-      const offsetLeftDifference = secondChild.offsetLeft - firstChild.offsetLeft;
-
-      if (offsetLeftDifference > 0) {
-        setItemOffsetPx(offsetLeftDifference);
-        return;
-      }
-
-      const rectDifference = secondChild.getBoundingClientRect().left - firstChild.getBoundingClientRect().left;
-      setItemOffsetPx(rectDifference > 0 ? rectDifference : firstChild.offsetWidth);
-    };
-
-    updateItemOffset();
-    window.addEventListener("resize", updateItemOffset);
+  useEffect(() => {
+    window.addEventListener("resize", updateCurrentOffset);
 
     return () => {
-      window.removeEventListener("resize", updateItemOffset);
+      window.removeEventListener("resize", updateCurrentOffset);
     };
-  }, [itemsPerView, testimonials.length]);
+  }, [updateCurrentOffset]);
 
   const canGoPrev = currentIndex > 0;
   const canGoNext = currentIndex < maxIndex;
@@ -181,10 +172,10 @@ export function TestimonialsCarousel({
 
   const trackStyles = useMemo(() => {
     return {
-      transform: `translateX(-${currentIndex * itemOffsetPx}px)`,
+      transform: `translateX(-${currentOffsetPx}px)`,
       gap: `${GAP_REM}rem`,
     };
-  }, [currentIndex, itemOffsetPx]);
+  }, [currentOffsetPx]);
 
   const itemWidth = useMemo(
     () => `calc((100% - ${(itemsPerView - 1) * GAP_REM}rem) / ${itemsPerView})`,
