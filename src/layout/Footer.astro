@@ -1,12 +1,236 @@
 ---
+import { Image } from "astro:assets";
+import logo from "@assets/svg/logo.svg";
+import instagramIcon from "@assets/svg/instagram.svg";
+import tiktokIcon from "@assets/svg/tiktok.svg";
+import youtubeIcon from "@assets/svg/youtube.svg";
+import whatsappIcon from "@assets/svg/whatsapp.svg";
+import smsIcon from "@assets/svg/sms.svg";
+
 const currentYear = new Date().getFullYear();
+
+const navigationLinks = [
+  { label: "Inicio", href: "/#inicio" },
+  { label: "Curso", href: "/#curso" },
+  { label: "Modalidades", href: "/#modalidad" },
+  { label: "Inversión", href: "/#precios" },
+  { label: "¿Quién es Gali Marli?", href: "/#quien-es" },
+  { label: "Testimonios", href: "/#testimonios" },
+  { label: "FAQs", href: "/#faqs" },
+  { label: "Contacto", href: "/#contacto" },
+];
+
+const socialLinks = [
+  {
+    name: "Instagram",
+    handle: "@galimari",
+    href: "https://www.instagram.com/galimari",
+    icon: instagramIcon,
+  },
+  {
+    name: "TikTok",
+    handle: "@galimari",
+    href: "https://www.tiktok.com/@galimari",
+    icon: tiktokIcon,
+  },
+  {
+    name: "YouTube",
+    handle: "Galimari Sound Healing",
+    href: "https://www.youtube.com/@galimarisoundhealing",
+    icon: youtubeIcon,
+  },
+];
+
+const contactLinks = [
+  {
+    label: "+52 55 4555 2007",
+    href: "https://wa.me/525545552007",
+    icon: whatsappIcon,
+  },
+  {
+    label: "galimari.soundhealing@gmail.com",
+    href: "mailto:galimari.soundhealing@gmail.com",
+    icon: smsIcon,
+  },
+];
+
+const topIcons = [
+  { href: socialLinks[0].href, icon: instagramIcon, label: "Instagram" },
+  { href: socialLinks[1].href, icon: tiktokIcon, label: "TikTok" },
+  { href: socialLinks[2].href, icon: youtubeIcon, label: "YouTube" },
+  { href: contactLinks[0].href, icon: whatsappIcon, label: "WhatsApp" },
+  { href: contactLinks[1].href, icon: smsIcon, label: "Correo" },
+];
 ---
 
-<footer class="bg-primary py-8 text-accent">
-  <div class="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 text-center text-sm lg:flex-row lg:items-center lg:justify-between lg:text-left">
-    <p class="font-sans uppercase tracking-[0.3em]">Zensory</p>
-    <p class="text-xs text-accent/80">
-      © {currentYear} Zensory. Todos los derechos reservados.
+<footer
+  class="mt-16 bg-primary text-accent rounded-tl-[3rem] rounded-tr-[4.5rem]"
+>
+  <div class="mx-auto w-full max-w-6xl px-5 py-12 md:px-8 lg:px-10 lg:py-20">
+    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+      {topIcons.map((item) => (
+        <a
+          href={item.href}
+          class="flex h-12 w-12 items-center justify-center rounded-full border border-accent/40 transition-colors duration-200 hover:border-accent hover:bg-accent/10"
+          aria-label={item.label}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image src={item.icon} alt={item.label} class="h-6 w-6" loading="lazy" />
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-10 h-px w-full bg-accent/20" />
+
+    <div class="mt-10 grid gap-10 lg:gap-14">
+      <div class="grid gap-10 sm:grid-cols-2 lg:hidden">
+        <div class="space-y-6">
+          <a href="/" class="inline-flex items-center gap-3">
+            <Image src={logo} alt="Zensory" class="h-8 w-auto" loading="lazy" />
+          </a>
+
+          <ul class="space-y-4 text-base">
+            {socialLinks.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/80"
+                >
+                  <span class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-accent/30 group-hover:border-accent/60">
+                    <Image src={item.icon} alt={item.name} class="h-4 w-4" loading="lazy" />
+                  </span>
+                  <span class="font-sans text-base">{item.handle}</span>
+                </a>
+              </li>
+            ))}
+
+            {contactLinks.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/80"
+                >
+                  <span class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-accent/30 group-hover:border-accent/60">
+                    <Image src={item.icon} alt={item.label} class="h-4 w-4" loading="lazy" />
+                  </span>
+                  <span class="font-sans text-base">{item.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-xl font-semibold uppercase tracking-[0.2em] text-accent">
+            Navegación
+          </h3>
+          <ul class="mt-6 space-y-3 text-base">
+            {navigationLinks.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="transition-colors duration-200 hover:text-accent/80"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="hidden grid-cols-[1.4fr_1.8fr_1.1fr_1.1fr] gap-12 lg:grid">
+        <div class="space-y-8">
+          <a href="/" class="inline-flex items-center">
+            <Image src={logo} alt="Zensory" class="h-9 w-auto" loading="lazy" />
+          </a>
+          <p class="max-w-xs text-sm font-light text-accent/80">
+            Manifiesta tus sueños a través de la frecuencia del sonido y la conexión contigo misma.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold uppercase tracking-[0.3em] text-accent">
+            Navegación
+          </h3>
+          <div class="mt-6 grid grid-cols-2 gap-x-10 gap-y-3 text-sm">
+            {navigationLinks.map((item) => (
+              <a
+                href={item.href}
+                class="transition-colors duration-200 hover:text-accent/70"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold uppercase tracking-[0.3em] text-accent">
+            Redes sociales
+          </h3>
+          <ul class="mt-6 space-y-4 text-sm">
+            {socialLinks.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/70"
+                >
+                  <span class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-accent/30 group-hover:border-accent/60">
+                    <Image src={item.icon} alt={item.name} class="h-4 w-4" loading="lazy" />
+                  </span>
+                  <div class="flex flex-col leading-tight">
+                    <span class="text-xs uppercase tracking-[0.3em] text-accent/60">
+                      {item.name}
+                    </span>
+                    <span>{item.handle}</span>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold uppercase tracking-[0.3em] text-accent">
+            Contacto
+          </h3>
+          <ul class="mt-6 space-y-4 text-sm">
+            {contactLinks.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/70"
+                >
+                  <span class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-accent/30 group-hover:border-accent/60">
+                    <Image src={item.icon} alt={item.label} class="h-4 w-4" loading="lazy" />
+                  </span>
+                  <span>{item.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 h-px w-full bg-accent/20" />
+
+    <p class="mt-6 text-center text-xs uppercase tracking-[0.4em] text-accent/70">
+      © {currentYear} Zensory
     </p>
   </div>
 </footer>
+
+<style>
+  @reference "../styles/global.css";
+</style>
