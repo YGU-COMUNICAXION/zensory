@@ -23,7 +23,7 @@ export function TestimonialCard({
           {age} años
         </span>
       </header>
-      <p className="font-sans text-sm leading-relaxed md:text-lg md:leading-8">
+      <p className="font-sans text-center text-sm leading-relaxed md:text-lg md:leading-8">
         {message}
       </p>
     </article>
