@@ -65,7 +65,7 @@ const topIcons = [
 
 <footer class="border-t border-white bg-primary text-accent font-heading">
   <div class="container mx-auto px-5 py-10 md:px-8 md:py-12 lg:px-10 lg:py-16">
-    <div class="flex flex-wrap items-center justify-center gap-5 sm:gap-7 lg:hidden">
+    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-5 lg:hidden">
       {topIcons.map((item) => (
         <a
           href={item.href}
@@ -95,10 +95,12 @@ const topIcons = [
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/80"
+                  class="group flex items-start gap-3 transition-colors duration-200 hover:text-accent/80"
                 >
                   <item.icon class="h-6 w-6 flex-shrink-0" />
-                  <span class="text-base">{item.handle}</span>
+                  <span class="block min-w-0 text-base font-light underline underline-offset-4 decoration-accent/40 break-words">
+                    {item.handle}
+                  </span>
                 </a>
               </li>
             ))}
@@ -109,10 +111,12 @@ const topIcons = [
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/80"
+                  class="group flex items-start gap-3 transition-colors duration-200 hover:text-accent/80"
                 >
                   <item.icon class="h-6 w-6 flex-shrink-0" />
-                  <span class="text-base">{item.label}</span>
+                  <span class="block min-w-0 text-base font-light underline underline-offset-4 decoration-accent/40 break-words">
+                    {item.label}
+                  </span>
                 </a>
               </li>
             ))}
@@ -128,7 +132,7 @@ const topIcons = [
               <li>
                 <a
                   href={item.href}
-                  class="transition-colors duration-200 hover:text-accent/80"
+                  class="font-light underline underline-offset-4 decoration-accent/40 transition-colors duration-200 hover:text-accent/80"
                 >
                   {item.label}
                 </a>
@@ -156,7 +160,7 @@ const topIcons = [
             {navigationLinks.map((item) => (
               <a
                 href={item.href}
-                class="transition-colors duration-200 hover:text-accent/70"
+                class="font-light underline underline-offset-4 decoration-accent/40 transition-colors duration-200 hover:text-accent/70"
               >
                 {item.label}
               </a>
@@ -175,14 +179,16 @@ const topIcons = [
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/70"
+                  class="group flex items-start gap-3 transition-colors duration-200 hover:text-accent/70"
                 >
                   <item.icon class="h-6 w-6 flex-shrink-0" />
-                  <div class="flex flex-col leading-tight">
+                  <div class="flex min-w-0 flex-col leading-tight">
                     <span class="text-xs uppercase tracking-[0.3em] text-accent/60">
                       {item.name}
                     </span>
-                    <span>{item.handle}</span>
+                    <span class="block min-w-0 font-light underline underline-offset-4 decoration-accent/40 break-words">
+                      {item.handle}
+                    </span>
                   </div>
                 </a>
               </li>
@@ -201,10 +207,12 @@ const topIcons = [
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/70"
+                  class="group flex items-start gap-3 transition-colors duration-200 hover:text-accent/70"
                 >
                   <item.icon class="h-6 w-6 flex-shrink-0" />
-                  <span>{item.label}</span>
+                  <span class="block min-w-0 font-light underline underline-offset-4 decoration-accent/40 break-words">
+                    {item.label}
+                  </span>
                 </a>
               </li>
             ))}
@@ -213,7 +221,7 @@ const topIcons = [
       </div>
     </div>
 
-    <div class="mt-12 h-px w-full bg-accent/20" />
+    <div class="mt-12 hidden h-px w-full bg-accent/20 lg:block" />
 
     <p class="mt-6 text-center text-xs uppercase tracking-[0.4em] text-accent/70">
       © {currentYear} Zensory
