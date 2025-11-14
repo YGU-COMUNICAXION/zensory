@@ -63,9 +63,9 @@ const topIcons = [
 ];
 ---
 
-<footer class="bg-primary text-accent font-heading">
-  <div class="container mx-auto border-t border-white px-5 py-10 md:px-8 md:py-12 lg:px-10 lg:py-16">
-    <div class="flex flex-wrap items-center justify-center gap-5 sm:gap-7">
+<footer class="border-t border-white bg-primary text-accent font-heading">
+  <div class="container mx-auto px-5 py-10 md:px-8 md:py-12 lg:px-10 lg:py-16">
+    <div class="flex flex-wrap items-center justify-center gap-5 sm:gap-7 lg:hidden">
       {topIcons.map((item) => (
         <a
           href={item.href}
