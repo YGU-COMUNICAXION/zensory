@@ -60,6 +60,7 @@ const NAVIGATION = [
               href={item.href}
               class="block w-full py-3 text-center font-heading text-xl font-light leading-none text-white transition-colors duration-200 hover:text-white/80 lg:py-0 lg:text-accent"
               data-nav-link
+              data-scroll-link
             >
               {item.label}
             </a>
@@ -82,6 +83,7 @@ const NAVIGATION = [
     const openIcon = toggle?.querySelector<HTMLImageElement>("[data-menu-icon=\"open\"]");
     const closeIcon = toggle?.querySelector<HTMLImageElement>("[data-menu-icon=\"close\"]");
     const navLinks = document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]");
+    const scrollLinks = document.querySelectorAll<HTMLAnchorElement>("[data-scroll-link]");
 
     if (!header || !menu || !toggle || !openIcon || !closeIcon) {
       return;
@@ -103,6 +105,50 @@ const NAVIGATION = [
     toggle.addEventListener("click", () => {
       const open = header.dataset.menuOpen === "true";
       setMenuState(!open);
+    });
+
+    const handleSmoothScroll = (event: MouseEvent) => {
+      const link = event.currentTarget as HTMLAnchorElement | null;
+      const href = link?.getAttribute("href");
+
+      if (!link || !href) {
+        return;
+      }
+
+      let url: URL;
+
+      try {
+        url = new URL(href, window.location.href);
+      } catch (error) {
+        return;
+      }
+
+      if (url.pathname !== window.location.pathname || !url.hash) {
+        return;
+      }
+
+      const target = document.querySelector<HTMLElement>(url.hash);
+
+      if (!target) {
+        return;
+      }
+
+      event.preventDefault();
+
+      const headerOffset = header?.offsetHeight ?? 0;
+      const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: Math.max(targetPosition, 0),
+        behavior: "smooth",
+      });
+
+      window.history.pushState(null, "", url.hash);
+      updateActiveLink();
+    };
+
+    scrollLinks.forEach((link) => {
+      link.addEventListener("click", handleSmoothScroll);
     });
 
     navLinks.forEach((link) => {
