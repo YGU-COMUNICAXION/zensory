@@ -63,10 +63,8 @@ const topIcons = [
 ];
 ---
 
-<footer
-  class="mt-16 bg-primary text-accent border-t border-accent/30 sm:border-none"
->
-  <div class="mx-auto w-full max-w-6xl px-5 py-10 md:px-8 md:py-12 lg:px-10 lg:py-16">
+<footer class="bg-primary text-accent font-heading">
+  <div class="container mx-auto border-t border-white px-5 py-10 md:px-8 md:py-12 lg:px-10 lg:py-16">
     <div class="flex flex-wrap items-center justify-center gap-5 sm:gap-7">
       {topIcons.map((item) => (
         <a
@@ -100,7 +98,7 @@ const topIcons = [
                   class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/80"
                 >
                   <item.icon class="h-6 w-6 flex-shrink-0" />
-                  <span class="font-sans text-base">{item.handle}</span>
+                  <span class="text-base">{item.handle}</span>
                 </a>
               </li>
             ))}
@@ -114,7 +112,7 @@ const topIcons = [
                   class="group flex items-center gap-3 transition-colors duration-200 hover:text-accent/80"
                 >
                   <item.icon class="h-6 w-6 flex-shrink-0" />
-                  <span class="font-sans text-base">{item.label}</span>
+                  <span class="text-base">{item.label}</span>
                 </a>
               </li>
             ))}
