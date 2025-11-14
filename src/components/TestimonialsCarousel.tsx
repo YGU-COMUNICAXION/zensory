@@ -80,7 +80,7 @@ export function TestimonialsCarousel({
             {testimonials.map((testimonial, index) => (
               <div
                 key={`${testimonial.name}-${index}`}
-                className="flex-shrink-0"
+                className="shrink-0"
                 style={{ flex: `0 0 ${itemWidth}` }}
               >
                 <TestimonialCard {...testimonial} />

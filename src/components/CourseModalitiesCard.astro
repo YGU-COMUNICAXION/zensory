@@ -27,11 +27,19 @@ const normalizedDescription = description.map((item) =>
   typeof item === "string" ? { text: item } : item
 );
 ---
+
 <article
   class={`flex h-full flex-col ${containerClass} bg-accent px-8 py-10 text-primary shadow-[0_10px_40px_-20px_rgba(58,35,59,0.55)]`}
 >
-  <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary">
-    <img src={icon.src} alt={`Ícono de ${title}`} class="h-9 w-9" loading="lazy" />
+  <div
+    class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary"
+  >
+    <img
+      src={icon.src}
+      alt={`Ícono de ${title}`}
+      class="h-9 w-9"
+      loading="lazy"
+    />
   </div>
 
   <h3
@@ -42,39 +50,45 @@ const normalizedDescription = description.map((item) =>
 
   <div class="mt-6 flex w-full flex-1 flex-col items-center">
     <div class="w-4/5">
-      {subtitle && subtitleIcon ? (
-        <>
-          <div class="flex items-center gap-2 text-xs font-medium text-primary">
-            <img
-              src={subtitleIcon.src}
-              alt={`Detalle de ${title}`}
-              class="h-3 w-3"
-              loading="lazy"
-            />
-            <span>{subtitle}</span>
-          </div>
-
-          <hr class="mt-1 w-full border-primary/20" />
-        </>
-      ) : (
-        <hr class="mx-auto mt-1 w-full border-primary/20" />
-      )}
-
-      <div class="mt-5 flex flex-col gap-4 text-base leading-relaxed md:text-lg">
-        {normalizedDescription.map((item) => (
-          <div class={item.icon ? "flex items-start gap-3" : ""}>
-            {item.icon && (
+      {
+        subtitle && subtitleIcon ? (
+          <>
+            <div class="flex items-center gap-2 text-xs font-medium text-primary">
               <img
-                src={item.icon.src}
-                alt=""
-                role="presentation"
-                class="mt-1 h-4 w-4 flex-shrink-0"
+                src={subtitleIcon.src}
+                alt={`Detalle de ${title}`}
+                class="h-3 w-3"
                 loading="lazy"
               />
-            )}
-            <p class={item.icon ? "flex-1" : ""}>{item.text}</p>
-          </div>
-        ))}
+              <span>{subtitle}</span>
+            </div>
+
+            <hr class="mt-1 w-full border-primary/20" />
+          </>
+        ) : (
+          <hr class="mx-auto mt-1 w-full border-primary/20" />
+        )
+      }
+
+      <div
+        class="mt-5 flex flex-col gap-4 text-base leading-relaxed md:text-lg"
+      >
+        {
+          normalizedDescription.map((item) => (
+            <div class={item.icon ? "flex items-start gap-3" : ""}>
+              {item.icon && (
+                <img
+                  src={item.icon.src}
+                  alt=""
+                  role="presentation"
+                  class="mt-1 h-4 w-4 shrink-0"
+                  loading="lazy"
+                />
+              )}
+              <p class={item.icon ? "flex-1" : ""}>{item.text}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </div>
