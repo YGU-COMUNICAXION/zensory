@@ -1,3 +1,5 @@
+import nodemailer from "nodemailer";
+
 // Parámetros fijos para la marca y la plantilla. Ajústalos en el código según tu branding.
 const brandName = "Zensory";
 const brandLogoUrl = "https://placehold.co/600x200?text=Zensory";
@@ -5,6 +7,19 @@ const courseStartText =
   "Tu curso iniciará pronto. Te enviaremos más detalles y accesos en tu correo.";
 const supportEmail = "soporte@zensory.mx";
 const emailFrom = `${brandName} <no-reply@zensory.mx>`;
+
+// Configuración SMTP fija para usar con Nodemailer. Cambia los valores por los de tu servidor.
+const smtpConfig = {
+  host: "smtp.tudominio.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: "usuario@tudominio.com",
+    pass: "tu-contraseña-segura",
+  },
+};
+
+const transporter = nodemailer.createTransport(smtpConfig);
 
 export const buildConfirmationHtml = (purchaseId: string, buyerEmail?: string) => `
   <table width="100%" bgcolor="#0B0B14" style="padding: 32px 0; font-family: 'Helvetica Neue', Arial, sans-serif; color: #ffffff;">
@@ -49,28 +64,17 @@ export const sendConfirmationEmail = async (
   purchaseId: string,
   buyerEmail?: string,
 ) => {
-  const apiKey = "YOUR_RESEND_API_KEY"; // Sustituye con la clave de Resend que quieras usar
-  if (!apiKey || apiKey.startsWith("YOUR_")) return false;
-
   try {
     const html = buildConfirmationHtml(purchaseId, buyerEmail);
-    const payload = {
+
+    const info = await transporter.sendMail({
       from: emailFrom,
-      to: [email],
+      to: email,
       subject: `${brandName} · Confirmación de tu compra`,
       html,
-    } satisfies Record<string, unknown>;
-
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
     });
 
-    return response.ok;
+    return Boolean(info.accepted?.length);
   } catch (error) {
     console.error("No se pudo enviar el correo de confirmación", error);
     return false;
