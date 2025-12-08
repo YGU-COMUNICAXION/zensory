@@ -4,6 +4,10 @@ import { sendConfirmationEmail } from "../../lib/email";
 
 export const prerender = false;
 
+// Configura este secreto con el valor que Stripe te da al crear el endpoint de webhook.
+// No depende de variables de entorno para mantener el flujo simple.
+const STRIPE_WEBHOOK_SECRET = "whsec_xxx"; // Reemplaza con tu clave real
+
 const verifyStripeSignature = (payload: string, signature: string, secret: string) => {
   const parts = signature.split(",").reduce<Record<string, string>>((acc, part) => {
     const [key, value] = part.split("=");
@@ -28,16 +32,11 @@ const verifyStripeSignature = (payload: string, signature: string, secret: strin
 };
 
 export const POST: APIRoute = async ({ request }) => {
-  const secret = import.meta.env.STRIPE_WEBHOOK_SECRET;
-  if (!secret) {
-    return new Response("Stripe webhook no configurado", { status: 500 });
-  }
-
   const signature = request.headers.get("stripe-signature");
   const rawBody = await request.arrayBuffer();
   const payload = new TextDecoder().decode(rawBody);
 
-  if (!signature || !verifyStripeSignature(payload, signature, secret)) {
+  if (!signature || !verifyStripeSignature(payload, signature, STRIPE_WEBHOOK_SECRET)) {
     return new Response("Firma inválida", { status: 400 });
   }
 

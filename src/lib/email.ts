@@ -1,17 +1,10 @@
-const brandName = import.meta.env.BRAND_NAME || "Zensory";
-const brandLogoUrl = import.meta.env.BRAND_LOGO_URL || "https://placehold.co/600x200?text=Zensory";
-const courseStartText = import.meta.env.COURSE_START_TEXT || "Tu curso iniciará pronto. Te enviaremos más detalles en tu correo.";
-const supportEmail = import.meta.env.SUPPORT_EMAIL || "soporte@ejemplo.com";
-
-const getFromDomain = () => {
-  try {
-    return new URL(brandLogoUrl).hostname || "example.com";
-  } catch {
-    return "example.com";
-  }
-};
-
-export const emailFrom = import.meta.env.EMAIL_FROM || `${brandName} <no-reply@${getFromDomain()}>`;
+// Parámetros fijos para la marca y la plantilla. Ajústalos en el código según tu branding.
+const brandName = "Zensory";
+const brandLogoUrl = "https://placehold.co/600x200?text=Zensory";
+const courseStartText =
+  "Tu curso iniciará pronto. Te enviaremos más detalles y accesos en tu correo.";
+const supportEmail = "soporte@zensory.mx";
+const emailFrom = `${brandName} <no-reply@zensory.mx>`;
 
 export const buildConfirmationHtml = (purchaseId: string, buyerEmail?: string) => `
   <table width="100%" bgcolor="#0B0B14" style="padding: 32px 0; font-family: 'Helvetica Neue', Arial, sans-serif; color: #ffffff;">
@@ -56,8 +49,8 @@ export const sendConfirmationEmail = async (
   purchaseId: string,
   buyerEmail?: string,
 ) => {
-  const apiKey = import.meta.env.RESEND_API_KEY;
-  if (!apiKey) return false;
+  const apiKey = "YOUR_RESEND_API_KEY"; // Sustituye con la clave de Resend que quieras usar
+  if (!apiKey || apiKey.startsWith("YOUR_")) return false;
 
   try {
     const html = buildConfirmationHtml(purchaseId, buyerEmail);
