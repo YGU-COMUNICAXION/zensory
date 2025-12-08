@@ -1,43 +1,35 @@
-# Astro Starter Kit: Minimal
+# Zensory
 
-```sh
-npm create astro@latest -- --template minimal
+Landing page de Astro para el curso de manifestación con sonido. Incluye una sección de compra integrada con Stripe Checkout y envíos de correo de confirmación mediante el webhook.
+
+## Requisitos
+
+- Node.js 18+
+- Cuenta de Stripe con un Price ID configurado
+- Clave de Resend (u otro proveedor SMTP compatible con la API HTTP de Resend)
+
+## Variables de entorno
+
+Crea un archivo `.env` en la raíz del proyecto con las claves necesarias:
+
+```bash
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_PRICE_ID=price_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+RESEND_API_KEY=re_xxx
+EMAIL_FROM="Zensory <no-reply@zensory.com>"
+PUBLIC_STRIPE_PRICE_ID=price_... # opcional para mostrar en el formulario
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- `STRIPE_PRICE_ID` es el plan por defecto usado si el cliente no envía otro.
+- `STRIPE_WEBHOOK_SECRET` se obtiene al registrar el webhook de `checkout.session.completed` en Stripe apuntando a `/api/stripe-webhook`.
+- `RESEND_API_KEY` habilita el envío del correo de confirmación; si se omite, el webhook no intentará mandar email.
 
-## 🚀 Project Structure
+## Desarrollo
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+npm install
+npm run dev
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+La sección de compra se renderiza en la página principal (`src/pages/index.astro`) y apunta al endpoint `/api/checkout`. Las páginas `/compra-exitosa` y `/compra-cancelada` sirven como redirecciones de éxito y cancelación.

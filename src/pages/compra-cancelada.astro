@@ -1,0 +1,35 @@
+---
+import Layout from "../layout/Layout.astro";
+---
+
+<Layout>
+  <section class="bg-primary text-accent">
+    <div class="container mx-auto px-4 py-20 text-center md:py-28">
+      <p class="font-heading text-sm uppercase tracking-[0.2em] text-accent/70">
+        Pago cancelado
+      </p>
+      <h1 class="mt-4 font-heading text-4xl font-extrabold italic md:text-5xl">
+        Tu pago fue cancelado
+      </h1>
+      <p class="mt-6 text-lg font-light md:text-xl">
+        Si fue un error, puedes intentarlo de nuevo cuando lo desees. Tus datos siguen seguros y
+        no se realizó ningún cargo.
+      </p>
+
+      <div class="mt-12 flex flex-col items-center gap-4 md:flex-row md:justify-center">
+        <a
+          href="#compra"
+          class="rounded-full bg-accent px-6 py-3 font-heading text-sm font-semibold uppercase tracking-wide text-primary transition hover:bg-accent/90"
+        >
+          Reintentar pago
+        </a>
+        <a
+          href="#contacto"
+          class="font-heading text-sm font-semibold uppercase tracking-wide underline decoration-2 underline-offset-8"
+        >
+          Ir a contacto
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

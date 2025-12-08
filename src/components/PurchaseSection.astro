@@ -1,0 +1,161 @@
+---
+interface Props {
+  id?: string;
+}
+
+const { id = "compra" }: Props = Astro.props;
+
+const purchaseOptions = [
+  {
+    id: import.meta.env.PUBLIC_STRIPE_PRICE_ID || "price_placeholder",
+    title: "Acceso completo al curso",
+    description:
+      "Obtén el programa completo de manifestación con sonido con acceso inmediato y actualizaciones futuras.",
+    priceLabel: "$2,997 MXN",
+  },
+];
+---
+
+<section id={id} class="bg-primary text-accent">
+  <div class="container mx-auto px-4 py-16 md:py-24 lg:py-28">
+    <div class="grid gap-12 md:grid-cols-[minmax(0,420px)_1fr] md:items-start md:gap-16 lg:gap-20">
+      <div class="space-y-6 md:pr-8 lg:pr-12">
+        <p class="font-heading text-sm uppercase tracking-[0.2em] text-accent/70">
+          Compra segura
+        </p>
+        <h2 class="font-heading text-4xl font-extrabold italic leading-tight md:text-5xl">
+          Inscríbete al curso y recibe tu confirmación al instante
+        </h2>
+        <p class="max-w-xl text-lg font-light md:text-xl">
+          Completa tus datos, realiza el pago con Stripe y recibe un correo con tu
+          comprobante e identificador de compra. Todo en minutos.
+        </p>
+        <div class="rounded-lg bg-accent/10 px-4 py-3 text-sm text-accent/80 md:text-base">
+          <p class="font-semibold text-accent">¿Qué incluye tu pago?</p>
+          <ul class="mt-2 list-disc space-y-1 pl-5">
+            <li>Acceso al curso completo y sus actualizaciones.</li>
+            <li>Soporte por correo para dudas de acceso.</li>
+            <li>Comprobante con identificador único de compra.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white p-6 shadow-xl md:p-8">
+        <form id="purchase-form" class="space-y-6 font-light">
+          <div class="space-y-2">
+            <label for="name" class="block text-base text-primary">Nombre completo</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              class="w-full border-0 border-b border-primary/40 bg-transparent pb-3 text-lg text-primary placeholder:text-primary/60 focus:border-primary focus:outline-none"
+              placeholder="Tu nombre"
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label for="email" class="block text-base text-primary">Correo</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              class="w-full border-0 border-b border-primary/40 bg-transparent pb-3 text-lg text-primary placeholder:text-primary/60 focus:border-primary focus:outline-none"
+              placeholder="tucorreo@email.com"
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label for="plan" class="block text-base text-primary">Plan</label>
+            <select
+              id="plan"
+              name="plan"
+              required
+              class="w-full border border-primary/30 bg-transparent px-3 py-3 text-lg text-primary focus:border-primary focus:outline-none"
+            >
+              {purchaseOptions.map((option) => (
+                <option value={option.id}>
+                  {option.title} ({option.priceLabel})
+                </option>
+              ))}
+            </select>
+            <p class="text-sm text-primary/70">Precio procesado en Stripe en moneda MXN.</p>
+          </div>
+
+          <div class="space-y-2">
+            <button
+              type="submit"
+              class="w-full bg-primary py-3 text-center font-heading text-lg font-semibold uppercase tracking-wide text-accent transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              Proceder al pago seguro
+            </button>
+            <p id="purchase-message" class="min-h-[1.5rem] text-sm font-medium"></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("purchase-form");
+  const message = document.getElementById("purchase-message");
+  const submitButton = form?.querySelector("button[type='submit']");
+
+  const setMessage = (text, type = "info") => {
+    if (!message) return;
+    const colors = {
+      info: "text-primary",
+      success: "text-green-700",
+      error: "text-red-700",
+    };
+    message.textContent = text;
+    message.className = `${colors[type]} text-sm font-medium`;
+  };
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!form) return;
+
+    const formData = new FormData(form);
+    const payload = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      priceId: formData.get("plan"),
+    };
+
+    setMessage("Creando sesión de pago segura...", "info");
+    if (submitButton) submitButton.disabled = true;
+
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "No se pudo iniciar el pago");
+      }
+
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error("No se recibió la URL de pago");
+      }
+    } catch (error) {
+      console.error(error);
+      setMessage(
+        "No pudimos iniciar el pago. Intenta de nuevo o escríbenos por contacto.",
+        "error",
+      );
+      if (submitButton) submitButton.disabled = false;
+    }
+  });
+</script>
