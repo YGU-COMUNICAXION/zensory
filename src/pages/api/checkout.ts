@@ -4,7 +4,7 @@ export const prerender = false;
 
 // Precio fijo configurado directamente en el código. Ajusta este ID con el Price
 // creado en tu cuenta de Stripe.
-const FIXED_PRICE_ID = "price_12345"; // TODO: reemplaza con tu Price ID real
+const FIXED_PRICE_ID = "price_1Sc9jU2SrCRvBA2aLlNlROYz"; // TODO: reemplaza con tu Price ID real
 
 export const POST: APIRoute = async ({ request, url }) => {
   const secretKey = import.meta.env.STRIPE_SECRET_KEY;
