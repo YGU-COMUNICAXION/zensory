@@ -16,14 +16,20 @@ export const POST: APIRoute = async ({ request, url }) => {
   const body = await request.json().catch(() => null) as {
     name?: string;
     email?: string;
-    priceId?: string;
   } | null;
 
   if (!body?.email) {
     return new Response("Falta el correo del comprador", { status: 400 });
   }
 
-  const priceId = body.priceId || FIXED_PRICE_ID;
+  if (!FIXED_PRICE_ID || FIXED_PRICE_ID.includes("12345") || !FIXED_PRICE_ID.startsWith("price_")) {
+    return new Response(
+      "Configura el FIXED_PRICE_ID con el Price ID real de Stripe en src/pages/api/checkout.ts",
+      { status: 500 },
+    );
+  }
+
+  const priceId = FIXED_PRICE_ID;
 
   const successUrl = new URL("/compra-exitosa", url).toString();
   const cancelUrl = new URL("/compra-cancelada", url).toString();
@@ -50,7 +56,18 @@ export const POST: APIRoute = async ({ request, url }) => {
     if (!response.ok) {
       const errorText = await response.text();
       console.error("Stripe Checkout error", errorText);
-      return new Response("No se pudo iniciar el pago", { status: 500 });
+
+      let message = "No se pudo iniciar el pago. Verifica el Price ID y que coincida el modo (test o live) con tu clave.";
+      try {
+        const parsed = JSON.parse(errorText) as { error?: { message?: string } };
+        if (parsed?.error?.message) {
+          message = parsed.error.message;
+        }
+      } catch {
+        // Si no es JSON, deja el mensaje genérico.
+      }
+
+      return new Response(message, { status: 500 });
     }
 
     const session = (await response.json()) as { url?: string };

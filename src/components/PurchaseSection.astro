@@ -127,7 +127,6 @@ const purchaseOptions = [
     const payload = {
       name: formData.get("name"),
       email: formData.get("email"),
-      priceId: formData.get("plan"),
     };
 
     setMessage("Creando sesión de pago segura...", "info");
@@ -142,23 +141,25 @@ const purchaseOptions = [
         body: JSON.stringify(payload),
       });
 
+      const responseText = await response.text();
+
       if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || "No se pudo iniciar el pago");
+        throw new Error(responseText || "No se pudo iniciar el pago");
       }
 
-      const data = await response.json();
-      if (data.url) {
+      const data = responseText ? JSON.parse(responseText) : null;
+
+      if (data?.url) {
         window.location.href = data.url;
       } else {
         throw new Error("No se recibió la URL de pago");
       }
     } catch (error) {
       console.error(error);
-      setMessage(
-        "No pudimos iniciar el pago. Intenta de nuevo o escríbenos por contacto.",
-        "error",
-      );
+      const text =
+        (error instanceof Error && error.message) ||
+        "No pudimos iniciar el pago. Intenta de nuevo o escríbenos por contacto.";
+      setMessage(text, "error");
       if (submitButton) submitButton.disabled = false;
     }
   });
