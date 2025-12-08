@@ -2,47 +2,55 @@
 import Layout from "../layout/Layout.astro";
 ---
 
-  <Layout>
-  <section class="bg-primary text-accent">
-    <div class="container mx-auto px-4 py-20 text-center md:py-28">
-      <p class="font-heading text-sm uppercase tracking-[0.2em] text-accent/70">
-        Pago completado
-      </p>
-      <h1 class="mt-4 font-heading text-4xl font-extrabold italic md:text-5xl">
-        ¡Gracias por tu compra!
-      </h1>
-      <p class="mt-6 text-lg font-light md:text-xl">
-        Hemos procesado tu pago de forma segura. En breve recibirás un correo de confirmación
-        con tu identificador de compra para cualquier seguimiento.
-      </p>
+<Layout>
+  <section class="bg-primary text-accent min-h-screen">
+    <div class="container mx-auto flex min-h-screen flex-col px-4 py-16 text-center sm:py-20">
+      <div class="flex flex-1 flex-col items-center justify-center">
+        <p class="font-heading text-sm uppercase tracking-[0.2em] text-accent/70">
+          Pago completado
+        </p>
+        <h1 class="mt-4 font-heading text-4xl font-extrabold italic md:text-5xl">
+          ¡Gracias por tu compra!
+        </h1>
+        <p class="mt-6 text-lg font-light md:text-xl max-w-3xl">
+          Hemos procesado tu pago de forma segura. En pocos minutos recibirás un correo con los detalles y tu identificador de compra. Si no llega, puedes reenviarlo manualmente desde aquí.
+        </p>
 
-      {(() => {
-        const purchaseId = Astro.url.searchParams.get("session_id");
-        if (!purchaseId) return null;
+        {(() => {
+          const purchaseId = Astro.url.searchParams.get("session_id");
+          if (!purchaseId) return null;
 
-        return (
-          <div class="mx-auto mt-10 max-w-2xl rounded-lg bg-accent/10 px-6 py-5 text-left text-accent">
-            <p class="text-sm uppercase tracking-[0.2em] text-accent/60">Identificador de compra</p>
-            <p class="mt-2 text-lg font-semibold text-accent">{purchaseId}</p>
-            <p class="mt-1 text-sm text-accent/80">
-              Guárdalo para cualquier consulta o referencia con nuestro equipo.
-            </p>
-            <p id="email-status" class="mt-3 text-sm text-accent/80"></p>
-          </div>
-        );
-      })()}
+          return (
+            <div class="mx-auto mt-10 max-w-2xl rounded-lg bg-accent/10 px-6 py-5 text-left text-accent">
+              <p class="text-sm uppercase tracking-[0.2em] text-accent/60">Identificador de compra</p>
+              <p class="mt-2 text-lg font-semibold text-accent">{purchaseId}</p>
+              <p class="mt-1 text-sm text-accent/80">
+                Guárdalo para cualquier consulta o referencia con nuestro equipo.
+              </p>
+              <p id="email-status" class="mt-3 text-sm text-accent/80"></p>
+              <button
+                id="resend-email"
+                class="mt-4 inline-flex items-center justify-center rounded bg-accent px-4 py-2 font-semibold text-primary transition hover:opacity-90"
+              >
+                Reenviar comprobante por correo
+              </button>
+            </div>
+          );
+        })()}
 
-      <a
-        href="/"
-        class="mt-12 inline-block font-heading text-lg font-semibold uppercase tracking-wide underline decoration-2 underline-offset-8"
-      >
-        Volver al inicio
-      </a>
+        <a
+          href="/"
+          class="mt-12 inline-block font-heading text-lg font-semibold uppercase tracking-wide underline decoration-2 underline-offset-8"
+        >
+          Volver al inicio
+        </a>
+      </div>
     </div>
   </section>
 
   <script>
     const statusLabel = document.getElementById("email-status");
+    const resendBtn = document.getElementById("resend-email");
     const params = new URLSearchParams(window.location.search);
     const sessionId = params.get("session_id");
 
@@ -53,7 +61,8 @@ import Layout from "../layout/Layout.astro";
 
     const triggerEmail = async () => {
       if (!sessionId) return;
-      setStatus("Enviando comprobante por correo...");
+      setStatus("Verificando pago y enviando correo...");
+      resendBtn?.setAttribute("disabled", "true");
 
       try {
         const response = await fetch("/api/confirmacion", {
@@ -68,16 +77,20 @@ import Layout from "../layout/Layout.astro";
 
         const data = await response.json();
         if (data.emailSent) {
-          setStatus("Correo de confirmación enviado.");
+          setStatus("Correo de confirmación reenviado. Revisa tu bandeja.");
         } else {
-          setStatus("Pago confirmado. Configura tu API de correo para enviar el comprobante automáticamente.");
+          setStatus("Pago confirmado. Configura la API de correo para enviar el comprobante automáticamente.");
         }
       } catch (error) {
         console.error(error);
         setStatus("No pudimos enviar el correo de confirmación. Contáctanos si necesitas ayuda.");
+      } finally {
+        resendBtn?.removeAttribute("disabled");
       }
     };
 
-    triggerEmail();
+    if (resendBtn) {
+      resendBtn.addEventListener("click", triggerEmail);
+    }
   </script>
 </Layout>
