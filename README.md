@@ -1,12 +1,12 @@
 # Zensory
 
-Landing page de Astro para el curso de manifestación con sonido. Incluye una sección de compra integrada con Stripe Checkout y envíos de correo de confirmación mediante el webhook.
+Landing page de Astro para el curso de manifestación con sonido. Incluye una sección de compra integrada con Stripe Checkout y envíos de correo de confirmación posteriores al pago.
 
 ## Requisitos
 
 - Node.js 18+
 - Cuenta de Stripe con un Price ID configurado
-- Clave de Resend (u otro proveedor SMTP compatible con la API HTTP de Resend)
+- Clave de Resend (u otro proveedor SMTP compatible con la API HTTP de Resend) si deseas que el correo se envíe automáticamente
 
 ## Variables de entorno
 
@@ -14,16 +14,15 @@ Crea un archivo `.env` en la raíz del proyecto con las claves necesarias:
 
 ```bash
 STRIPE_SECRET_KEY=sk_test_...
-STRIPE_PRICE_ID=price_...
-STRIPE_WEBHOOK_SECRET=whsec_...
+STRIPE_PUBLIC_KEY=pk_test_... # sólo se usa en el cliente si quieres exponerlo
+
+# Correo (opcional pero recomendado)
 RESEND_API_KEY=re_xxx
 EMAIL_FROM="Zensory <no-reply@zensory.com>"
-PUBLIC_STRIPE_PRICE_ID=price_... # opcional para mostrar en el formulario
 ```
 
-- `STRIPE_PRICE_ID` es el plan por defecto usado si el cliente no envía otro.
-- `STRIPE_WEBHOOK_SECRET` se obtiene al registrar el webhook de `checkout.session.completed` en Stripe apuntando a `/api/stripe-webhook`.
-- `RESEND_API_KEY` habilita el envío del correo de confirmación; si se omite, el webhook no intentará mandar email.
+- El Price ID del plan está incrustado en el código. Actualízalo en `src/components/PurchaseSection.astro` y `src/pages/api/checkout.ts` (constante `FIXED_PRICE_ID`).
+- `RESEND_API_KEY` habilita el envío del correo de confirmación; si se omite, el pago funcionará y la página de éxito mostrará un mensaje indicando que falta configurar el proveedor de correo.
 
 ## Desarrollo
 
@@ -33,3 +32,9 @@ npm run dev
 ```
 
 La sección de compra se renderiza en la página principal (`src/pages/index.astro`) y apunta al endpoint `/api/checkout`. Las páginas `/compra-exitosa` y `/compra-cancelada` sirven como redirecciones de éxito y cancelación.
+
+### Flujo de correo de confirmación
+1. Stripe redirige a `/compra-exitosa?session_id=...` tras un pago completado.
+2. Esa página llama al endpoint `/api/confirmacion` enviando el `session_id`.
+3. El endpoint valida la sesión con la clave secreta de Stripe y, si el pago está en estado `paid`, envía el correo a la dirección del comprador usando Resend (configurado con `RESEND_API_KEY` y `EMAIL_FROM`).
+4. Si no configuras Resend, el pago sigue siendo válido y la página muestra que falta configurar el proveedor de correo para el envío automático.

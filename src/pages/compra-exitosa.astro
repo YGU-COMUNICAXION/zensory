@@ -2,7 +2,7 @@
 import Layout from "../layout/Layout.astro";
 ---
 
-<Layout>
+  <Layout>
   <section class="bg-primary text-accent">
     <div class="container mx-auto px-4 py-20 text-center md:py-28">
       <p class="font-heading text-sm uppercase tracking-[0.2em] text-accent/70">
@@ -27,6 +27,7 @@ import Layout from "../layout/Layout.astro";
             <p class="mt-1 text-sm text-accent/80">
               Guárdalo para cualquier consulta o referencia con nuestro equipo.
             </p>
+            <p id="email-status" class="mt-3 text-sm text-accent/80"></p>
           </div>
         );
       })()}
@@ -39,4 +40,44 @@ import Layout from "../layout/Layout.astro";
       </a>
     </div>
   </section>
+
+  <script>
+    const statusLabel = document.getElementById("email-status");
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get("session_id");
+
+    const setStatus = (text) => {
+      if (!statusLabel) return;
+      statusLabel.textContent = text;
+    };
+
+    const triggerEmail = async () => {
+      if (!sessionId) return;
+      setStatus("Enviando comprobante por correo...");
+
+      try {
+        const response = await fetch("/api/confirmacion", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionId }),
+        });
+
+        if (!response.ok) {
+          throw new Error(await response.text());
+        }
+
+        const data = await response.json();
+        if (data.emailSent) {
+          setStatus("Correo de confirmación enviado.");
+        } else {
+          setStatus("Pago confirmado. Configura tu API de correo para enviar el comprobante automáticamente.");
+        }
+      } catch (error) {
+        console.error(error);
+        setStatus("No pudimos enviar el correo de confirmación. Contáctanos si necesitas ayuda.");
+      }
+    };
+
+    triggerEmail();
+  </script>
 </Layout>

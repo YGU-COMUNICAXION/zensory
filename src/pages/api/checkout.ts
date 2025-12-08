@@ -2,9 +2,12 @@ import type { APIRoute } from "astro";
 
 export const prerender = false;
 
+// Precio fijo configurado directamente en el código. Ajusta este ID con el Price
+// creado en tu cuenta de Stripe.
+const FIXED_PRICE_ID = "price_12345"; // TODO: reemplaza con tu Price ID real
+
 export const POST: APIRoute = async ({ request, url }) => {
   const secretKey = import.meta.env.STRIPE_SECRET_KEY;
-  const defaultPriceId = import.meta.env.STRIPE_PRICE_ID;
 
   if (!secretKey) {
     return new Response("Stripe no está configurado", { status: 500 });
@@ -20,10 +23,7 @@ export const POST: APIRoute = async ({ request, url }) => {
     return new Response("Falta el correo del comprador", { status: 400 });
   }
 
-  const priceId = body.priceId || defaultPriceId;
-  if (!priceId) {
-    return new Response("No se encontró el plan de pago", { status: 400 });
-  }
+  const priceId = body.priceId || FIXED_PRICE_ID;
 
   const successUrl = new URL("/compra-exitosa", url).toString();
   const cancelUrl = new URL("/compra-cancelada", url).toString();
