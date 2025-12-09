@@ -5,7 +5,7 @@ export const prerender = false;
 // Precio fijo configurado directamente en el código. Ajusta este ID con el Price
 // creado en tu cuenta de Stripe. Debe existir en el mismo modo (test/live) que
 // la clave secreta que uses.
-const FIXED_PLAN = {
+const FIXED_PRICE = {
   id: "price_12345", // TODO: reemplaza con tu Price ID real
   title: "Acceso completo al curso",
   priceLabel: "$4,444 MXN",
@@ -21,25 +21,20 @@ export const POST: APIRoute = async ({ request, url }) => {
   const body = await request.json().catch(() => null) as {
     name?: string;
     email?: string;
-    plan?: string;
   } | null;
 
   if (!body?.email) {
     return new Response("Falta el correo del comprador", { status: 400 });
   }
 
-  if (!FIXED_PLAN.id || FIXED_PLAN.id.includes("12345") || !FIXED_PLAN.id.startsWith("price_")) {
+  if (!FIXED_PRICE.id || FIXED_PRICE.id.includes("12345") || !FIXED_PRICE.id.startsWith("price_")) {
     return new Response(
       "Configura el Price ID real de Stripe en src/pages/api/checkout.ts",
       { status: 500 },
     );
   }
 
-  if (body?.plan && body.plan !== FIXED_PLAN.id) {
-    return new Response("El plan seleccionado no es válido", { status: 400 });
-  }
-
-  const priceId = FIXED_PLAN.id;
+  const priceId = FIXED_PRICE.id;
 
   const successUrl = new URL("/compra-exitosa", url).toString();
   const cancelUrl = new URL("/compra-cancelada", url).toString();
@@ -50,8 +45,8 @@ export const POST: APIRoute = async ({ request, url }) => {
     params.set("customer_email", body.email);
     params.set("metadata[buyer_name]", body.name || "");
     params.set("metadata[buyer_email]", body.email || "");
-    params.set("metadata[plan_title]", FIXED_PLAN.title);
-    params.set("metadata[plan_price_label]", FIXED_PLAN.priceLabel);
+    params.set("metadata[course_title]", FIXED_PRICE.title);
+    params.set("metadata[price_label]", FIXED_PRICE.priceLabel);
     params.set("line_items[0][price]", priceId);
     params.set("line_items[0][quantity]", "1");
     params.set("success_url", `${successUrl}?session_id={CHECKOUT_SESSION_ID}`);

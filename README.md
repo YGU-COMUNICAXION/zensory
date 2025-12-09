@@ -17,7 +17,7 @@ STRIPE_SECRET_KEY=sk_test_...
 STRIPE_PUBLIC_KEY=pk_test_... # sólo se usa en el cliente si quieres exponerlo
 ```
 
-- El Price ID del plan está incrustado en el código. Actualízalo en `src/components/PurchaseSection.astro` y `src/pages/api/checkout.ts` (constante `FIXED_PRICE_ID`). El ID debe existir en el mismo modo (test o live) que la clave secreta de Stripe; si usas un Price de modo live con una clave de prueba (o viceversa) Stripe responderá `No such price`.
+- El Price ID está incrustado en el código. Actualízalo en `src/components/PurchaseSection.astro` y `src/pages/api/checkout.ts` (propiedad `id` de `FIXED_PRICE`). El ID debe existir en el mismo modo (test o live) que la clave secreta de Stripe; si usas un Price de modo live con una clave de prueba (o viceversa) Stripe responderá `No such price`.
 - La configuración SMTP para Nodemailer está fija en `src/lib/email.ts`. Trae un ejemplo listo para Gmail con contraseña de aplicación (host `smtp.gmail.com`, puerto 465, `secure: true`). Sustituye `user` y `pass` por tu correo de Gmail y la contraseña de aplicación de 16 dígitos.
 
 ## Desarrollo
