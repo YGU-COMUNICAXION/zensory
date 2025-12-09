@@ -25,7 +25,12 @@ const smtpConfig = {
 
 const transporter = nodemailer.createTransport(smtpConfig);
 
-export const buildConfirmationHtml = (purchaseId: string, buyerEmail?: string) => `
+export const buildConfirmationHtml = (
+  purchaseId: string,
+  buyerEmail?: string,
+  buyerName?: string,
+  amountLabel?: string,
+) => `
   <table width="100%" bgcolor="#0B0B14" style="padding: 32px 0; font-family: 'Helvetica Neue', Arial, sans-serif; color: #ffffff;">
     <tr>
       <td align="center">
@@ -38,7 +43,7 @@ export const buildConfirmationHtml = (purchaseId: string, buyerEmail?: string) =
           </tr>
           <tr>
             <td style="padding: 32px;">
-              <p style="margin: 0 0 16px; font-size: 16px; color: #E5E7EB;">Gracias por tu compra. Hemos registrado tu pago de forma segura.</p>
+              <p style="margin: 0 0 16px; font-size: 16px; color: #E5E7EB;">${buyerName ? `Hola ${buyerName}, ` : ""}gracias por tu compra. Hemos registrado tu pago de forma segura.</p>
               <p style="margin: 0 0 16px; font-size: 16px; color: #E5E7EB;">${courseStartText}</p>
               <table width="100%" cellpadding="0" cellspacing="0" style="margin: 24px 0; background: #1F2937; border-radius: 10px; padding: 16px;">
                 <tr>
@@ -48,6 +53,8 @@ export const buildConfirmationHtml = (purchaseId: string, buyerEmail?: string) =
                   <td style="font-size: 18px; font-weight: 700; color: #F3F4F6; padding-top: 8px;">${purchaseId}</td>
                 </tr>
                 ${buyerEmail ? `<tr><td style="padding-top: 12px; font-size: 14px; color: #D1D5DB;">Correo: ${buyerEmail}</td></tr>` : ""}
+                ${buyerName ? `<tr><td style="padding-top: 4px; font-size: 14px; color: #D1D5DB;">Nombre: ${buyerName}</td></tr>` : ""}
+                ${amountLabel ? `<tr><td style="padding-top: 4px; font-size: 14px; color: #D1D5DB;">Monto: ${amountLabel}</td></tr>` : ""}
               </table>
               <p style="margin: 0 0 12px; font-size: 14px; color: #D1D5DB;">Guarda este identificador para cualquier consulta. Si tienes dudas, responde a este correo o escríbenos a <a href="mailto:${supportEmail}" style="color: #C084FC;">${supportEmail}</a>.</p>
             </td>
@@ -67,9 +74,19 @@ export const sendConfirmationEmail = async (
   email: string,
   purchaseId: string,
   buyerEmail?: string,
+  buyerName?: string,
+  amountLabel?: string,
 ) => {
   try {
-    const html = buildConfirmationHtml(purchaseId, buyerEmail);
+    console.log("[correo] Preparando correo de confirmación", {
+      to: email,
+      purchaseId,
+      buyerEmail,
+      buyerName,
+      amountLabel,
+    });
+
+    const html = buildConfirmationHtml(purchaseId, buyerEmail, buyerName, amountLabel);
 
     const info = await transporter.sendMail({
       from: emailFrom,
@@ -78,7 +95,10 @@ export const sendConfirmationEmail = async (
       html,
     });
 
-    return Boolean(info.accepted?.length);
+    const accepted = Boolean(info.accepted?.length);
+    console.log("[correo] Resultado del envío", { accepted, messageId: info.messageId });
+
+    return accepted;
   } catch (error) {
     console.error("No se pudo enviar el correo de confirmación", error);
     return false;
