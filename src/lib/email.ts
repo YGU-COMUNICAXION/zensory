@@ -19,7 +19,7 @@ const smtpConfig = {
   secure: true,
   auth: {
     user: "fenixfuego100@gmail.com",
-    pass: "ltjg tytv yxnh oche",
+    pass: "",
   },
 };
 
