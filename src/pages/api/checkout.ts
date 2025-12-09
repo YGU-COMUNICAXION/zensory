@@ -8,7 +8,7 @@ export const prerender = false;
 const FIXED_PLAN = {
   id: "price_12345", // TODO: reemplaza con tu Price ID real
   title: "Acceso completo al curso",
-  priceLabel: "$2,997 MXN",
+  priceLabel: "$4,444 MXN",
 };
 
 export const POST: APIRoute = async ({ request, url }) => {
