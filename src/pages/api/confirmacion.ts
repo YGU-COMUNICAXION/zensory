@@ -43,24 +43,33 @@ export const POST: APIRoute = async ({ request }) => {
       };
     };
 
-    const email = session.customer_details?.email || session.customer_email;
     const purchaseId = session.id;
     const buyerName = session.metadata?.buyer_name || undefined;
+    const buyerEmail = session.metadata?.buyer_email || undefined;
     const amountLabel = session.metadata?.price_label || undefined;
+    const recipientEmail =
+      buyerEmail || session.customer_details?.email || session.customer_email;
 
-    if (session.payment_status !== "paid" || !email || !purchaseId) {
+    if (session.payment_status !== "paid" || !recipientEmail || !purchaseId) {
       return new Response("La compra no está confirmada", { status: 400 });
     }
 
     console.log("[confirmacion] Sesión pagada validada", {
       purchaseId,
-      email,
+      recipientEmail,
+      buyerEmail,
       buyerName,
       amountLabel,
     });
 
-    const sent = await sendConfirmationEmail(email, purchaseId, email, buyerName, amountLabel);
-    console.log("[confirmacion] Correo disparado", { purchaseId, email, sent });
+    const sent = await sendConfirmationEmail(
+      recipientEmail,
+      purchaseId,
+      buyerEmail,
+      buyerName,
+      amountLabel,
+    );
+    console.log("[confirmacion] Correo disparado", { purchaseId, recipientEmail, sent });
 
     return new Response(JSON.stringify({ emailSent: sent }), {
       status: 200,
