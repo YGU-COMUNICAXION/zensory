@@ -17,6 +17,9 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   try {
+    const debugLog: Array<Record<string, unknown>> = [];
+    debugLog.push({ step: "start", sessionId });
+
     const stripeResponse = await fetch(`https://api.stripe.com/v1/checkout/sessions/${sessionId}`, {
       method: "GET",
       headers: {
@@ -27,7 +30,11 @@ export const POST: APIRoute = async ({ request }) => {
     if (!stripeResponse.ok) {
       const errorText = await stripeResponse.text();
       console.error("Stripe session fetch error", errorText);
-      return new Response("No se pudo validar la compra", { status: 400 });
+      debugLog.push({ step: "stripe_fetch_failed", status: stripeResponse.status, errorText });
+      return new Response(
+        JSON.stringify({ message: "No se pudo validar la compra", debugLog }),
+        { status: 400, headers: { "Content-Type": "application/json" } },
+      );
     }
 
     const session = (await stripeResponse.json()) as {
@@ -50,8 +57,24 @@ export const POST: APIRoute = async ({ request }) => {
     const recipientEmail =
       buyerEmail || session.customer_details?.email || session.customer_email;
 
+    debugLog.push({
+      step: "session_parsed",
+      payment_status: session.payment_status,
+      recipientEmail,
+      buyerEmail,
+      buyerName,
+      amountLabel,
+    });
+
     if (session.payment_status !== "paid" || !recipientEmail || !purchaseId) {
-      return new Response("La compra no está confirmada", { status: 400 });
+      debugLog.push({
+        step: "session_rejected",
+        reason: "missing paid status or recipient",
+      });
+      return new Response(
+        JSON.stringify({ message: "La compra no está confirmada", debugLog }),
+        { status: 400, headers: { "Content-Type": "application/json" } },
+      );
     }
 
     console.log("[confirmacion] Sesión pagada validada", {
@@ -69,14 +92,18 @@ export const POST: APIRoute = async ({ request }) => {
       buyerName,
       amountLabel,
     );
+    debugLog.push({ step: "email_attempted", sent });
     console.log("[confirmacion] Correo disparado", { purchaseId, recipientEmail, sent });
 
-    return new Response(JSON.stringify({ emailSent: sent }), {
+    return new Response(JSON.stringify({ emailSent: sent, debugLog }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
     console.error("Error validando la compra", error);
-    return new Response("Error interno", { status: 500 });
+    return new Response(
+      JSON.stringify({ message: "Error interno", error: `${error}` }),
+      { status: 500, headers: { "Content-Type": "application/json" } },
+    );
   }
 };
