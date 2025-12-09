@@ -18,7 +18,7 @@ STRIPE_PUBLIC_KEY=pk_test_... # sólo se usa en el cliente si quieres exponerlo
 ```
 
 - El Price ID del plan está incrustado en el código. Actualízalo en `src/components/PurchaseSection.astro` y `src/pages/api/checkout.ts` (constante `FIXED_PRICE_ID`). El ID debe existir en el mismo modo (test o live) que la clave secreta de Stripe; si usas un Price de modo live con una clave de prueba (o viceversa) Stripe responderá `No such price`.
-- La configuración SMTP para Nodemailer está fija en `src/lib/email.ts`. Sustituye host, puerto, `user` y `pass` por los de tu proveedor SMTP.
+- La configuración SMTP para Nodemailer está fija en `src/lib/email.ts`. Trae un ejemplo listo para Gmail con contraseña de aplicación (host `smtp.gmail.com`, puerto 465, `secure: true`). Sustituye `user` y `pass` por tu correo de Gmail y la contraseña de aplicación de 16 dígitos.
 
 ## Desarrollo
 
@@ -36,8 +36,17 @@ La sección de compra se renderiza en la página principal (`src/pages/index.ast
 4. Si no configuras el SMTP en `src/lib/email.ts`, el pago sigue siendo válido pero el envío de correo fallará silenciosamente; la página de éxito seguirá permitiendo el reintento manual una vez que completes la configuración.
 
 ### Cómo preparar el envío de correos
-1. **Configura tu servidor SMTP**: usa las credenciales de tu proveedor (Mailgun SMTP, Postmark SMTP, tu servidor corporativo, etc.). En `src/lib/email.ts` cambia `smtpConfig` con host, puerto y credenciales válidas.
+1. **Configura tu servidor SMTP**: usa las credenciales de tu proveedor (Gmail, Mailgun SMTP, Postmark SMTP, tu servidor corporativo, etc.). En `src/lib/email.ts` cambia `smtpConfig` con host, puerto y credenciales válidas (ya viene un ejemplo completo para Gmail con contraseña de aplicación).
 2. **Ajusta remitente, branding y textos en código**: en `src/lib/email.ts` están los valores fijos (`brandName`, `brandLogoUrl`, `supportEmail`, `emailFrom` y el texto del curso). Personaliza logo, correo de soporte y remitente según tu dominio.
-3. **Registra el webhook en Stripe**: en el Dashboard crea un endpoint que apunte a `/api/stripe-webhook` (o la URL pública correspondiente) y selecciona el evento `checkout.session.completed`. Copia el secreto `whsec_...` que Stripe genera y sustitúyelo en `STRIPE_WEBHOOK_SECRET` dentro del archivo.
+3. **Registra el webhook en Stripe** (personalizado dentro del proyecto):
+   - Ve a **Developers → Webhooks → Add endpoint**.
+   - URL: tu dominio público + `/api/stripe-webhook` (en local, usa Stripe CLI: `stripe listen --forward-to localhost:4321/api/stripe-webhook`).
+   - Eventos: marca **`checkout.session.completed`**.
+   - Copia el secreto `whsec_...` que Stripe genera y pégalo en la constante `STRIPE_WEBHOOK_SECRET` de `src/pages/api/stripe-webhook.ts`.
 4. **Prueba en modo local**: ejecuta un pago de prueba. Si la firma del webhook es válida y el evento es `paid`, se enviará el correo automáticamente vía SMTP. Si recibes un error `Faltan datos` o `Firma inválida`, revisa el Price ID, el secreto del webhook en el código y que estés usando el mismo modo (test/live) para todos los IDs.
-5. **Errores comunes**: credenciales SMTP inválidas (el envío falla), uso de Price ID de modo distinto al de la clave (`No such price`) o webhook sin firma válida.
+5. **Configurar envío desde Gmail**:
+   - Activa **verificación en dos pasos** en tu cuenta de Gmail.
+   - Genera una **contraseña de aplicación** (App Password) para "Mail" → "Other".
+   - En `src/lib/email.ts`, sustituye `user` por tu correo de Gmail y `pass` por la contraseña de aplicación de 16 dígitos; el host/puerto ya están listos para Gmail.
+   - Ajusta `emailFrom` si quieres mostrar un nombre distinto, pero mantén el correo real en el `user` para evitar rechazos de Gmail.
+6. **Errores comunes**: credenciales SMTP inválidas (el envío falla), uso de Price ID de modo distinto al de la clave (`No such price`) o webhook sin firma válida.

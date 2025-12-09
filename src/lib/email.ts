@@ -5,17 +5,21 @@ const brandName = "Zensory";
 const brandLogoUrl = "https://placehold.co/600x200?text=Zensory";
 const courseStartText =
   "Tu curso iniciará pronto. Te enviaremos más detalles y accesos en tu correo.";
-const supportEmail = "soporte@zensory.mx";
-const emailFrom = `${brandName} <no-reply@zensory.mx>`;
+const supportEmail = "fenixfuego100@gmail.com";
+const emailFrom = `${brandName} fenixfuego100@gmail.com`;
 
-// Configuración SMTP fija para usar con Nodemailer. Cambia los valores por los de tu servidor.
+// Configuración SMTP fija para usar con Nodemailer.
+// Ejemplo listo para Gmail con una contraseña de aplicación de 16 dígitos:
+// 1) Activa 2FA en tu cuenta de Gmail.
+// 2) Genera una "App password" para "Mail" en "Other" (o "Correo" → "Otro").
+// 3) Sustituye user y pass con tu correo y la contraseña de aplicación.
 const smtpConfig = {
-  host: "smtp.tudominio.com",
-  port: 587,
-  secure: false,
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
-    user: "usuario@tudominio.com",
-    pass: "tu-contraseña-segura",
+    user: "fenixfuego100@gmail.com",
+    pass: "ltjg tytv yxnh oche",
   },
 };
 
