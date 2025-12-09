@@ -38,15 +38,15 @@ export const POST: APIRoute = async ({ request }) => {
       metadata?: {
         buyer_name?: string;
         buyer_email?: string;
-        plan_title?: string;
-        plan_price_label?: string;
+        course_title?: string;
+        price_label?: string;
       };
     };
 
     const email = session.customer_details?.email || session.customer_email;
     const purchaseId = session.id;
     const buyerName = session.metadata?.buyer_name || undefined;
-    const amountLabel = session.metadata?.plan_price_label || undefined;
+    const amountLabel = session.metadata?.price_label || undefined;
 
     if (session.payment_status !== "paid" || !email || !purchaseId) {
       return new Response("La compra no está confirmada", { status: 400 });

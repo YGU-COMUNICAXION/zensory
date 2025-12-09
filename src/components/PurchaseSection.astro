@@ -5,17 +5,15 @@ interface Props {
 
 const { id = "compra" }: Props = Astro.props;
 
-// Define aquí el precio/plan que usarás en Stripe. Este ID está incrustado en el
+// Define aquí el Price ID que usarás en Stripe. Este ID está incrustado en el
 // código y no depende de variables de entorno.
-const FIXED_PLAN = {
+const FIXED_PRICE = {
   id: "price_12345", // TODO: reemplaza con tu Price ID real
   title: "Acceso completo al curso",
   description:
     "Obtén el programa completo de manifestación con sonido con acceso inmediato y actualizaciones futuras.",
   priceLabel: "$4,444 MXN",
 };
-
-const purchaseOptions = [FIXED_PLAN];
 ---
 
 <section id={id} class="bg-primary text-accent">
@@ -69,20 +67,11 @@ const purchaseOptions = [FIXED_PLAN];
           </div>
 
           <div class="space-y-2">
-            <label for="plan" class="block text-base text-primary">Plan</label>
-            <select
-              id="plan"
-              name="plan"
-              required
-              class="w-full border border-primary/30 bg-transparent px-3 py-3 text-lg text-primary focus:border-primary focus:outline-none"
-            >
-              {purchaseOptions.map((option) => (
-                <option value={option.id}>
-                  {option.title} ({option.priceLabel})
-                </option>
-              ))}
-            </select>
-            <p class="text-sm text-primary/70">Precio procesado en Stripe en moneda MXN.</p>
+            <p class="text-base font-medium text-primary">{FIXED_PRICE.title}</p>
+            <p class="text-2xl font-semibold text-primary">{FIXED_PRICE.priceLabel}</p>
+            <p class="text-sm text-primary/70">
+              Pago único procesado en Stripe en moneda MXN. El importe está fijado en el checkout.
+            </p>
           </div>
 
           <div class="space-y-2">
@@ -125,7 +114,6 @@ const purchaseOptions = [FIXED_PLAN];
     const payload = {
       name: formData.get("name"),
       email: formData.get("email"),
-      plan: formData.get("plan"),
     };
 
     setMessage("Creando sesión de pago segura...", "info");
