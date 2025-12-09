@@ -44,7 +44,20 @@ export const POST: APIRoute = async ({ request }) => {
     const event = JSON.parse(payload) as {
       id: string;
       type: string;
-      data?: { object?: { id?: string; payment_status?: string; customer_details?: { email?: string }; customer_email?: string } };
+      data?: {
+        object?: {
+          id?: string;
+          payment_status?: string;
+          customer_details?: { email?: string };
+          customer_email?: string;
+          metadata?: {
+            buyer_name?: string;
+            buyer_email?: string;
+            plan_title?: string;
+            plan_price_label?: string;
+          };
+        };
+      };
     };
 
     if (event.type !== "checkout.session.completed") {
@@ -55,13 +68,23 @@ export const POST: APIRoute = async ({ request }) => {
     const email = session?.customer_details?.email || session?.customer_email;
     const purchaseId = session?.id;
     const paid = session?.payment_status === "paid";
+    const buyerName = session?.metadata?.buyer_name || undefined;
+    const amountLabel = session?.metadata?.plan_price_label || undefined;
 
     if (!purchaseId || !email || !paid) {
       console.error("Webhook sin email, purchaseId o pago no confirmado", { purchaseId, email, paid });
       return new Response("Faltan datos", { status: 400 });
     }
 
-    const sent = await sendConfirmationEmail(email, purchaseId, email);
+    console.log("[webhook] Pago confirmado, preparando correo", {
+      purchaseId,
+      email,
+      buyerName,
+      amountLabel,
+    });
+
+    const sent = await sendConfirmationEmail(email, purchaseId, email, buyerName, amountLabel);
+    console.log("[webhook] Correo disparado", { purchaseId, email, sent });
 
     return new Response(JSON.stringify({ received: true, emailSent: sent }), {
       status: 200,

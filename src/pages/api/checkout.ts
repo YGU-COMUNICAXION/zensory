@@ -5,6 +5,13 @@ export const prerender = false;
 // Precio fijo configurado directamente en el código. Ajusta este ID con el Price
 // creado en tu cuenta de Stripe.
 const FIXED_PRICE_ID = "price_1Sc9jU2SrCRvBA2aLlNlROYz"; // TODO: reemplaza con tu Price ID real
+// creado en tu cuenta de Stripe. Debe existir en el mismo modo (test/live) que
+// la clave secreta que uses.
+const FIXED_PLAN = {
+  id: "price_1Sc9jU2SrCRvBA2aLlNlROYz", // TODO: reemplaza con tu Price ID real
+  title: "Acceso completo al curso",
+  priceLabel: "$4,444 MXN",
+};
 
 export const POST: APIRoute = async ({ request, url }) => {
   const secretKey = import.meta.env.STRIPE_SECRET_KEY;
@@ -16,20 +23,25 @@ export const POST: APIRoute = async ({ request, url }) => {
   const body = await request.json().catch(() => null) as {
     name?: string;
     email?: string;
+    plan?: string;
   } | null;
 
   if (!body?.email) {
     return new Response("Falta el correo del comprador", { status: 400 });
   }
 
-  if (!FIXED_PRICE_ID || FIXED_PRICE_ID.includes("12345") || !FIXED_PRICE_ID.startsWith("price_")) {
+  if (!FIXED_PLAN.id || FIXED_PLAN.id.includes("12345") || !FIXED_PLAN.id.startsWith("price_")) {
     return new Response(
-      "Configura el FIXED_PRICE_ID con el Price ID real de Stripe en src/pages/api/checkout.ts",
+      "Configura el Price ID real de Stripe en src/pages/api/checkout.ts",
       { status: 500 },
     );
   }
 
-  const priceId = FIXED_PRICE_ID;
+  if (body?.plan && body.plan !== FIXED_PLAN.id) {
+    return new Response("El plan seleccionado no es válido", { status: 400 });
+  }
+
+  const priceId = FIXED_PLAN.id;
 
   const successUrl = new URL("/compra-exitosa", url).toString();
   const cancelUrl = new URL("/compra-cancelada", url).toString();
@@ -39,6 +51,9 @@ export const POST: APIRoute = async ({ request, url }) => {
     params.set("mode", "payment");
     params.set("customer_email", body.email);
     params.set("metadata[buyer_name]", body.name || "");
+    params.set("metadata[buyer_email]", body.email || "");
+    params.set("metadata[plan_title]", FIXED_PLAN.title);
+    params.set("metadata[plan_price_label]", FIXED_PLAN.priceLabel);
     params.set("line_items[0][price]", priceId);
     params.set("line_items[0][quantity]", "1");
     params.set("success_url", `${successUrl}?session_id={CHECKOUT_SESSION_ID}`);
