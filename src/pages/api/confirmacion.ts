@@ -47,6 +47,8 @@ export const POST: APIRoute = async ({ request }) => {
         buyer_email?: string;
         course_title?: string;
         price_label?: string;
+        email_sent?: string;
+        email_sent_at?: string;
       };
     };
 
@@ -56,6 +58,8 @@ export const POST: APIRoute = async ({ request }) => {
     const amountLabel = session.metadata?.price_label || undefined;
     const recipientEmail =
       buyerEmail || session.customer_details?.email || session.customer_email;
+    const emailAlreadySent = session.metadata?.email_sent === "true";
+    const alreadySentAt = session.metadata?.email_sent_at;
 
     debugLog.push({
       step: "session_parsed",
@@ -64,6 +68,8 @@ export const POST: APIRoute = async ({ request }) => {
       buyerEmail,
       buyerName,
       amountLabel,
+      emailAlreadySent,
+      alreadySentAt,
     });
 
     if (session.payment_status !== "paid" || !recipientEmail || !purchaseId) {
@@ -74,6 +80,19 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(
         JSON.stringify({ message: "La compra no está confirmada", debugLog }),
         { status: 400, headers: { "Content-Type": "application/json" } },
+      );
+    }
+
+    if (emailAlreadySent) {
+      console.log("[confirmacion] Correo ya registrado como enviado", {
+        purchaseId,
+        recipientEmail,
+        alreadySentAt,
+      });
+      debugLog.push({ step: "email_already_sent", alreadySentAt });
+      return new Response(
+        JSON.stringify({ emailSent: false, alreadySent: true, debugLog }),
+        { status: 200, headers: { "Content-Type": "application/json" } },
       );
     }
 
@@ -94,6 +113,31 @@ export const POST: APIRoute = async ({ request }) => {
     );
     debugLog.push({ step: "email_attempted", sent });
     console.log("[confirmacion] Correo disparado", { purchaseId, recipientEmail, sent });
+
+    if (sent) {
+      const updateBody = new URLSearchParams({
+        "metadata[email_sent]": "true",
+        "metadata[email_sent_at]": new Date().toISOString(),
+      });
+
+      const updateResponse = await fetch(`https://api.stripe.com/v1/checkout/sessions/${purchaseId}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${secretKey}`,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: updateBody.toString(),
+      });
+
+      const updateOk = updateResponse.ok;
+      if (!updateOk) {
+        const updateError = await updateResponse.text();
+        console.error("[confirmacion] No se pudo marcar email_sent en metadata", updateError);
+        debugLog.push({ step: "metadata_update_failed", updateError, status: updateResponse.status });
+      } else {
+        debugLog.push({ step: "metadata_marked_sent" });
+      }
+    }
 
     return new Response(JSON.stringify({ emailSent: sent, debugLog }), {
       status: 200,

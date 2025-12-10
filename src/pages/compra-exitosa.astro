@@ -75,6 +75,13 @@ import Layout from "../layout/Layout.astro";
 
     const triggerEmail = async () => {
       if (!sessionId) return;
+      const localKey = `confirm-email-sent-${sessionId}`;
+      if (localStorage.getItem(localKey) === "done") {
+        appendDebug(`Correo ya marcado como enviado para ${sessionId} (local)`);
+        setStatus("El comprobante ya se envió. Revisa tu bandeja de entrada.");
+        resendBtn?.classList.add("hidden");
+        return;
+      }
       setStatus("Verificando pago y enviando correo...");
       resendBtn?.setAttribute("disabled", "true");
       appendDebug(`Inicio de solicitud para session_id=${sessionId}`);
@@ -97,8 +104,17 @@ import Layout from "../layout/Layout.astro";
           appendDebug(`Log del backend: ${JSON.stringify(data.debugLog, null, 2)}`);
         }
 
-        if (data.emailSent) {
-          setStatus("Correo de confirmación reenviado. Revisa tu bandeja.");
+        const localDone = () => {
+          localStorage.setItem(localKey, "done");
+          resendBtn?.classList.add("hidden");
+        };
+
+        if (data.alreadySent) {
+          setStatus("Ya habíamos enviado tu comprobante. Revisa tu bandeja.");
+          localDone();
+        } else if (data.emailSent) {
+          setStatus("Correo de confirmación enviado. Revisa tu bandeja.");
+          localDone();
         } else {
           setStatus("Pago confirmado. Configura la API de correo para enviar el comprobante automáticamente.");
         }
