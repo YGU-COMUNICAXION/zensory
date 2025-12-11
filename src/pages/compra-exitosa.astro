@@ -28,6 +28,10 @@ import Layout from "../layout/Layout.astro";
                 Guárdalo para cualquier consulta o referencia con nuestro equipo.
               </p>
               <p id="email-status" class="mt-3 text-sm text-accent/80"></p>
+              <details id="debug-email" class="mt-3 hidden rounded bg-primary/40 p-3 text-sm text-accent/80">
+                <summary class="cursor-pointer font-semibold text-accent">Ver log de depuración</summary>
+                <pre id="email-debug-log" class="mt-2 whitespace-pre-wrap text-xs text-accent/80"></pre>
+              </details>
               <button
                 id="resend-email"
                 class="mt-4 inline-flex items-center justify-center rounded bg-accent px-4 py-2 font-semibold text-primary transition hover:opacity-90"
@@ -53,16 +57,34 @@ import Layout from "../layout/Layout.astro";
     const resendBtn = document.getElementById("resend-email");
     const params = new URLSearchParams(window.location.search);
     const sessionId = params.get("session_id");
+    const debugContainer = document.getElementById("debug-email");
+    const debugLog = document.getElementById("email-debug-log");
 
     const setStatus = (text) => {
       if (!statusLabel) return;
       statusLabel.textContent = text;
     };
 
+    const appendDebug = (entry) => {
+      if (!debugLog) return;
+      const timestamp = new Date().toISOString();
+      const current = debugLog.textContent || "";
+      debugLog.textContent = `${current}\n[${timestamp}] ${entry}`.trim();
+      debugContainer?.classList.remove("hidden");
+    };
+
     const triggerEmail = async () => {
       if (!sessionId) return;
+      const localKey = `confirm-email-sent-${sessionId}`;
+      if (localStorage.getItem(localKey) === "done") {
+        appendDebug(`Correo ya marcado como enviado para ${sessionId} (local)`);
+        setStatus("El comprobante ya se envió. Revisa tu bandeja de entrada.");
+        resendBtn?.classList.add("hidden");
+        return;
+      }
       setStatus("Verificando pago y enviando correo...");
       resendBtn?.setAttribute("disabled", "true");
+      appendDebug(`Inicio de solicitud para session_id=${sessionId}`);
 
       try {
         const response = await fetch("/api/confirmacion", {
@@ -72,17 +94,33 @@ import Layout from "../layout/Layout.astro";
         });
 
         if (!response.ok) {
-          throw new Error(await response.text());
+          const errorText = await response.text();
+          appendDebug(`Respuesta HTTP ${response.status}: ${errorText}`);
+          throw new Error(errorText);
         }
 
         const data = await response.json();
-        if (data.emailSent) {
-          setStatus("Correo de confirmación reenviado. Revisa tu bandeja.");
+        if (Array.isArray(data.debugLog)) {
+          appendDebug(`Log del backend: ${JSON.stringify(data.debugLog, null, 2)}`);
+        }
+
+        const localDone = () => {
+          localStorage.setItem(localKey, "done");
+          resendBtn?.classList.add("hidden");
+        };
+
+        if (data.alreadySent) {
+          setStatus("Ya habíamos enviado tu comprobante. Revisa tu bandeja.");
+          localDone();
+        } else if (data.emailSent) {
+          setStatus("Correo de confirmación enviado. Revisa tu bandeja.");
+          localDone();
         } else {
           setStatus("Pago confirmado. Configura la API de correo para enviar el comprobante automáticamente.");
         }
       } catch (error) {
         console.error(error);
+        appendDebug(`Error en el envío: ${error}`);
         setStatus("No pudimos enviar el correo de confirmación. Contáctanos si necesitas ayuda.");
       } finally {
         resendBtn?.removeAttribute("disabled");
@@ -91,6 +129,10 @@ import Layout from "../layout/Layout.astro";
 
     if (resendBtn) {
       resendBtn.addEventListener("click", triggerEmail);
+    }
+
+    if (sessionId) {
+      triggerEmail();
     }
   </script>
 </Layout>

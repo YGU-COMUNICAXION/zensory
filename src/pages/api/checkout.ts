@@ -2,13 +2,10 @@ import type { APIRoute } from "astro";
 
 export const prerender = false;
 
-// Precio fijo configurado directamente en el código. Ajusta este ID con el Price
-// creado en tu cuenta de Stripe.
-const FIXED_PRICE_ID = "price_1Sc9jU2SrCRvBA2aLlNlROYz"; // TODO: reemplaza con tu Price ID real
-// creado en tu cuenta de Stripe. Debe existir en el mismo modo (test/live) que
-// la clave secreta que uses.
+const FIXED_PRICE_ID = import.meta.env.STRIPE_PRICE_ID;
+
 const FIXED_PRICE = {
-  id: "price_1Sc9jU2SrCRvBA2aLlNlROYz", // TODO: reemplaza con tu Price ID real
+  id: FIXED_PRICE_ID,
   title: "Acceso completo al curso",
   priceLabel: "$4,444 MXN",
 };
@@ -20,7 +17,7 @@ export const POST: APIRoute = async ({ request, url }) => {
     return new Response("Stripe no está configurado", { status: 500 });
   }
 
-  const body = await request.json().catch(() => null) as {
+  const body = (await request.json().catch(() => null)) as {
     name?: string;
     email?: string;
   } | null;
@@ -29,10 +26,14 @@ export const POST: APIRoute = async ({ request, url }) => {
     return new Response("Falta el correo del comprador", { status: 400 });
   }
 
-  if (!FIXED_PRICE.id || FIXED_PRICE.id.includes("12345") || !FIXED_PRICE.id.startsWith("price_")) {
+  if (
+    !FIXED_PRICE.id ||
+    FIXED_PRICE.id.includes("12345") ||
+    !FIXED_PRICE.id.startsWith("price_")
+  ) {
     return new Response(
       "Configura el Price ID real de Stripe en src/pages/api/checkout.ts",
-      { status: 500 },
+      { status: 500 }
     );
   }
 
@@ -54,22 +55,28 @@ export const POST: APIRoute = async ({ request, url }) => {
     params.set("success_url", `${successUrl}?session_id={CHECKOUT_SESSION_ID}`);
     params.set("cancel_url", cancelUrl);
 
-    const response = await fetch("https://api.stripe.com/v1/checkout/sessions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${secretKey}`,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: params,
-    });
+    const response = await fetch(
+      "https://api.stripe.com/v1/checkout/sessions",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${secretKey}`,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: params,
+      }
+    );
 
     if (!response.ok) {
       const errorText = await response.text();
       console.error("Stripe Checkout error", errorText);
 
-      let message = "No se pudo iniciar el pago. Verifica el Price ID y que coincida el modo (test o live) con tu clave.";
+      let message =
+        "No se pudo iniciar el pago. Verifica el Price ID y que coincida el modo (test o live) con tu clave.";
       try {
-        const parsed = JSON.parse(errorText) as { error?: { message?: string } };
+        const parsed = JSON.parse(errorText) as {
+          error?: { message?: string };
+        };
         if (parsed?.error?.message) {
           message = parsed.error.message;
         }
