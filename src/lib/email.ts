@@ -2,11 +2,12 @@ import nodemailer from "nodemailer";
 
 // Parámetros fijos para la marca y la plantilla. Ajústalos en el código según tu branding.
 const brandName = "Zensory";
-const brandLogoUrl = "https://placehold.co/600x200?text=Zensory";
+const brandLogoUrl =
+  "https://www.galimarli.com/wp-content/uploads/2022/02/LogoGalit-1.png";
 const courseStartText =
   "Tu curso iniciará pronto. Te enviaremos más detalles y accesos en tu correo.";
-const supportEmail = "fenixfuego100@gmail.com";
-const emailFrom = `${brandName} fenixfuego100@gmail.com`;
+const supportEmail = "galimarli.soundhealing@gmail.com";
+const emailFrom = `${brandName} galimarli.soundhealing@gmail.com`;
 
 // Configuración SMTP fija para usar con Nodemailer.
 // Ejemplo listo para Gmail con una contraseña de aplicación de 16 dígitos:
@@ -18,8 +19,8 @@ const smtpConfig = {
   port: 465,
   secure: true,
   auth: {
-    user: "fenixfuego100@gmail.com",
-    pass: "ltjg tytv yxnh oche",
+    user: "galimarli.soundhealing@gmail.com",
+    pass: "twkv wcvp qmze oqaz",
   },
 };
 
@@ -29,7 +30,7 @@ export const buildConfirmationHtml = (
   purchaseId: string,
   buyerEmail?: string,
   buyerName?: string,
-  amountLabel?: string,
+  amountLabel?: string
 ) => `
   <table width="100%" bgcolor="#0B0B14" style="padding: 32px 0; font-family: 'Helvetica Neue', Arial, sans-serif; color: #ffffff;">
     <tr>
@@ -43,7 +44,9 @@ export const buildConfirmationHtml = (
           </tr>
           <tr>
             <td style="padding: 32px;">
-              <p style="margin: 0 0 16px; font-size: 16px; color: #E5E7EB;">${buyerName ? `Hola ${buyerName}, ` : ""}gracias por tu compra. Hemos registrado tu pago de forma segura.</p>
+              <p style="margin: 0 0 16px; font-size: 16px; color: #E5E7EB;">${
+                buyerName ? `Hola ${buyerName}, ` : ""
+              }gracias por tu compra. Hemos registrado tu pago de forma segura.</p>
               <p style="margin: 0 0 16px; font-size: 16px; color: #E5E7EB;">${courseStartText}</p>
               <table width="100%" cellpadding="0" cellspacing="0" style="margin: 24px 0; background: #1F2937; border-radius: 10px; padding: 16px;">
                 <tr>
@@ -52,9 +55,21 @@ export const buildConfirmationHtml = (
                 <tr>
                   <td style="font-size: 18px; font-weight: 700; color: #F3F4F6; padding-top: 8px;">${purchaseId}</td>
                 </tr>
-                ${buyerEmail ? `<tr><td style="padding-top: 12px; font-size: 14px; color: #D1D5DB;">Correo: ${buyerEmail}</td></tr>` : ""}
-                ${buyerName ? `<tr><td style="padding-top: 4px; font-size: 14px; color: #D1D5DB;">Nombre: ${buyerName}</td></tr>` : ""}
-                ${amountLabel ? `<tr><td style="padding-top: 4px; font-size: 14px; color: #D1D5DB;">Monto: ${amountLabel}</td></tr>` : ""}
+                ${
+                  buyerEmail
+                    ? `<tr><td style="padding-top: 12px; font-size: 14px; color: #D1D5DB;">Correo: ${buyerEmail}</td></tr>`
+                    : ""
+                }
+                ${
+                  buyerName
+                    ? `<tr><td style="padding-top: 4px; font-size: 14px; color: #D1D5DB;">Nombre: ${buyerName}</td></tr>`
+                    : ""
+                }
+                ${
+                  amountLabel
+                    ? `<tr><td style="padding-top: 4px; font-size: 14px; color: #D1D5DB;">Monto: ${amountLabel}</td></tr>`
+                    : ""
+                }
               </table>
               <p style="margin: 0 0 12px; font-size: 14px; color: #D1D5DB;">Guarda este identificador para cualquier consulta. Si tienes dudas, responde a este correo o escríbenos a <a href="mailto:${supportEmail}" style="color: #C084FC;">${supportEmail}</a>.</p>
             </td>
@@ -75,7 +90,7 @@ export const sendConfirmationEmail = async (
   purchaseId: string,
   buyerEmail?: string,
   buyerName?: string,
-  amountLabel?: string,
+  amountLabel?: string
 ) => {
   try {
     console.log("[correo] Preparando correo de confirmación", {
@@ -86,7 +101,12 @@ export const sendConfirmationEmail = async (
       amountLabel,
     });
 
-    const html = buildConfirmationHtml(purchaseId, buyerEmail, buyerName, amountLabel);
+    const html = buildConfirmationHtml(
+      purchaseId,
+      buyerEmail,
+      buyerName,
+      amountLabel
+    );
 
     const info = await transporter.sendMail({
       from: emailFrom,
@@ -96,7 +116,10 @@ export const sendConfirmationEmail = async (
     });
 
     const accepted = Boolean(info.accepted?.length);
-    console.log("[correo] Resultado del envío", { accepted, messageId: info.messageId });
+    console.log("[correo] Resultado del envío", {
+      accepted,
+      messageId: info.messageId,
+    });
 
     return accepted;
   } catch (error) {

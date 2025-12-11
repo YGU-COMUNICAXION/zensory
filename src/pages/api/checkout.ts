@@ -4,11 +4,11 @@ export const prerender = false;
 
 // Precio fijo configurado directamente en el código. Ajusta este ID con el Price
 // creado en tu cuenta de Stripe.
-const FIXED_PRICE_ID = "price_1Sc9jU2SrCRvBA2aLlNlROYz"; // TODO: reemplaza con tu Price ID real
+const FIXED_PRICE_ID = "price_1Sc9jU2SrCRvBA2aQyIEgAnz"; // TODO: reemplaza con tu Price ID real
 // creado en tu cuenta de Stripe. Debe existir en el mismo modo (test/live) que
 // la clave secreta que uses.
 const FIXED_PRICE = {
-  id: "price_1Sc9jU2SrCRvBA2aLlNlROYz", // TODO: reemplaza con tu Price ID real
+  id: "price_1Sc9jU2SrCRvBA2aQyIEgAnz", // TODO: reemplaza con tu Price ID real
   title: "Acceso completo al curso",
   priceLabel: "$4,444 MXN",
 };
