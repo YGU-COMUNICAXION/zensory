@@ -5,10 +5,12 @@ interface Props {
 
 const { id = "compra" }: Props = Astro.props;
 
+const STRIPE_PRICE_ID = import.meta.env.STRIPE_PRICE_ID;
+
 // Define aquí el Price ID que usarás en Stripe. Este ID está incrustado en el
 // código y no depende de variables de entorno.
 const FIXED_PRICE = {
-  id: "price_1Sc9jU2SrCRvBA2aQyIEgAnz", // TODO: reemplaza con tu Price ID real
+  id: STRIPE_PRICE_ID,
   title: "Acceso completo al curso",
   description:
     "Obtén el programa completo de manifestación con sonido con acceso inmediato y actualizaciones futuras.",
@@ -100,8 +102,7 @@ const FIXED_PRICE = {
             >
               Proceder al pago seguro
             </button>
-            <p id="purchase-message" class="min-h-[1.5rem] text-sm font-medium">
-            </p>
+            <p id="purchase-message" class="min-h-6 text-sm font-medium"></p>
           </div>
         </form>
       </div>
@@ -110,11 +111,18 @@ const FIXED_PRICE = {
 </section>
 
 <script>
-  const form = document.getElementById("purchase-form");
+  const form = document.getElementById(
+    "purchase-form"
+  ) as HTMLFormElement | null;
   const message = document.getElementById("purchase-message");
-  const submitButton = form?.querySelector("button[type='submit']");
+  const submitButton = form?.querySelector(
+    "button[type='submit']"
+  ) as HTMLButtonElement | null;
 
-  const setMessage = (text, type = "info") => {
+  const setMessage = (
+    text: string | null,
+    type: "info" | "success" | "error" = "info"
+  ) => {
     if (!message) return;
     const colors = {
       info: "text-primary",
@@ -167,7 +175,7 @@ const FIXED_PRICE = {
         (error instanceof Error && error.message) ||
         "No pudimos iniciar el pago. Intenta de nuevo o escríbenos por contacto.";
       setMessage(text, "error");
-      if (submitButton) submitButton.disabled = false;
+      if (submitButton) (submitButton as HTMLButtonElement).disabled = false;
     }
   });
 </script>

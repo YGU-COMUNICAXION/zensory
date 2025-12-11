@@ -1,4 +1,6 @@
 import nodemailer from "nodemailer";
+// Obtnener las variables de entorno necesarias
+const GMAIL_APP_KEY = import.meta.env.GMAIL_APP_KEY;
 
 // Parámetros fijos para la marca y la plantilla. Ajústalos en el código según tu branding.
 const brandName = "Zensory";
@@ -20,7 +22,7 @@ const smtpConfig = {
   secure: true,
   auth: {
     user: "galimarli.soundhealing@gmail.com",
-    pass: "twkv wcvp qmze oqaz",
+    pass: GMAIL_APP_KEY,
   },
 };
 
