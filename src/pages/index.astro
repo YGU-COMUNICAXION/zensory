@@ -1,30 +1,107 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layout/Layout.astro";
-import Banner from "@components/Banner.astro";
-import CourseForYou from "@components/CourseForYou.astro";
-import CourseModules from "@components/CourseModules.astro";
-import CourseOverview from "@components/CourseOverview.astro";
-import CourseHighlights from "@components/CourseHighlights.astro";
-import WhoIsSection from "@components/WhoIsSection.astro";
-import CourseModalities from "@components/CourseModalities.astro";
-import CoursePricing from "@components/CoursePricing.astro";
-import FAQs from "@components/FAQs.astro";
-import ContactSection from "@components/ContactSection.astro";
-import TestimonialsSection from "@components/TestimonialsSection.astro";
-import PurchaseSection from "@components/PurchaseSection.astro";
+import PlateCarousel from "@components/home/PlateCarousel";
+import dishOne from "@assets/home/plato-uno.svg";
+import dishTwo from "@assets/home/plato-dos.svg";
+import dishThree from "@assets/home/plato-tres.svg";
+import menuSectionImage from "@assets/home/menu-section.svg";
+import casaSectionImage from "@assets/home/casa-section.svg";
+
+const dishes = [
+  { title: "Pad Thai", image: dishOne.src },
+  { title: "Curry Verde", image: dishTwo.src },
+  { title: "Tom Yum", image: dishThree.src },
+];
 ---
 
 <Layout>
-  <Banner id="inicio" />
-  <CourseOverview />
-  <CourseHighlights />
-  <CourseForYou id="curso" />
-  <CourseModules />
-  <CourseModalities />
-  <CoursePricing />
-  <WhoIsSection id="gali-marli" />
-  <TestimonialsSection />
-  <FAQs />
-  <PurchaseSection />
-  <ContactSection />
+  <section id="inicio" class="bg-[#fbf7f1]">
+    <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 py-16 md:grid-cols-[1.1fr_0.9fr]">
+      <div class="space-y-6">
+        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-[#b07a4f]">
+          Bienvenido a Thai Town
+        </p>
+        <h1 class="text-4xl font-semibold text-[#8b5f3c] md:text-5xl">
+          El mejor Pad Thai en México
+        </h1>
+        <p class="text-base leading-relaxed text-[#7c6a5a] md:text-lg">
+          Thai Town es un pedacito de la cultura tailandesa en México. A través de
+          nuestros platillos podrás tener un viaje gastronómico al sudeste
+          asiático y ser atendido con la calidez mexicana.
+        </p>
+        <div class="flex flex-wrap items-center gap-4 text-sm font-semibold text-[#b07a4f]">
+          <span>Platillos artesanales</span>
+          <span class="h-1 w-1 rounded-full bg-[#b07a4f]"></span>
+          <span>Sabores auténticos</span>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <PlateCarousel client:load dishes={dishes} />
+      </div>
+    </div>
+  </section>
+
+  <section id="menu" class="bg-white">
+    <div class="mx-auto grid max-w-6xl items-center gap-10 px-6 py-16 md:grid-cols-[1fr_1fr]">
+      <div class="overflow-hidden rounded-3xl">
+        <Image
+          src={menuSectionImage}
+          alt="Platillos tailandeses"
+          class="h-full w-full object-cover"
+        />
+      </div>
+      <div class="space-y-6">
+        <h2 class="text-3xl font-semibold text-[#8b5f3c]">
+          Más que un menú, un homenaje al sabor tailandés
+        </h2>
+        <p class="text-base leading-relaxed text-[#7c6a5a]">
+          Desde los clásicos edamames, hasta nuestros curries y Pad Thai, cada
+          receta tiene ingredientes que garantizan frescura, textura y un sabor
+          inolvidable para tu paladar.
+        </p>
+        <a
+          href="/menu"
+          class="inline-flex items-center rounded-full bg-[#b07a4f] px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-[#8b5f3c]"
+        >
+          Conoce el menú
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="nosotros" class="bg-[#fbf7f1]">
+    <div class="mx-auto grid max-w-6xl items-center gap-10 px-6 py-16 md:grid-cols-[1fr_1fr]">
+      <div class="space-y-6">
+        <h2 class="text-3xl font-semibold text-[#8b5f3c]">
+          Nuestra casa, tu casa de Thai
+        </h2>
+        <p class="text-base leading-relaxed text-[#7c6a5a]">
+          Nuestro restaurante es un acogedor lugar en el que te hemos servido
+          por los últimos 2 años, aunque en el pasado también estuvimos en el
+          mercado Mesa Nápoles por 5 años.
+        </p>
+        <p class="text-base leading-relaxed text-[#7c6a5a]">
+          Nos encantaría que nos visites en esta nueva ubicación.
+        </p>
+        <p class="text-sm font-semibold text-[#b07a4f]">
+          📍 C. Pensilvania 80, Nápoles, Benito Juárez, 03810 Ciudad de México,
+          CDMX
+        </p>
+        <a
+          href="/menu"
+          class="inline-flex items-center text-sm font-semibold uppercase tracking-[0.2em] text-[#b07a4f] underline decoration-[#b07a4f]/40 underline-offset-4"
+        >
+          Visita nuestro menú
+        </a>
+      </div>
+      <div class="overflow-hidden rounded-3xl">
+        <Image
+          src={casaSectionImage}
+          alt="Fachada Thai Town"
+          class="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+  </section>
 </Layout>

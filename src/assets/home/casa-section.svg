@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" role="img" aria-label="Fachada Thai Town">
+  <rect width="720" height="480" fill="#f3ebe0" />
+  <rect x="80" y="120" width="560" height="260" rx="24" fill="#3e2b27" />
+  <rect x="120" y="160" width="480" height="80" rx="16" fill="#c87f4c" />
+  <text x="150" y="215" font-family="Poppins, sans-serif" font-size="46" font-weight="700" fill="#fff5e6">thai town</text>
+  <rect x="140" y="270" width="180" height="90" rx="12" fill="#f2c89b" />
+  <rect x="340" y="270" width="220" height="90" rx="12" fill="#d9a46f" />
+  <circle cx="110" cy="110" r="12" fill="#b07a4f" />
+  <circle cx="630" cy="110" r="12" fill="#b07a4f" />
+  <rect x="100" y="90" width="520" height="10" rx="5" fill="#b07a4f" />
+</svg>

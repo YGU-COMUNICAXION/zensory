@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" role="img" aria-label="Platillos tailandeses">
+  <rect width="720" height="480" fill="#f7efe4" />
+  <rect x="40" y="60" width="320" height="280" rx="24" fill="#fff7eb" stroke="#e0c8a8" stroke-width="4" />
+  <circle cx="200" cy="200" r="120" fill="#f7d9a6" stroke="#e3c09c" stroke-width="6" />
+  <path d="M120 190c40-20 80-20 120 0s80 20 120 0" stroke="#c47a3d" stroke-width="14" stroke-linecap="round" fill="none"/>
+  <path d="M110 230c50 30 100 30 150 0s100-30 150 0" stroke="#b55b3a" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <rect x="400" y="80" width="260" height="320" rx="28" fill="#fff" stroke="#e0c8a8" stroke-width="4" />
+  <rect x="430" y="120" width="200" height="14" rx="7" fill="#d8b18d" />
+  <rect x="430" y="160" width="180" height="12" rx="6" fill="#e3c09c" />
+  <rect x="430" y="200" width="190" height="12" rx="6" fill="#e3c09c" />
+  <rect x="430" y="240" width="170" height="12" rx="6" fill="#e3c09c" />
+  <rect x="430" y="280" width="160" height="12" rx="6" fill="#e3c09c" />
+</svg>
