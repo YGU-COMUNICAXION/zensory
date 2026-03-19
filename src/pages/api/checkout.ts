@@ -7,7 +7,7 @@ const FIXED_PRICE_ID = import.meta.env.STRIPE_PRICE_ID;
 const FIXED_PRICE = {
   id: FIXED_PRICE_ID,
   title: "Acceso completo al curso",
-  priceLabel: "$4,444 MXN",
+  priceLabel: "$8,888 MXN",
 };
 
 export const POST: APIRoute = async ({ request, url }) => {
@@ -33,7 +33,7 @@ export const POST: APIRoute = async ({ request, url }) => {
   ) {
     return new Response(
       "Configura el Price ID real de Stripe en src/pages/api/checkout.ts",
-      { status: 500 }
+      { status: 500 },
     );
   }
 
@@ -64,7 +64,7 @@ export const POST: APIRoute = async ({ request, url }) => {
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: params,
-      }
+      },
     );
 
     if (!response.ok) {

@@ -15,11 +15,6 @@ const { id = "inversion" }: Props = Astro.props;
 
 const priceColumns = [
   {
-    label: "Precio promocional de lanzamiento",
-    amount: "$4,444",
-    currency: "MXN",
-  },
-  {
     label: "Precio general del curso",
     amount: "$8,888",
     currency: "MXN",
@@ -87,9 +82,7 @@ const paymentMethods = [
     <div
       class="container relative mx-auto bg-primary px-6 pb-24 pt-16 text-accent shadow-[0_25px_80px_-40px_rgba(34,9,34,0.55)] md:px-10 md:pb-28 md:pt-20"
     >
-      <div
-        class="grid gap-12 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-16"
-      >
+      <div class="grid gap-12 md:grid-cols-[minmax(0,1fr)] md:gap-16">
         <div class="flex flex-col items-center text-center">
           <span
             class="text-sm lg:text-lg font-heading italic uppercase text-accent/80 mb-0"
@@ -107,40 +100,10 @@ const paymentMethods = [
             </span>
           </span>
         </div>
-
-        <div class="mx-auto hidden h-full w-px bg-accent/30 md:block"></div>
-
-        <div class="flex flex-col items-center text-center">
-          <span
-            class="text-sm lg:text-lg font-heading italic uppercase text-accent/80 mb-2"
-          >
-            {priceColumns[1].label}
-          </span>
-          <span class="mt-5 font-heading text-5xl font-semibold md:text-7xl">
-            {priceColumns[1].amount}
-            <span
-              class="ml-2 text-base font-sans font-medium uppercase text-accent/60"
-            >
-              {priceColumns[1].currency}
-            </span>
-          </span>
-        </div>
       </div>
 
       <div class="mt-10 md:hidden">
         <div class="mx-auto h-px w-4/5 bg-accent/30"></div>
-      </div>
-
-      <div
-        class="absolute bottom-6 left-6 right-6 flex items-start gap-3 text-left text-sm leading-relaxed text-accent/80 md:bottom-10 md:left-10 md:right-10 md:text-base"
-      >
-        <Image
-          src={alertIcon}
-          alt="Condiciones de pago"
-          class="mt-0.5 h-5 w-5 shrink-0"
-          loading="lazy"
-        />
-        <p class="md:whitespace-nowrap">{upfrontNote}</p>
       </div>
     </div>
   </div>

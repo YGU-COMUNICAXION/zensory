@@ -14,7 +14,7 @@ const FIXED_PRICE = {
   title: "Acceso completo al curso",
   description:
     "Obtén el programa completo de manifestación con sonido con acceso inmediato y actualizaciones futuras.",
-  priceLabel: "$4,444 MXN",
+  priceLabel: "$8,888 MXN",
 };
 ---
 
@@ -112,16 +112,16 @@ const FIXED_PRICE = {
 
 <script>
   const form = document.getElementById(
-    "purchase-form"
+    "purchase-form",
   ) as HTMLFormElement | null;
   const message = document.getElementById("purchase-message");
   const submitButton = form?.querySelector(
-    "button[type='submit']"
+    "button[type='submit']",
   ) as HTMLButtonElement | null;
 
   const setMessage = (
     text: string | null,
-    type: "info" | "success" | "error" = "info"
+    type: "info" | "success" | "error" = "info",
   ) => {
     if (!message) return;
     const colors = {
