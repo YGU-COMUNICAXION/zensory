@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" role="img" aria-label="Thai Town">
+  <rect width="240" height="80" rx="16" fill="#f7f1e7" />
+  <text x="28" y="52" fill="#b07a4f" font-family="Playfair Display, serif" font-size="34" font-weight="700">
+    thai town
+  </text>
+  <path d="M200 20c12 8 18 22 12 38-3 8-9 14-17 18" fill="none" stroke="#b07a4f" stroke-width="4" stroke-linecap="round"/>
+</svg>

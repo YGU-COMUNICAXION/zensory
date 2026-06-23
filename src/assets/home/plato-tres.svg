@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Tom Yum">
+  <defs>
+    <radialGradient id="plate" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#ececec"/>
+    </radialGradient>
+  </defs>
+  <circle cx="300" cy="300" r="280" fill="url(#plate)" stroke="#d2d2d2" stroke-width="6"/>
+  <circle cx="300" cy="300" r="200" fill="#f7c4a5"/>
+  <path d="M170 270c60-30 120-30 180 0s120 30 180 0" stroke="#d86b4f" stroke-width="18" stroke-linecap="round" fill="none"/>
+  <path d="M180 340c50 40 120 40 170 0s120-40 170 0" stroke="#c84f3f" stroke-width="14" stroke-linecap="round" fill="none"/>
+  <circle cx="240" cy="250" r="28" fill="#6aa84f"/>
+  <circle cx="360" cy="350" r="24" fill="#6aa84f"/>
+  <circle cx="320" cy="260" r="16" fill="#f6d55c"/>
+</svg>

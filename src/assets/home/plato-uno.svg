@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Pad Thai">
+  <defs>
+    <radialGradient id="plate" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e8e8e8"/>
+    </radialGradient>
+  </defs>
+  <circle cx="300" cy="300" r="280" fill="url(#plate)" stroke="#d0d0d0" stroke-width="6"/>
+  <circle cx="300" cy="300" r="200" fill="#f7d9a6"/>
+  <path d="M170 270c60-40 140-40 200 0s140 40 200 0" stroke="#c47a3d" stroke-width="18" stroke-linecap="round" fill="none"/>
+  <path d="M150 330c70 50 160 50 220 0s160-50 220 0" stroke="#b55b3a" stroke-width="14" stroke-linecap="round" fill="none"/>
+  <circle cx="230" cy="240" r="28" fill="#6aa84f"/>
+  <circle cx="370" cy="350" r="22" fill="#6aa84f"/>
+  <circle cx="340" cy="250" r="20" fill="#efc84a"/>
+  <circle cx="260" cy="360" r="18" fill="#efc84a"/>
+</svg>
